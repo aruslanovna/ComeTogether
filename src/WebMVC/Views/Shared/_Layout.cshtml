@@ -1,0 +1,1804 @@
+﻿@*<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - WebMVC</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+
+        <link href='https://fonts.googleapis.com/css?family=Product+Sans' rel='stylesheet' type='text/css'>
+        <link href="https://coderthemes.com/hyper/saas/assets/css/app.min.css">
+        <link href="https://coderthemes.com/hyper/saas/assets/css/vendor/jquery-jvectormap-1.2.2.css">
+
+
+
+
+        <script src="../Scripts/jquery-ui-1.10.3.js"></script>
+
+
+
+        <script src="../Scripts/jquery.signalR-2.0.1.min.js" type="text/javascript"></script>
+        <script src="../signalr/hubs" type="text/javascript"></script>
+        <script src="../Scripts/jquery-2.0.3.min.js"></script>
+
+    </head>
+    <body>
+
+        <div class="mainWindow">
+            <div class="mainWindow__leftSide navbar">
+                <div class="navbar__navigation">
+                    <div class="logout">
+                        <p class="blackFont">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16" role="img" width="13px" style="width:13px !important;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>                Abmelden
+                        </p>
+                    </div>
+                    <div class="navigation__item singlePageLink" data-target-ref="dashboard">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="tachometer-alt" class="svg-inline--fa fa-tachometer-alt fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path fill="currentColor" d="M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"></path>
+                        </svg> <span class="greyFont">Dashboard</span>
+                    </div>
+                    <div class="navigation__item singlePageLink" data-target-ref="team">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-friends" class="svg-inline--fa fa-user-friends fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                            <path fill="currentColor" d="M192 256c61.9 0 112-50.1 112-112S253.9 32 192 32 80 82.1 80 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C51.6 288 0 339.6 0 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zM480 256c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm48 32h-3.8c-13.9 4.8-28.6 8-44.2 8s-30.3-3.2-44.2-8H432c-20.4 0-39.2 5.9-55.7 15.4 24.4 26.3 39.7 61.2 39.7 99.8v38.4c0 2.2-.5 4.3-.6 6.4H592c26.5 0 48-21.5 48-48 0-61.9-50.1-112-112-112z"></path>
+                        </svg> <span class="greyFont">Team</span>
+                    </div>
+                    <div class="navigation__item singlePageLink" data-target-ref="archive">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="archive" class="svg-inline--fa fa-archive fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z"></path></svg> <span class="greyFont">Archiv</span>
+                    </div>
+                    <div class="navigation__item singlePageLink" data-target-ref="export">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cloud-download-alt" class="svg-inline--fa fa-cloud-download-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zm-132.9 88.7L299.3 420.7c-6.2 6.2-16.4 6.2-22.6 0L171.3 315.3c-10.1-10.1-2.9-27.3 11.3-27.3H248V176c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16v112h65.4c14.2 0 21.4 17.2 11.3 27.3z"></path></svg> <span class="greyFont">Export</span>
+                    </div>
+                    <div class="navigation__item singlePageLink" data-target-ref="project">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="folder-plus" class="svg-inline--fa fa-folder-plus fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 128H272l-64-64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48zm-96 168c0 8.84-7.16 16-16 16h-72v72c0 8.84-7.16 16-16 16h-16c-8.84 0-16-7.16-16-16v-72h-72c-8.84 0-16-7.16-16-16v-16c0-8.84 7.16-16 16-16h72v-72c0-8.84 7.16-16 16-16h16c8.84 0 16 7.16 16 16v72h72c8.84 0 16 7.16 16 16v16z"></path></svg> <span class="greyFont">Neues Projekt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mainWindow__rightSide">
+                <div class="topbar">
+                    <div class="topbar-left">
+                        <div>
+                            @await Html.PartialAsync("_SelectLanguagePartial")
+                        </div>
+                        <button class="iconBtn popUpBtn trackTimeBtn" id="trackTimeBtn" data-target-popup="timeTracking" data-currently-tracking="">
+                            <div class="iconBtn__content">
+                                <div class="icon">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                    </svg>
+                                </div>
+                                Zeit erfassen
+                            </div>
+                        </button>
+                        <button class="iconBtn singlePageLink" id="createProjectBtn" data-target-ref="project">
+                            <div class="iconBtn__content">
+                                <div class="icon">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+                                    </svg>
+                                </div>
+                                Neues Projekt
+                            </div>
+                        </button>
+                    </div>
+                    <div class="topbar-right">
+                        <div class="notificationBell">
+                            <img class="notificationBell__icon" src="http://stark-schwarz.de/wp-content/uploads/2019/12/bell-solid.svg">
+                            <div class="notificationBell__value"></div>
+                        </div>
+                        <button class="darkModeBtn">
+                            <img src="http://stark-schwarz.de/wp-content/uploads/2019/12/moon-solid.svg">
+
+                        </button>
+                        <div class="profile">
+                            <div class="profile__information">
+                                <partial name="_LoginPartial" />
+                                <p class="profile__information__name blackFont">Björn Fehrenbach</p>
+                                <p class="profile__information__time profile__information__time--inactive" data-target-modal="">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                    </svg>
+                                    <span class="profile__information__time__value">Starte Timer ...</span>
+                                </p>
+                            </div>
+                            <img class="profile__img" src="https://image.jimcdn.com/app/cms/image/transf/dimension=303x10000:format=png/path/sf6c81e43024fd297/image/ief6aace65d87d1a0/version/1554140440/image.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+
+
+
+
+
+
+                     Start "Mit <3 gemacht in Bamberg" Footer
+                    <div class="content__row madeInBamberg">
+                        <div id="loginBlock">
+                            Ввойти в чат:<br />
+                            <input id="userName" type="text" />
+                            <input id="loginBtn" type="button" value="Войти" />
+                        </div><br />
+
+                        <div id="header"></div><br />
+
+                        <div id="inputForm">
+                            <input type="text" id="message" />
+                            <input type="button" id="sendBtn" value="Отправить" />
+                        </div>
+                        <div id="chatroom"></div>
+
+
+
+
+
+
+
+
+                        @RenderBody()
+
+                        @{
+                            ViewBag.Title = "Dashboard";
+                        }
+
+                        <h2></h2>
+
+                        <p style="font-weight:bold;font-size:1.5em;">Visit <a href="http://techbrij.com">TechBrij.com</a> for more details </p>
+
+                        <section id="chartResult"></section>
+
+
+
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+         Start Modal Structure
+        <div class="modalWindow modalWindow--inactive">
+            <div class="closeModal"></div>
+
+
+            <div class="popUp popUp--inactive" id="project425345">
+                <div class="turquoise popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425346">
+                <div class="blue popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425347">
+                <div class="yellow popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425348">
+                <div class="red popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425349">
+                <div class="turquoise popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425350">
+                <div class="yellow popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425351">
+                <div class="blue popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425352">
+                <div class="red popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+            <div class="popUp popUp--inactive" id="project425353">
+                <div class="turquoise popUp__header">
+                    <div>
+                        <p class="popUp__header__projectTitle">Entwicklung WebApp</p>
+                        <p class="popUp__header__projectClient">Migros Gruppe AG</p>
+                        <p class="popUp__header__dueDate"><strong>Fällig am:</strong> 29.12.2019</p>
+                    </div>
+                </div>
+                <div class="popUp__body">
+                    <p class="popUp__body__skillsTitle blackFont">Benötigte Skills</p>
+                    <div class="popUp__body__skills">
+                        <div class="skillItem frontendSkill">HTML</div>
+                        <div class="skillItem frontendSkill">CSS</div>
+                        <div class="skillItem frontendSkill">React</div>
+                        <div class="skillItem languageSkill">Spanisch</div>
+                        <div class="skillItem itSkill">Azure</div>
+                        <div class="skillItem itSkill">UX</div>
+                        <div class="skillItem backendSkill">PHP</div>
+                        <div class="skillItem backendSkill">MySQL</div>
+                        <div class="skillItem frontendSkill">JS</div>
+                        <div class="skillItem languageSkill">Englisch</div>
+                        <div class="skillItem itSkill">Wordpress</div>
+                        <div class="skillItem itSkill">SAP HANA</div>
+                        <div class="skillItem backendSkill">Python</div>
+                    </div>
+                    <div class="popUp__body__facts">
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">400h</p>
+                                <p class="facts__box__title greyFont">Soll-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">440h</p>
+                                <p class="facts__box__title greyFont">Ist-Stunden</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">13.500 €</p>
+                                <p class="facts__box__title greyFont">Gesamtbudget</p>
+                            </div>
+                        </div>
+                        <div class="popUp__body__facts__box">
+                            <div>
+                                <p class="facts__box__value blackFont">4.500 €</p>
+                                <p class="facts__box__title greyFont">Monatsbudget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="popUp__body__notesTitle blackFont">Notizen</p>
+                    <div class="popUp__body__notes">
+                        <p class="blackFont">Herr Zbinden (Abteilung Sales) wünscht sich die Möglichkeit Clickstreams der Kunden innerhalb der App tracken zu können.<br><br />   wie hoch schätzt du hier den Aufwand? </p>
+                    </div>
+                    <p class="popUp__body__teamTitle blackFont">Zugeordnete Mitarbeiter</p>
+                    <div class="popUp__body__team">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                        <img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80">
+                    </div>
+                </div>
+                <div class="popUp__editProject">
+                    <button class="archiveBtn">archivieren</button>
+                    <button class="editBtn">bearbeiten</button>
+                </div>
+            </div>
+
+
+            <div class="popUp popUp--inactive" id="timeTracking">
+                <div class="timeTrackingStartWindow">
+                    <div class="popUp__header">
+                        <p class="popUp__header__timeTrackingTitle">Zeiterfassung</p>
+                    </div>
+                    <div class="popUp__body">
+                        <p class="popUp__body__timeTrackingDescr blackFont">Projekt wählen</p>
+                        <div data-target-project="project5430" class="popUp__body__timeTrackingProject red">
+                            <div>
+                                <p class="popUp__body__timeTrackingProject__title">Entwicklung WebApp</p>
+                                <p class="popUp__body__timeTrackingProject__client">Migros Gruppe</p>
+                            </div>
+                            <div>
+                                <img src="http://stark-schwarz.de/wp-content/uploads/2020/01/chevron-right-solid.svg">
+                            </div>
+                        </div>
+                        <div data-target-project="project5431" class="popUp__body__timeTrackingProject yellow">
+                            <div>
+                                <p class="popUp__body__timeTrackingProject__title">BPR Consulting Plus</p>
+                                <p class="popUp__body__timeTrackingProject__client">Läderach GmbH</p>
+                            </div>
+                            <div>
+                                <img src="http://stark-schwarz.de/wp-content/uploads/2020/01/chevron-right-solid.svg">
+                            </div>
+                        </div>
+                        <div data-target-project="project5432" class="popUp__body__timeTrackingProject blue">
+                            <div>
+                                <p class="popUp__body__timeTrackingProject__title">Redesign Webshop</p>
+                                <p class="popUp__body__timeTrackingProject__client">Coop Fribourg Sárl</p>
+                            </div>
+                            <div>
+                                <img src="http://stark-schwarz.de/wp-content/uploads/2020/01/chevron-right-solid.svg">
+                            </div>
+                        </div>
+                        <div data-target-project="project5433" class="popUp__body__timeTrackingProject turquoise">
+                            <div>
+                                <p class="popUp__body__timeTrackingProject__title">Agile Banking Consulting</p>
+                                <p class="popUp__body__timeTrackingProject__client">Kantonalbank Zürich</p>
+                            </div>
+                            <div>
+                                <img src="http://stark-schwarz.de/wp-content/uploads/2020/01/chevron-right-solid.svg">
+                            </div>
+                        </div>
+                        <div data-target-project="project5434" class="popUp__body__timeTrackingProject blue">
+                            <div>
+                                <p class="popUp__body__timeTrackingProject__title">Mobile Payment Consulting</p>
+                                <p class="popUp__body__timeTrackingProject__client">Aldi Süd</p>
+                            </div>
+                            <div>
+                                <img src="http://stark-schwarz.de/wp-content/uploads/2020/01/chevron-right-solid.svg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="timeTracking-project5430" class="timeTrackingProjectWindow timeTrackingWindow--inactive">
+                    <div class="popUp__header red timeTrackingHeader">
+                        <div class="timeTrackingHeader__title">
+                            <p>Zeiterfassung</p>
+                        </div>
+                        <div class="timeTrackingHeader__information">
+                            <p class="popUp__body__timeTrackingProject__title">Entwicklung WebApp</p>
+                            <p class="popUp__body__timeTrackingProject__client">Migros Gruppe</p>
+                        </div>
+                    </div>
+                    <div class="timeTrackingErrorMessage"><strong>Fehler:</strong> Die Zeitangabe ist ungültig.</div>
+                    <div class="timeTrackingBody">
+                        <p class="timeTrackingBody__title blackFont">Zeiterfassung starten</p>
+                        <div class="timeTrackingBody__toolBar">
+                            <p class="timeTrackingBody__toolBar__time timeTrackingBody__toolBar__time--inactive">
+                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                </svg>
+                                <span class="timeTrackingBody__toolBar__time__value">Starte Timer ...</span>
+                            </p>
+                            <button class="iconBtn trackTimeBtn startTimeTracking" data-status="startTracking">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Zeit erfassen</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--nextStep">
+                            <button class="iconBtn timeTrackingBody__toolBar--nextStep__Btn timeTrackingBody__toolBar--nextStep__Btn--inactive standardBtn">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                                    </div>
+                                    <span>Speichern</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--save timeTrackingBody__toolBar--save--inactive">
+                            <form>
+                                <div class="timeTrackingBody__toolBar--save__firstRow">
+                                    <div>
+                                        <input class="timeTrackingResult" type="text" value="Zeit laden" readonly></input><br>
+                                        <input class="timeTrackingResult--time" value="Zeit laden" maxlength="13"></input>
+                                    </div>
+                                    <input class="timeTrackingPurpose" type="text" placeholder="Verwendungszweck eingeben"></input>
+                                </div>
+                                <div class="timeTrackingBody__toolBar--save__secondRow">
+                                    <button class="standardBtn" type="submit">speichern</button>
+                                </div>
+                            </form>
+                        </div>
+                        <p style="margin-top:50px;" class="timeTrackingBody__title blackFont">Bisher erbrachte Leistungen für dieses Projekt:</p>
+                        <table class="timeTrackingBody__table blackFont">
+                            <tr>
+                                <td class="timeTrackingBody__table__date">20.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundentelefonat Rückfragen</td>
+                                <td class="timeTrackingBody__table__value">00:15h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">18.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Recherche Marktumfeld</td>
+                                <td class="timeTrackingBody__table__value">02:45h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">16.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundeninterview Geschäftsprozesse</td>
+                                <td class="timeTrackingBody__table__value">01:30h</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="timeTracking-project5431" class="timeTrackingProjectWindow timeTrackingWindow--inactive">
+                    <div class="popUp__header yellow timeTrackingHeader">
+                        <div class="timeTrackingHeader__title">
+                            <p>Zeiterfassung</p>
+                        </div>
+                        <div class="timeTrackingHeader__information">
+                            <p class="popUp__body__timeTrackingProject__title">BPR Consulting Plus</p>
+                            <p class="popUp__body__timeTrackingProject__client">Läderach GmbH</p>
+                        </div>
+                    </div>
+                    <div class="timeTrackingErrorMessage"><strong>Fehler:</strong> Die Zeitangabe ist ungültig.</div>
+                    <div class="timeTrackingBody">
+                        <p class="timeTrackingBody__title blackFont">Zeiterfassung starten</p>
+                        <div class="timeTrackingBody__toolBar">
+                            <p class="timeTrackingBody__toolBar__time timeTrackingBody__toolBar__time--inactive">
+                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                </svg>
+                                <span class="timeTrackingBody__toolBar__time__value">Starte Timer ...</span>
+                            </p>
+                            <button class="iconBtn trackTimeBtn startTimeTracking" data-status="startTracking">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Zeit erfassen</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--nextStep">
+                            <button class="iconBtn timeTrackingBody__toolBar--nextStep__Btn timeTrackingBody__toolBar--nextStep__Btn--inactive standardBtn">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                                    </div>
+                                    <span>Speichern</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--save timeTrackingBody__toolBar--save--inactive">
+                            <form>
+                                <div class="timeTrackingBody__toolBar--save__firstRow">
+                                    <div>
+                                        <input class="timeTrackingResult" type="text" value="Zeit laden" readonly></input><br>
+                                        <input class="timeTrackingResult--time" value="Zeit laden" maxlength="13"></input>
+                                    </div>
+                                    <input class="timeTrackingPurpose" type="text" placeholder="Verwendungszweck eingeben"></input>
+                                </div>
+                                <div class="timeTrackingBody__toolBar--save__secondRow">
+                                    <button class="standardBtn" type="submit">speichern</button>
+                                </div>
+                            </form>
+                        </div>
+                        <p style="margin-top:50px;" class="timeTrackingBody__title blackFont">Bisher erbrachte Leistungen für dieses Projekt:</p>
+                        <table class="timeTrackingBody__table blackFont">
+                            <tr>
+                                <td class="timeTrackingBody__table__date">20.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundentelefonat Rückfragen</td>
+                                <td class="timeTrackingBody__table__value">00:15h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">18.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Recherche Marktumfeld</td>
+                                <td class="timeTrackingBody__table__value">02:45h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">16.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundeninterview Geschäftsprozesse</td>
+                                <td class="timeTrackingBody__table__value">01:30h</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="timeTracking-project5432" class="timeTrackingProjectWindow timeTrackingWindow--inactive">
+                    <div class="popUp__header blue timeTrackingHeader">
+                        <div class="timeTrackingHeader__title">
+                            <p>Zeiterfassung</p>
+                        </div>
+                        <div class="timeTrackingHeader__information">
+                            <p class="popUp__body__timeTrackingProject__title">Redesign Webshop</p>
+                            <p class="popUp__body__timeTrackingProject__client">Coop Fribourg Sárl</p>
+                        </div>
+                    </div>
+                    <div class="timeTrackingErrorMessage"><strong>Fehler:</strong> Die Zeitangabe ist ungültig.</div>
+                    <div class="timeTrackingBody">
+                        <p class="timeTrackingBody__title blackFont">Zeiterfassung starten</p>
+                        <div class="timeTrackingBody__toolBar">
+                            <p class="timeTrackingBody__toolBar__time timeTrackingBody__toolBar__time--inactive">
+                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                </svg>
+                                <span class="timeTrackingBody__toolBar__time__value">Starte Timer ...</span>
+                            </p>
+                            <button class="iconBtn trackTimeBtn startTimeTracking" data-status="startTracking">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Zeit erfassen</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--nextStep">
+                            <button class="iconBtn timeTrackingBody__toolBar--nextStep__Btn timeTrackingBody__toolBar--nextStep__Btn--inactive standardBtn">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                                    </div>
+                                    <span>Speichern</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--save timeTrackingBody__toolBar--save--inactive">
+                            <form>
+                                <div class="timeTrackingBody__toolBar--save__firstRow">
+                                    <div>
+                                        <input class="timeTrackingResult" type="text" value="Zeit laden" readonly></input><br>
+                                        <input class="timeTrackingResult--time" value="Zeit laden" maxlength="13"></input>
+                                    </div>
+                                    <input class="timeTrackingPurpose" type="text" placeholder="Verwendungszweck eingeben"></input>
+                                </div>
+                                <div class="timeTrackingBody__toolBar--save__secondRow">
+                                    <button class="standardBtn" type="submit">speichern</button>
+                                </div>
+                            </form>
+                        </div>
+                        <p style="margin-top:50px;" class="timeTrackingBody__title blackFont">Bisher erbrachte Leistungen für dieses Projekt:</p>
+                        <table class="timeTrackingBody__table blackFont">
+                            <tr>
+                                <td class="timeTrackingBody__table__date">20.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundentelefonat Rückfragen</td>
+                                <td class="timeTrackingBody__table__value">00:15h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">18.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Recherche Marktumfeld</td>
+                                <td class="timeTrackingBody__table__value">02:45h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">16.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundeninterview Geschäftsprozesse</td>
+                                <td class="timeTrackingBody__table__value">01:30h</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="timeTracking-project5433" class="timeTrackingProjectWindow timeTrackingWindow--inactive">
+                    <div class="popUp__header turquoise timeTrackingHeader">
+                        <div class="timeTrackingHeader__title">
+                            <p>Zeiterfassung</p>
+                        </div>
+                        <div class="timeTrackingHeader__information">
+                            <p class="popUp__body__timeTrackingProject__title">Redesign Webshop</p>
+                            <p class="popUp__body__timeTrackingProject__client">Coop Fribourg Sárl</p>
+                        </div>
+                    </div>
+                    <div class="timeTrackingErrorMessage"><strong>Fehler:</strong> Die Zeitangabe ist ungültig.</div>
+                    <div class="timeTrackingBody">
+                        <p class="timeTrackingBody__title blackFont">Zeiterfassung starten</p>
+                        <div class="timeTrackingBody__toolBar">
+                            <p class="timeTrackingBody__toolBar__time timeTrackingBody__toolBar__time--inactive">
+                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                </svg>
+                                <span class="timeTrackingBody__toolBar__time__value">Starte Timer ...</span>
+                            </p>
+                            <button class="iconBtn trackTimeBtn startTimeTracking" data-status="startTracking">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Zeit erfassen</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--nextStep">
+                            <button class="iconBtn timeTrackingBody__toolBar--nextStep__Btn timeTrackingBody__toolBar--nextStep__Btn--inactive standardBtn">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                                    </div>
+                                    <span>Speichern</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--save timeTrackingBody__toolBar--save--inactive">
+                            <form>
+                                <div class="timeTrackingBody__toolBar--save__firstRow">
+                                    <div>
+                                        <input class="timeTrackingResult" type="text" value="Zeit laden" readonly></input><br>
+                                        <input class="timeTrackingResult--time" value="Zeit laden" maxlength="13"></input>
+                                    </div>
+                                    <input class="timeTrackingPurpose" type="text" placeholder="Verwendungszweck eingeben"></input>
+                                </div>
+                                <div class="timeTrackingBody__toolBar--save__secondRow">
+                                    <button class="standardBtn" type="submit">speichern</button>
+                                </div>
+                            </form>
+                        </div>
+                        <p style="margin-top:50px;" class="timeTrackingBody__title blackFont">Bisher erbrachte Leistungen für dieses Projekt:</p>
+                        <table class="timeTrackingBody__table blackFont">
+                            <tr>
+                                <td class="timeTrackingBody__table__date">20.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundentelefonat Rückfragen</td>
+                                <td class="timeTrackingBody__table__value">00:15h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">18.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Recherche Marktumfeld</td>
+                                <td class="timeTrackingBody__table__value">02:45h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">16.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundeninterview Geschäftsprozesse</td>
+                                <td class="timeTrackingBody__table__value">01:30h</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="timeTracking-project5434" class="timeTrackingProjectWindow timeTrackingWindow--inactive">
+                    <div class="popUp__header blue timeTrackingHeader">
+                        <div class="timeTrackingHeader__title">
+                            <p>Zeiterfassung</p>
+                        </div>
+                        <div class="timeTrackingHeader__information">
+                            <p class="popUp__body__timeTrackingProject__title">Redesign Webshop</p>
+                            <p class="popUp__body__timeTrackingProject__client">Coop Fribourg Sárl</p>
+                        </div>
+                    </div>
+                    <div class="timeTrackingErrorMessage"><strong>Fehler:</strong> Die Zeitangabe ist ungültig.</div>
+                    <div class="timeTrackingBody">
+                        <p class="timeTrackingBody__title blackFont">Zeiterfassung starten</p>
+                        <div class="timeTrackingBody__toolBar">
+                            <p class="timeTrackingBody__toolBar__time timeTrackingBody__toolBar__time--inactive">
+                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                </svg>
+                                <span class="timeTrackingBody__toolBar__time__value">Starte Timer ...</span>
+                            </p>
+                            <button class="iconBtn trackTimeBtn startTimeTracking" data-status="startTracking">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Zeit erfassen</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--nextStep">
+                            <button class="iconBtn timeTrackingBody__toolBar--nextStep__Btn timeTrackingBody__toolBar--nextStep__Btn--inactive standardBtn">
+                                <div class="iconBtn__content">
+                                    <div class="icon">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                                    </div>
+                                    <span>Speichern</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="timeTrackingBody__toolBar--save timeTrackingBody__toolBar--save--inactive">
+                            <form>
+                                <div class="timeTrackingBody__toolBar--save__firstRow">
+                                    <div>
+                                        <input class="timeTrackingResult" type="text" value="Zeit laden" readonly></input><br>
+                                        <input class="timeTrackingResult--time" value="Zeit laden" maxlength="13"></input>
+                                    </div>
+                                    <input class="timeTrackingPurpose" type="text" placeholder="Verwendungszweck eingeben"></input>
+                                </div>
+                                <div class="timeTrackingBody__toolBar--save__secondRow">
+                                    <button class="standardBtn" type="submit">speichern</button>
+                                </div>
+                            </form>
+                        </div>
+                        <p style="margin-top:50px;" class="timeTrackingBody__title blackFont">Bisher erbrachte Leistungen für dieses Projekt:</p>
+                        <table class="timeTrackingBody__table blackFont">
+                            <tr>
+                                <td class="timeTrackingBody__table__date">20.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundentelefonat Rückfragen</td>
+                                <td class="timeTrackingBody__table__value">00:15h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">18.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Recherche Marktumfeld</td>
+                                <td class="timeTrackingBody__table__value">02:45h</td>
+                            </tr>
+                            <tr>
+                                <td class="timeTrackingBody__table__date">16.10.2019</td>
+                                <td class="timeTrackingBody__table__purpose">Kundeninterview Geschäftsprozesse</td>
+                                <td class="timeTrackingBody__table__value">01:30h</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="notificationBar notificationBar--inactive">
+                <h2 class="blackFont">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24.177" height="27.63" style="margin-right:10px;" viewBox="0 0 24.177 27.63">
+                        <defs>
+                            <linearGradient id="linear-gradient" x1="0.147" y1="0.088" x2="0.873" y2="1" gradientUnits="objectBoundingBox">
+                                <stop offset="0" stop-color="#ff4c60" />
+                                <stop offset="1" stop-color="#ff754c" stop-opacity="0.749" />
+                            </linearGradient>
+                        </defs>
+                        <path id="bell-regular" d="M23.711,19.551c-1.043-1.12-2.993-2.806-2.993-8.326a8.522,8.522,0,0,0-6.9-8.373V1.727a1.726,1.726,0,1,0-3.452,0V2.852a8.522,8.522,0,0,0-6.9,8.373c0,5.521-1.951,7.206-2.993,8.326A1.686,1.686,0,0,0,0,20.723,1.728,1.728,0,0,0,1.732,22.45H22.444a1.728,1.728,0,0,0,1.732-1.727A1.685,1.685,0,0,0,23.711,19.551Zm-20.068.308c1.145-1.509,2.4-4.011,2.4-8.6,0-.011,0-.021,0-.031a6.044,6.044,0,1,1,12.088,0c0,.011,0,.021,0,.031.006,4.592,1.258,7.094,2.4,8.6Zm8.444,7.771a3.453,3.453,0,0,0,3.452-3.454h-6.9A3.453,3.453,0,0,0,12.088,27.63Z" transform="translate(0.001)" fill="url(#linear-gradient)" />
+                    </svg> Notifications
+                </h2>
+                <div class="notificationBox newNotification">
+                    <div class="notificationBox__header">
+                        <div class="notificationBox__header__delete">
+                            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"></path></svg>
+                        </div>
+                        <span class="notificationBox__header__status">Neu</span>
+                    </div>
+                    <p class="notificationBox__title">Neuer Skill gefragt</p>
+                    <p class="notificationBox__msg">Hans-Jürgen möchte wissen, wie fit Du in Angular bist. Schätze Dich auf einer Skala von 1 (Beginner) bis 5 (Experte) ein.</p>
+                    <div class="notificationBox__interactiveWidget">
+                        <p class="notificationBox__interactiveWidget__item" data-value="1">1</p>
+                        <p class="notificationBox__interactiveWidget__item" data-value="2">2</p>
+                        <p class="notificationBox__interactiveWidget__item" data-value="3">3</p>
+                        <p class="notificationBox__interactiveWidget__item" data-value="4">4</p>
+                        <p class="notificationBox__interactiveWidget__item" data-value="5">5</p>
+                    </div>
+                </div>
+                <div class="notificationBox newNotification">
+                    <div class="notificationBox__header">
+                        <div class="notificationBox__header__delete">
+                            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"></path></svg>
+                        </div>
+                        <span class="notificationBox__header__status">Neu</span>
+                    </div>
+                    <p class="notificationBox__title">Projekt beendet</p>
+                    <p class="notificationBox__msg">Max hat das Projekt „Business Process Redesign Consulting“ für Migros Gruppe AG beendet.</p>
+                </div>
+                <div class="notificationBox newNotification">
+                    <div class="notificationBox__header">
+                        <div class="notificationBox__header__delete">
+                            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"></path></svg>
+                        </div>
+                        <span class="notificationBox__header__status">Neu</span>
+                    </div>
+                    <p class="notificationBox__title">Projekt gewonnen</p>
+                    <p class="notificationBox__msg">Sabine hat das Projekt „Redesign Webshop“ für MyFondue AG auf „gewonnen“ umgestellt.</p>
+                </div>
+                <div class="notificationBox__noResults notificationBox__noResults--inactive">
+                    <img style="width:140px; height:140px; border-radius:100%; object-fit:cover;" src="https://media.giphy.com/media/5LONmJBzkVSOQ/200.gif" />
+                    <p><strong><span class="blackFont">Nix los hier!</span></strong><br>Keine Benachrichtigungen in Deinem Postfach.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="js/signalr/dist/browser/signalr.min.js"></script>
+        <script>
+            const hubConnection = new signalR.HubConnectionBuilder()
+                .withUrl("/chat")
+                .build();
+            let userName = "";
+            // получение сообщения от сервера
+            hubConnection.on("Receive", function (message, userName) {
+
+                // создаем элемент <b> для имени пользователя
+                let userNameElem = document.createElement("b");
+                userNameElem.appendChild(document.createTextNode(userName + ": "));
+
+                // создает элемент <p> для сообщения пользователя
+                let elem = document.createElement("p");
+                elem.appendChild(userNameElem);
+                elem.appendChild(document.createTextNode(message));
+
+                var firstElem = document.getElementById("chatroom").firstChild;
+                document.getElementById("chatroom").insertBefore(elem, firstElem);
+
+            });
+            // диагностическое сообщение
+            hubConnection.on("Notify", function (message) {
+
+                let elem = document.createElement("p");
+                elem.appendChild(document.createTextNode(message));
+
+                var firstElem = document.getElementById("chatroom").firstChild;
+                document.getElementById("chatroom").insertBefore(elem, firstElem);
+            });
+
+            // установка имени пользователя
+            document.getElementById("loginBtn").addEventListener("click", function (e) {
+                userName = document.getElementById("userName").value;
+                hubConnection.invoke("Enter", userName);
+            });
+            // отправка сообщения на сервер
+            document.getElementById("sendBtn").addEventListener("click", function (e) {
+                let message = document.getElementById("message").value;
+                hubConnection.invoke("Send", message, userName);
+            });
+
+            hubConnection.start();
+        </script>
+
+
+
+
+         Start Modal Structure
+
+
+        <script>
+            // Modal Function
+
+            let siteBody = document.querySelector("body");
+            let mainWindow = document.querySelector(".mainWindow");
+            let popUpBtn = document.querySelectorAll(".popUpBtn");
+            let popUp = document.querySelectorAll(".popUp");
+            let modalWindow = document.querySelector(".modalWindow");
+            let closeModal = document.querySelectorAll(".closeModal");
+            let notificationBell = document.querySelector(".notificationBell");
+            let notificationBar = document.querySelector(".notificationBar");
+            let timeTrackingProjectTile = document.querySelectorAll(
+                ".popUp__body__timeTrackingProject"
+            );
+            let timeTrackingStartWindow = document.querySelector(
+                ".timeTrackingStartWindow"
+            );
+            let timeTrackingProjectWindow = document.querySelectorAll(
+                ".timeTrackingProjectWindow"
+            );
+
+
+            function openLayer() {
+                mainWindow.classList.toggle("mainWindow--inactive");
+                siteBody.classList.toggle("disableScrolling");
+                modalWindow.classList.toggle("modalWindow--inactive");
+            }
+
+            function closeLayer() {
+                mainWindow.classList.toggle("mainWindow--inactive");
+                siteBody.classList.toggle("disableScrolling");
+                modalWindow.classList.add("modalWindow--inactive");
+            }
+
+            popUpBtn.forEach(e => {
+                e.addEventListener("click", () => {
+                    openLayer();
+                    let targetPopUp = document.getElementById(e.dataset.targetPopup);
+                    targetPopUp.classList.remove("popUp--inactive");
+                });
+            });
+
+            notificationBell.addEventListener("click", () => {
+                openLayer();
+                notificationBar.classList.remove("notificationBar--inactive");
+            });
+
+            closeModal.forEach(e => {
+                e.addEventListener("click", () => {
+                    closeLayer();
+                    popUp.forEach(popUp => {
+                        popUp.classList.add("popUp--inactive");
+                    });
+                    notificationBar.classList.add("notificationBar--inactive");
+
+                    /* Reset Time Tracking PopUp*/
+                    timeTrackingStartWindow.classList.remove(
+                        "timeTrackingWindow--inactive"
+                    );
+                    timeTrackingProjectWindow.forEach(e => {
+                        e.classList.add("timeTrackingWindow--inactive");
+                    });
+                });
+            });
+
+            // Single Page Functionality
+            let darkModeSet = "false";
+            let singlePageLinks = document.querySelectorAll(".singlePageLink");
+            let contentSinglePage = document.querySelectorAll(".content--singlePage");
+            singlePageLinks.forEach(e => {
+                e.addEventListener("click", () => {
+                    contentSinglePage.forEach(page => {
+                        page.classList.remove("content--singlePage--active");
+                    });
+                    let targetPageId = "content--" + e.dataset.targetRef;
+                    let targetPage = document.getElementById(targetPageId);
+                    targetPage.classList.add("content--singlePage--active");
+                    sizeProjectTable();
+                    if (darkModeSet == "true") {
+                        singlePageLinks.forEach(s => {
+                            s.classList.remove('navigation__item--active--dark');
+                        });
+                        e.classList.toggle('navigation__item--active--dark');
+                    } else {
+                        singlePageLinks.forEach(s => {
+                            s.classList.remove('navigation__item--active--dark');
+                        });
+                    }
+                });
+            });
+
+            singlePageLinks[0].click();
+
+            // Navbar Functionality
+
+            let navItems = document.querySelectorAll(".navigation__item");
+
+            navItems.forEach(e => {
+                e.addEventListener("click", () => {
+                    navItems.forEach(item => {
+                        item.classList.remove("navigation__item--active");
+                    });
+                    e.classList.add("navigation__item--active");
+                });
+            });
+
+            navItems[0].click();
+
+            // New Project Button Single Page Functionality
+
+            document.querySelector('#createProjectBtn').addEventListener('click', () => {
+                navItems.forEach(item => {
+                    item.classList.remove("navigation__item--active");
+                });
+                navItems.forEach(item => {
+                    if (item.dataset.targetRef == 'project') {
+                        item.classList.add("navigation__item--active");
+                    }
+                });
+
+            });
+
+            // Current Amount of Notifications Functionality
+            let newNotifications = document.querySelectorAll(".newNotification").length;
+            let notificationBellValue = document.querySelector(".notificationBell__value");
+
+            notificationBellValue.innerText = newNotifications;
+
+            // Notifications Remove Functionality
+            let deleteNotification = document.querySelectorAll(
+                ".notificationBox__header__delete"
+            );
+            let leftNotifications = deleteNotification.length;
+
+            deleteNotification.forEach(e => {
+                e.addEventListener("click", () => {
+                    let notificationBox = e.parentNode.parentNode;
+                    notificationBar.removeChild(notificationBox);
+                    leftNotifications--;
+                    if (notificationBox.classList.contains("newNotification")) {
+                        newNotifications--;
+                    }
+                    if (newNotifications != 0) {
+                        notificationBellValue.innerText = newNotifications;
+                    } else {
+                        notificationBellValue.style.display = "none";
+                        document.querySelector('.notificationBox__noResults').classList.toggle('notificationBox__noResults--inactive');
+                    }
+                });
+            });
+
+            // HR Filter Function
+
+
+
+
+            // Time Tracking Functionality
+
+            let trackedSeconds = 0;
+            let trackedMinutes = 0;
+            let trackedHours = 0;
+            let trackedTime;
+            let timeTrackingOutputField = document.querySelector(".profile__information__time");
+            let timeTrackingOutputValue = document.querySelector(".profile__information__time__value");
+
+            function minTwoDigits(n) {
+                return (n < 10 ? "0" : "") + n;
+            }
+
+            let timer;
+
+            function startTimer(dataset, modalDisplay) {
+                timeTrackingOutputField.dataset.targetModal = dataset.toString();
+                timer = setInterval(() => {
+                    trackedSeconds++;
+                    if (trackedSeconds >= 60) {
+                        trackedMinutes++;
+                        trackedSeconds = 0;
+                    } else if (trackedMinutes >= 60) {
+                        trackedHours++;
+                        trackedMinutes = 0;
+                    }
+
+                    trackedTime =
+                        minTwoDigits(trackedHours) +
+                        ":" +
+                        minTwoDigits(trackedMinutes) +
+                        "." +
+                        minTwoDigits(trackedSeconds);
+
+                    timeTrackingOutputValue.innerHTML = trackedTime;
+                    modalDisplay.innerHTML = trackedTime;
+
+
+                }, 1000);
+            };
+
+            function stopTimer() {
+                clearInterval(timer);
+            }
+
+            let today = new Date();
+            let startTime;
+            let stopTime;
+
+            let startTimeTracking = document.querySelectorAll(".startTimeTracking");
+            startTimeTracking.forEach((e) => {
+                e.addEventListener("click", () => {
+                    if (e.dataset.status == "startTracking") {
+                        document.querySelector('#trackTimeBtn').setAttribute('data-currently-tracking', e.parentNode.parentNode.parentNode.id);
+                        e.setAttribute('data-status', 'stopTracking');
+                        e.querySelector('span').innerHTML = "Zeit stoppen";
+                        startTimer(e.parentNode.parentNode.parentNode.id, e.parentNode.parentNode.querySelector('.timeTrackingBody__toolBar__time__value'));
+                        timeTrackingOutputField.classList.toggle("profile__information__time--inactive");
+                        let timeDisplay = e.parentNode.querySelector('.timeTrackingBody__toolBar__time');
+                        timeDisplay.classList.remove('timeTrackingBody__toolBar__time--inactive');
+                        e.parentNode.parentNode.firstElementChild.innerHTML = "Zeiterfassung läuft";
+                        startTime = minTwoDigits(today.getHours()) + ":" + minTwoDigits(today.getMinutes());
+                    }
+                    else if (e.dataset.status == "stopTracking") {
+                        stopTimer();
+                        e.setAttribute('data-status', 'startTracking');
+                        e.querySelector('span').innerHTML = "Fortsetzen";
+                        e.parentNode.parentNode.firstElementChild.innerHTML = "Zeiterfassung angehalten";
+                        let currentTimeTrackingWindow = e.parentNode.parentNode.parentNode;
+                        currentTimeTrackingWindow.querySelector('.timeTrackingBody__toolBar--nextStep__Btn').classList.remove('timeTrackingBody__toolBar--nextStep__Btn--inactive');
+
+
+                        // Rounding Time Tracking Result
+                        let roundTrackedTime = minTwoDigits(trackedHours) +
+                            ":";
+                        if (trackedMinutes <= 15) {
+                            roundTrackedTime += '15.00';
+                        } else if (trackedMinutes > 15 && trackedMinutes <= 30) {
+                            roundTrackedTime += '30.00';
+                        } else if (trackedMinutes > 30 && trackedMinutes <= 45) {
+                            roundTrackedTime += '45.00';
+                        } else if (trackedMinutes > 45 && trackedMinutes <= 60) {
+                            roundTrackedTime = minTwoDigits(trackedHours + 1) + ":" + '00.00';
+                        }
+                        currentTimeTrackingWindow.querySelector('.timeTrackingResult').value = roundTrackedTime;
+
+
+                        stopTime = minTwoDigits(today.getHours()) + ":" + minTwoDigits(today.getMinutes());
+
+                        let timeTrackingResultTime = currentTimeTrackingWindow.querySelector('.timeTrackingResult--time');
+                        timeTrackingResultTime.value = startTime + " - " + stopTime;
+
+                        timeTrackingResultTime.addEventListener('input', () => {
+                            window.setTimeout(function () {
+                                let newTime = timeTrackingResultTime.value;
+                                let index = newTime.indexOf(" ");  // Gets the index where separator is placed
+                                let newStartTime = newTime.substr(0, index); // Gets the start time
+                                let newEndTime = newTime.substr(index + 3);  // Gets the end time
+                                let newHours = minTwoDigits(parseInt(newEndTime.substr(0, 2)) - parseInt(newStartTime.substr(0, 2)));
+                                let newMinutes = minTwoDigits(parseInt(newEndTime.substr(3, 5)) - parseInt(newStartTime.substr(3, 5)));
+
+                                if ((newHours >= 0 && newMinutes >= 0) && parseInt(newStartTime.substr(0, 2)) <= 24 && parseInt(newEndTime.substr(0, 2)) <= 24 && parseInt(newStartTime.substr(3, 5)) <= 60 && parseInt(newEndTime.substr(3, 5)) <= 60) {
+                                    currentTimeTrackingWindow.querySelector('.timeTrackingErrorMessage').classList.remove('timeTrackingErrorMessage--active');
+                                    currentTimeTrackingWindow.querySelector('.timeTrackingResult').value = newHours + ":" + newMinutes + ".00";
+                                } else {
+                                    currentTimeTrackingWindow.querySelector('.timeTrackingErrorMessage').classList.add('timeTrackingErrorMessage--active');
+                                    currentTimeTrackingWindow.querySelector('.timeTrackingErrorMessage').innerHTML = "<strong>Fehler:</strong> Die Zeiteingabe ist ungültig.";
+                                }
+                            }, 250);
+                        });
+                    }
+                });
+            });
+
+
+
+            let timeTrackingNextStepBtn = document.querySelectorAll('.timeTrackingBody__toolBar--nextStep__Btn');
+
+            timeTrackingNextStepBtn.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    let currentTimeTrackingWindow = btn.parentNode.parentNode.parentNode;
+                    currentTimeTrackingWindow.querySelector('.timeTrackingBody__toolBar').style.display = "none"; currentTimeTrackingWindow.querySelector('.timeTrackingBody__toolBar--save').classList.toggle('timeTrackingBody__toolBar--save--inactive');
+                    btn.classList.toggle('timeTrackingBody__toolBar--nextStep__Btn--inactive');
+                });
+            });
+
+            let saveTrackedTimeBtn = document.querySelectorAll('.timeTrackingBody__toolBar--save__secondRow button');
+            saveTrackedTimeBtn.forEach((e) => {
+                e.addEventListener('click', () => {
+                    // Resetting Topbar Timetracking Button
+                    document.querySelector('#trackTimeBtn').setAttribute('data-currently-tracking', "");
+                    // End
+                })
+            });
+
+
+
+            // Internal Time Tracking PopUp Functions
+
+            timeTrackingProjectTile.forEach(tile => {
+                tile.addEventListener("click", () => {
+                    let targetTimeTrackingProjectWindow = document.getElementById(
+                        "timeTracking-" + tile.dataset.targetProject
+                    );
+                    tile.parentNode.parentNode.classList.add("timeTrackingWindow--inactive");
+                    targetTimeTrackingProjectWindow.classList.toggle(
+                        "timeTrackingWindow--inactive"
+                    );
+                });
+            });
+
+            timeTrackingOutputField.addEventListener('click', () => {
+                openLayer();
+                let timeTrackingModal = document.getElementById('timeTracking');
+                timeTrackingModal.classList.remove('popUp--inactive');
+                timeTrackingModal.firstElementChild.classList.add('timeTrackingWindow--inactive');
+                let targetModal = timeTrackingOutputField.dataset.targetModal;
+                document.getElementById(targetModal).classList.toggle('timeTrackingWindow--inactive');
+            });
+
+            let topBarTimeTrackingBtn = document.querySelector('#trackTimeBtn');
+
+            topBarTimeTrackingBtn.addEventListener('click', (e) => {
+                if (!topBarTimeTrackingBtn.dataset.currentlyTracking == "") {
+                    let targetTimeTrackingProjectWindow = topBarTimeTrackingBtn.dataset.currentlyTracking;
+                    document.querySelector('.timeTrackingStartWindow').classList.add("timeTrackingWindow--inactive");
+                    document.getElementById(targetTimeTrackingProjectWindow).classList.toggle(
+                        "timeTrackingWindow--inactive"
+                    );
+                }
+            })
+
+
+
+            // Dark Mode functionality
+
+            let darkModeBtn = document.querySelector(".darkModeBtn");
+            let navbar = document.querySelector(".navbar");
+            let topbar = document.querySelector(".topbar");
+            let popUpProjectNotes = document.querySelectorAll(".popUp__body__notes");
+            let popUpProjectEdit = document.querySelectorAll(".popUp__editProject");
+            let kpiTiles = document.querySelectorAll(".kpiComponent__tile");
+            let employeeTile = document.querySelectorAll(".hrWidget__employeeTile");
+            let navigationItem = document.querySelectorAll('.navigation__item');
+
+            let logOut = document.querySelector('.logout');
+            let blackFont = document.querySelectorAll(".blackFont");
+
+
+            darkModeBtn.addEventListener("click", () => {
+                if (darkModeSet == "false") {
+                    darkModeSet = "true";
+                } else {
+                    darkModeSet = "false";
+                }
+                siteBody.classList.toggle("body--dark");
+                navbar.classList.toggle("navbar--dark");
+                topbar.classList.toggle("topbar--dark");
+                kpiTiles.forEach(e => {
+                    e.classList.toggle("kpiComponent__tile--dark");
+                });
+                blackFont.forEach(e => {
+                    e.classList.toggle("blackFont--dark");
+                });
+                darkModeBtn.classList.toggle("darkModeBtn--dark");
+                popUp.forEach(popUp => {
+                    popUp.classList.toggle("popUp--dark");
+                });
+                popUpProjectNotes.forEach(e => {
+                    e.classList.toggle("popUp__body__notes--dark");
+                });
+                popUpProjectEdit.forEach(e => {
+                    e.classList.toggle("popUp__editProject--dark");
+                });
+                notificationBar.classList.toggle("notificationBar--dark");
+                employeeTile.forEach(e => {
+                    e.classList.toggle("hrWidget__employeeTile--dark");
+                });
+                navigationItem.forEach(e => {
+                    e.classList.toggle('navigation__item--dark')
+                });
+
+
+                document.querySelector('.navigation__item--active').classList.toggle('navigation__item--active--dark');
+                logOut.classList.toggle('logout--dark');
+            });
+
+
+    // Stacking Profile Pics in ProjectTable
+
+
+
+        </script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+
+    </body>
+    </html>*@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - My ASP.NET Application</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Application name</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/Home/About">About</a></li>
+                    <li><a href="/Home/Contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+
+
+        <h2></h2>
+
+        <p style="font-weight:bold;font-size:1.5em;">Visit <a href="http://techbrij.com">TechBrij.com</a> for more details </p>
+
+        <section id="chartResult"></section>
+
+        @RenderBody();
+
+
+        <hr />
+        <footer>
+            <p>&copy; 2020 - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/respond.js"></script>
+
+
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+   
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="/signalr/hubs"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="~/Scripts/react/react-0.12.2.min.js"></script>
+
+    <script src="~/Scripts/jsx/piechart.jsx"></script>
+    <script src="~/Scripts/jsx/dashboard.jsx"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VotingApplication.Data.Model;
 
 namespace ComeTogether.Domain.Entities
 {

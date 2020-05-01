@@ -4,12 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using ComeTogether.Infrastructure.Identity;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebMVC.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         

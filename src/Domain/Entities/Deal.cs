@@ -6,9 +6,9 @@ namespace ComeTogether.Domain.Entities
 {
    public class Deal
     {
-        public string Id { get; set; }
+        public int DealId { get; set; }
         
-        public Project Project { get; set; }
-        public Partner Partner { get; set; }
+        public int ProjectId { get; set; }
+        public string Partner { get; set; }
     }
 }

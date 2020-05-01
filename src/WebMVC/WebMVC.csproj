@@ -6,6 +6,40 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Areas\Identity\Pages\Account\AccessDenied.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Lockout.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Login.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Logout.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\Email.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\Index.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ManageNavPages.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ShowRecoveryCodes.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Register.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ResetPassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Error.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Scripts\bootstrap.js" />
     <None Include="wwwroot\Scripts\bootstrap.min.js" />
     <None Include="wwwroot\Scripts\jquery-1.10.2.intellisense.js" />
@@ -30,50 +64,50 @@
 
  
   <ItemGroup>
-    <PackageReference Include="d3" Version="3.5.3" />
-    <PackageReference Include="EntityFramework" Version="6.4.0" />
-    <PackageReference Include="JSPool" Version="4.0.0" />
+    
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNet.SignalR.JS" Version="2.4.1" />
-    <PackageReference Include="Microsoft.AspNet.SignalR.Owin" Version="1.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
+   
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
+   
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="3.1.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
+   
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Owin" Version="4.1.0" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.1.0" />
     <PackageReference Include="Microsoft.Owin.Security" Version="2.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
   <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" />
   <PackageReference Include="Owin" Version="1.0.0" />
-  <PackageReference Include="React.Core" Version="1.3.0" />
-  <PackageReference Include="react.js" Version="0.12.2" />
-  <PackageReference Include="React.Web" Version="1.3.0" />
-  <PackageReference Include="React.Web.Mvc4" Version="5.2.4" />
+ 
   <PackageReference Include="Respond" Version="1.4.2" />
   <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
   <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.7.0" />
+  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
 
   </ItemGroup>
 
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Domain\Domain.csproj" />
-    <ProjectReference Include="..\src\Infrastructure\Infrastructure.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
+    <EmbeddedResource Update="Resources\Content.resx">
+      <LastGenOutput>Content.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Resources.resx">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\SharedResource.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -96,7 +130,27 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\NewFolder\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Service.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Resources\Content.Designer.cs">
+      <DependentUpon>Content.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
   </ItemGroup>
 
 </Project>

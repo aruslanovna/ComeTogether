@@ -6,7 +6,7 @@ namespace ComeTogether.Domain.Entities
     {
         public Category()
         {
-            Products = new HashSet<Product>();
+            Products = new HashSet<Project>();
         }
 
         public int CategoryId { get; set; }
@@ -14,6 +14,6 @@ namespace ComeTogether.Domain.Entities
         public string Description { get; set; }
         public byte[] Picture { get; set; }
 
-        public ICollection<Product> Products { get; private set; }
+        public ICollection<Project> Products { get; private set; }
     }
 }

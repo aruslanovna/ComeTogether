@@ -7,13 +7,13 @@ using System.Security.Claims;
 using ComeTogether.Infrastructure.Identity;
 using static Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal.LoginModel;
 
-using System;
-using WebMVC.SignalR;
+
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using ComeTogether.Infrastructure.Persistence;
 using ComeTogether.Infrastructure;
 using ComeTogether.Domain.Entities;
+using ApplicationUser = ComeTogether.Infrastructure.Identity.ApplicationUser;
 
 namespace WebMVC.Controllers
 {

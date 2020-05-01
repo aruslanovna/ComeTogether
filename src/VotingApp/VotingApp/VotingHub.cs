@@ -11,11 +11,11 @@ namespace VotingApp
     {
 
         public static Dictionary<string, int> poll = new Dictionary<string, int>(){
-             {"Apples",10 },
-             {"Oranges",10},
-             {"Bananas",10},
-             {"Blueberries",10},
-             {"mangoes",10},        
+             {"Apply changes",25 },
+             {"Refuse",25},
+             {"Abstain",5},
+             {"Another",25},
+                    
         };
 
 

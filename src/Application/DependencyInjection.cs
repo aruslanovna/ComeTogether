@@ -1,19 +1,24 @@
-﻿using AutoMapper;
-using ComeTogether.Application.Common.Behaviours;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
-namespace ComeTogether.Application
+using ComeTogether.Service.Interfaces;
+using ComeTogether.Service.Services;
+
+namespace ComeTogether.Service
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+           
+            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IArticleService, ArticleService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+          
 
             return services;
         }

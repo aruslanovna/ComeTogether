@@ -50,21 +50,6 @@ namespace WebMVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public JsonResult SurveyQuiz()
-        {
-            var poll = new
-            {
-                question = "Which is your favourite fruit?",
-                choices = VotingHub.poll.Select(x => new { name = x.Key, count = x.Value }).ToList()
-            };
-            return Json(poll, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Dashboard()
-        {
-            return View();
-        }
-
 
 
     }

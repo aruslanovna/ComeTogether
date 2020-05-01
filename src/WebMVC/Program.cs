@@ -18,11 +18,11 @@ namespace WebMVC
            
             CreateHostBuilder(args).Build().Run();
         }
-        public static IWebHost BuildWebHost(string[] args) =>
-       WebHost.CreateDefaultBuilder(args)
-           .UseStartup<Startup>()
-           .UseIISIntegration()
-           .Build();
+       // public static IWebHost BuildWebHost(string[] args) =>
+       //WebHost.CreateDefaultBuilder(args)
+       //    .UseStartup<Startup>()
+       //    .UseIISIntegration()
+       //    .Build();
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

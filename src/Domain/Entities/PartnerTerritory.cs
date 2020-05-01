@@ -10,7 +10,7 @@ namespace ComeTogether.Domain.Entities
         public int PartnerId { get; set; }
     public string TerritoryId { get; set; }
 
-    public Partner Partner { get; set; }
+   // public Partner Partner { get; set; }
     public Territory Territory { get; set; }
 
     

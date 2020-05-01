@@ -1,0 +1,204 @@
+﻿ 
+@using System.Linq
+@model IEnumerable<ComeTogether.Domain.ViewModel.UserProfileModel>
+
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        letter-spacing: 1px;
+        line-height: 1.6em;
+        font-weight: 300;
+        color: #555;
+    }
+
+    p {
+        margin-bottom: 2em;
+    }
+
+    header {
+        border-bottom: solid 1px #e0e0e0;
+        margin: 0 0 20px 0;
+    }
+
+    .pageTitle,
+    .pageSubTitle {
+        font-family: 'Titillium', sans-serif;
+        text-transform: uppercase;
+        color: #333;
+    }
+
+    .pageTitle {
+        color: #FF7600;
+    }
+
+    .pageTitle {
+        font-size: 2em;
+        font-weight: 700;
+        line-height: 2em;
+    }
+
+    .pageSubTitle {
+        margin-bottom: 1em;
+        font-size: 1.4em;
+        font-weight: 300;
+    }
+
+    .background {
+        background: url("http://img.talkandroid.com/uploads/2013/03/htc-sense-5-wallpaper-3.jpg") repeat;
+        background-size: 100% auto;
+        position: fixed;
+        width: 100%;
+        height: 300%;
+        top: 0;
+        left: 0;
+        z-index: -1
+    }
+
+    .wrapper {
+        width: 520px;
+        padding: 40px;
+        margin: 20px auto;
+        background: #fff;
+        box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .slogan {
+        position: fixed;
+        display: block;
+        top: 700px;
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        background: #222;
+    }
+
+    .sloganTitle {
+        font-size: 70px;
+        font-weight: 700;
+        line-height: 80px;
+        color: #fff;
+        text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .button {
+        background-color: #68a369;
+        color: aliceblue;
+    }
+
+    .comment-box {
+        position: center;
+    }
+</style>
+@foreach (var item in Model)
+{
+    <article class="wrapper">
+
+        <header>
+            <h1 class="pageTitle">@item.ArticleName</h1>
+            <h2 class="pageSubTitle">@item.Briefly</h2>
+        </header>
+        <section>
+            <p>@item.Description</p>
+            @{
+                if (@item.Photo != null)
+                {
+                    var base64 = Convert.ToBase64String(@item.Photo);
+                    var imagesrc = string.Format("data:image/jpeg;base64,{0}", base64);
+
+                    <img src="@imagesrc" alt="" height="330em" />
+                }
+                else
+                {
+
+
+                    <img src="~/Resource/thuan-pham-1Kj0OZiwLN8-unsplash.jpg" alt="" height="330em" />
+
+                }
+            }
+        </section>
+
+
+    </article>
+
+    <div class="container">
+        <div class="comments-container">
+
+            <h1> @*@Resources.Content.Comments*@</h1>
+
+            <ul id="comments-list" class="comments-list">
+
+                <li>
+                    @using (Html.BeginForm("AddComment", "Articles", new { articleId = item.ArticleId , style="padding:0"}))
+                    {
+                        <div class="comment-main-level">
+                            <!-- Avatar -->
+                            @*<div class="comment-avatar">
+                                @{
+                                    if (@ViewBag.Photo != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(@ViewBag.Photo);
+                                        var imagesrc = string.Format("data:image/jpeg;base64,{0}", base64);
+
+                                        <img src="@imagesrc" style=" background-size: cover;border-radius: 50%; height: 42px; margin-right: .9rem;position: relative;top: 8px; width: 42px;" />
+                                    }
+                                    else
+                                    {
+
+
+                                        <img src="~/Resource/thuan-pham-1Kj0OZiwLN8-unsplash.jpg" style=" background-size: cover;border-radius: 50%;height: 42px; margin-right: .9rem;  position: relative;  top: 8px;  width: 42px;" />
+
+                                    }
+                                }
+                            </div>*@ <!-- Contenedor del Comentario -->
+                            <div class="comment-box">
+                                <div class="comment-head">
+                                    <h6 class="comment-name">@ViewBag.Name</h6>
+
+                                    <i class="fa fa-reply"></i>
+                                    <i class="fa fa-heart"></i>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputlg">Your comment</label>
+                                    <input class="form-control input-lg" id="inputlg" type="text" name="Content">
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="button button-block btn" type="submit">Post </button>
+
+
+                    }
+                </li>
+                @if (@item.Comment.Count != 0)
+                {
+                    <li>
+                        @for (int i = 0; i < @item.Comment.Count; i++)
+                        {
+                            <div class="comment-main-level">
+                                
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name"><a href="#">@item.CommentedUserName[i]</a></h6>
+                                        
+                                        <i class="fa fa-reply"></i>
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                    <div class="comment-content">
+
+                                        @item.Comment[i];
+                                        <br>
+                                        <span>@item.CommentDate[i]</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+}
+

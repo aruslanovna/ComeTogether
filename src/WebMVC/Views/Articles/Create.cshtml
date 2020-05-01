@@ -1,0 +1,144 @@
+﻿@model ComeTogether.Domain.Entities.Article
+<style>
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        letter-spacing: 1px;
+        line-height: 1.6em;
+        font-weight: 300;
+        color: #555;
+    }
+
+    p {
+        margin-bottom: 2em;
+    }
+
+    header {
+        margin: 0 0 20px 0;
+    }
+
+    .pageTitle,
+    .pageSubTitle {
+        font-family: 'Titillium', sans-serif;
+        text-transform: uppercase;
+        color: #333;
+        white-space: nowrap;
+        border-bottom: solid 1px #e0e0e0;
+        text-align: center;
+    }
+
+    .pageTitle {
+        color: #FF7600;
+    }
+
+    .pageTitle {
+        font-size: 2em;
+        font-weight: 700;
+        line-height: 2em;
+    }
+
+    .pageSubTitle {
+        line-height: 2em;
+        font-size: 1.4em;
+        font-weight: 300;
+    }
+
+
+
+    .wrapper {
+        width: 500px;
+        padding: 60px;
+        margin: 20px auto;
+        background: #fff;
+        box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .form-group {
+        position: center;
+    }
+</style>
+
+
+
+
+@using (Html.BeginForm("Create", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+
+
+    <article class="wrapper">
+        @ViewBag.Ok;
+        <header>
+            <h1 class="pageTitle">Title</h1>
+
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Name, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.Name, "", new
+           {
+               @class =
+     "text-danger"
+           })
+
+            </div>
+
+
+        </header>
+        <section>
+            <h2 class="pageSubTitle"> Description </h2>
+
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Briefly, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+
+                })
+                @Html.ValidationMessageFor(model => model.Briefly, "", new
+           {
+               @class =
+        "text-danger"
+           })
+
+            </div>
+        </section>
+        <section>
+            <p class="pageSubTitle">Body</p>
+
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Description, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.Description, "", new
+           {
+               @class =
+     "text-danger"
+           })
+            </div>
+
+        </section>
+        <input type="file" name="ImageData" id="ImageData" style="margin:1.5em" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </article>
+
+
+}
+
+

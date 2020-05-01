@@ -19,6 +19,137 @@ namespace ComeTogether.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ComeTogether.Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("HomePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Info")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ApplicationUser");
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Article", b =>
+                {
+                    b.Property<int>("ArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Briefly")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime?>("PostDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("TopicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ArticleId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Articles");
+                });
+
             modelBuilder.Entity("ComeTogether.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -40,333 +171,89 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Comment", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
+                    b.Property<DateTime?>("PostDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("CommentId");
 
-                    b.Property<string>("ContactName")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasIndex("ArticleId");
 
-                    b.Property<string>("ContactTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fax")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CustomerId");
-
-                    b.ToTable("Customers");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Deal", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("DealId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("PartnerId")
+                    b.Property<string>("Partner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PartnerId");
-
-                    b.HasIndex("ProjectId");
+                    b.HasKey("DealId");
 
                     b.ToTable("Deals");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Employee", b =>
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Follower", b =>
                 {
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EmployeeId1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("HireDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("HomePhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("PhotoPath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ReportsTo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleOfCourtesy")
+                    b.Property<string>("FollowerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EmployeeId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId1");
-
-                    b.ToTable("Employee");
+                    b.ToTable("Followers");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Founder", b =>
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Following", b =>
                 {
-                    b.Property<int>("FounderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FollowingId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("FounderId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Founders");
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("Freight")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("RequiredDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ShipAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShipCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShipCountry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShipName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShipPostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShipRegion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ShipVia")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ShippedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ShipperId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ShipperId");
-
-                    b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Discount")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<short>("Quantity")
-                        .HasColumnType("smallint");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("OrderId1");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderDetail");
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Partner", b =>
-                {
-                    b.Property<int>("PartnerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HomePhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PartnerId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Partners");
+                    b.ToTable("Followings");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.PartnerTerritory", b =>
@@ -376,37 +263,14 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PartnerId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("TerritoryId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PartnerId");
 
-                    b.HasIndex("PartnerId1");
-
                     b.HasIndex("TerritoryId");
 
                     b.ToTable("PartnerTerritories");
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Poll", b =>
-                {
-                    b.Property<int>("PollId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Question")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PollId");
-
-                    b.ToTable("Polls");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.PollOption", b =>
@@ -422,67 +286,17 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.Property<int>("PollId")
                         .HasColumnType("int");
 
+                    b.Property<long?>("PollId1")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("Vote")
                         .HasColumnType("int");
 
                     b.HasKey("PollOptionId");
 
-                    b.HasIndex("PollId");
+                    b.HasIndex("PollId1");
 
                     b.ToTable("PollOptions");
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Product", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Discontinued")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QuantityPerUnit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<short?>("ReorderLevel")
-                        .HasColumnType("smallint");
-
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<short?>("UnitsInStock")
-                        .HasColumnType("smallint");
-
-                    b.Property<short?>("UnitsOnOrder")
-                        .HasColumnType("smallint");
-
-                    b.HasKey("ProductId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Project", b =>
@@ -492,23 +306,43 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Background")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("FounderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FounderId1")
+                    b.Property<int?>("ProjectDetailsProjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RisksAndChallenges")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StartBudget")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ProjectId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("FounderId1");
+                    b.HasIndex("FounderId");
+
+                    b.HasIndex("ProjectDetailsProjectId");
 
                     b.ToTable("Projects");
                 });
@@ -520,27 +354,28 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("Background")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FounderId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
+                    b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectId1")
+                    b.Property<string>("RisksAndChallenges")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StartBudget")
                         .HasColumnType("int");
 
-                    b.HasKey("ProjectId");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("ProjectId1");
+                    b.HasKey("ProjectId");
 
                     b.ToTable("ProjectDetails");
                 });
@@ -558,69 +393,6 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.HasKey("RegionId");
 
                     b.ToTable("Region");
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Shipper", b =>
-                {
-                    b.Property<int>("ShipperId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ShipperId");
-
-                    b.ToTable("Shippers");
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Supplier", b =>
-                {
-                    b.Property<int>("SupplierId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fax")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HomePage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SupplierId");
-
-                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Territory", b =>
@@ -649,8 +421,20 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -661,6 +445,9 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Info")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -690,6 +477,12 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Position")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -849,69 +642,203 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Deal", b =>
+            modelBuilder.Entity("VotingApplication.Data.Model.Ballot", b =>
                 {
-                    b.HasOne("ComeTogether.Domain.Entities.Partner", "Partner")
-                        .WithMany()
-                        .HasForeignKey("PartnerId");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasOne("ComeTogether.Domain.Entities.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasVoted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ManageGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long?>("PollId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("TokenGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("VoterName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PollId");
+
+                    b.ToTable("Ballots");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Employee", b =>
+            modelBuilder.Entity("VotingApplication.Data.Model.Choice", b =>
                 {
-                    b.HasOne("ComeTogether.Domain.Entities.Employee", null)
-                        .WithMany("DirectReports")
-                        .HasForeignKey("EmployeeId1");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PollChoiceNumber")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("PollId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PollId");
+
+                    b.ToTable("Choices");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Order", b =>
+            modelBuilder.Entity("VotingApplication.Data.Model.Metric", b =>
                 {
-                    b.HasOne("ComeTogether.Domain.Entities.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasOne("ComeTogether.Domain.Entities.Employee", "Employee")
-                        .WithMany("Orders")
-                        .HasForeignKey("EmployeeId");
+                    b.Property<string>("Detail")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasOne("ComeTogether.Domain.Entities.Shipper", "Shipper")
-                        .WithMany("Orders")
-                        .HasForeignKey("ShipperId");
+                    b.Property<int>("MetricType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("PollId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimestampUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Metrics");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.OrderDetail", b =>
+            modelBuilder.Entity("VotingApplication.Data.Model.Poll", b =>
                 {
-                    b.HasOne("ComeTogether.Domain.Entities.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasOne("ComeTogether.Domain.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<bool>("ChoiceAdding")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedDateUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatorIdentity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ExpiryDateUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("InviteOnly")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdatedUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ManageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("MaxPerVote")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaxPoints")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NamedVoting")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PollType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UUID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Polls");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Partner", b =>
+            modelBuilder.Entity("VotingApplication.Data.Model.Vote", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("BallotId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ChoiceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("PollId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("VoteValue")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BallotId");
+
+                    b.HasIndex("ChoiceId");
+
+                    b.HasIndex("PollId");
+
+                    b.ToTable("Votes");
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.ApplicationUser", b =>
                 {
                     b.HasOne("ComeTogether.Domain.Entities.Project", null)
                         .WithMany("Partners")
                         .HasForeignKey("ProjectId");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.PartnerTerritory", b =>
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Article", b =>
                 {
-                    b.HasOne("ComeTogether.Domain.Entities.Partner", "Partner")
-                        .WithMany("PartnerTerritories")
-                        .HasForeignKey("PartnerId1")
+                    b.HasOne("ComeTogether.Domain.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("ComeTogether.Domain.Entities.Article", "Articles")
+                        .WithMany("Comments")
+                        .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("ComeTogether.Domain.Entities.PartnerTerritory", b =>
+                {
                     b.HasOne("ComeTogether.Domain.Entities.Territory", "Territory")
                         .WithMany("PartnerTerritories")
                         .HasForeignKey("TerritoryId");
@@ -919,36 +846,24 @@ namespace ComeTogether.Infrastructure.Migrations
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.PollOption", b =>
                 {
-                    b.HasOne("ComeTogether.Domain.Entities.Poll", "Poll")
-                        .WithMany("PollOption")
-                        .HasForeignKey("PollId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ComeTogether.Domain.Entities.Product", b =>
-                {
-                    b.HasOne("ComeTogether.Domain.Entities.Category", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId");
+                    b.HasOne("VotingApplication.Data.Model.Poll", "Poll")
+                        .WithMany()
+                        .HasForeignKey("PollId1");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Project", b =>
                 {
                     b.HasOne("ComeTogether.Domain.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("ComeTogether.Domain.Entities.Founder", "Founder")
-                        .WithMany("Projects")
-                        .HasForeignKey("FounderId1");
-                });
+                    b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", "Founder")
+                        .WithMany()
+                        .HasForeignKey("FounderId");
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.ProjectDetails", b =>
-                {
-                    b.HasOne("ComeTogether.Domain.Entities.Project", "Project")
-                        .WithMany("ProjectDetails")
-                        .HasForeignKey("ProjectId1");
+                    b.HasOne("ComeTogether.Domain.Entities.ProjectDetails", null)
+                        .WithMany("Projects")
+                        .HasForeignKey("ProjectDetailsProjectId");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Territory", b =>
@@ -1009,6 +924,35 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("VotingApplication.Data.Model.Ballot", b =>
+                {
+                    b.HasOne("VotingApplication.Data.Model.Poll", null)
+                        .WithMany("Ballots")
+                        .HasForeignKey("PollId");
+                });
+
+            modelBuilder.Entity("VotingApplication.Data.Model.Choice", b =>
+                {
+                    b.HasOne("VotingApplication.Data.Model.Poll", null)
+                        .WithMany("Choices")
+                        .HasForeignKey("PollId");
+                });
+
+            modelBuilder.Entity("VotingApplication.Data.Model.Vote", b =>
+                {
+                    b.HasOne("VotingApplication.Data.Model.Ballot", "Ballot")
+                        .WithMany("Votes")
+                        .HasForeignKey("BallotId");
+
+                    b.HasOne("VotingApplication.Data.Model.Choice", "Choice")
+                        .WithMany()
+                        .HasForeignKey("ChoiceId");
+
+                    b.HasOne("VotingApplication.Data.Model.Poll", "Poll")
+                        .WithMany()
+                        .HasForeignKey("PollId");
                 });
 #pragma warning restore 612, 618
         }

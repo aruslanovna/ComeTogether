@@ -1,4 +1,5 @@
-﻿using ComeTogether.Application.Common.Models;
+﻿
+using ComeTogether.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 

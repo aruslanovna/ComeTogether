@@ -6,50 +6,57 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ComeTogether.Domain.Entities;
-using ComeTogether.Infrastructure.Persistence;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 using ComeTogether.Infrastructure;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNet.SignalR;
+using ComeTogether.Service;
 
 namespace WebMVC.Controllers
 {
+   
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-       // private readonly UserManager<ApplicationUser> userManager;
-       
-
-
-
-        public ProjectsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor/*, UserManager<ApplicationUser> userMgr*/)
+        public readonly IProjectService _unitOfWork;
+        public ProjectsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, IProjectService unitOfWork)
         {
             _httpContextAccessor = httpContextAccessor;
-           //  userManager = userMgr;
-             //signInManager = signinMgr;
-             _context = context;
+            _context = context;
+             _unitOfWork = unitOfWork;
         }
+
 
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Projects.Include(p => p.Category).Include(p => p.Founder);
-            return View(await applicationDbContext.ToListAsync());
+            var projects = _unitOfWork.GetAll();   
+            return View( projects.ToList());
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> MyProjects()
+        {
+            var current = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
+            var applicationDbContext = _unitOfWork.GetByUserIdWithCategory(current);
+            return View(nameof(Index),  applicationDbContext);
         }
 
         // GET: Projects/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            var project = _unitOfWork.GetByIdWithCategory(id);
 
-            var project = await _context.Projects
-                .Include(p => p.Category)
-                .Include(p => p.Founder)
-                .Include(p => p.Partners)
-                .FirstOrDefaultAsync(m => m.ProjectId == id);
+
+
+
             if (project == null)
             {
                 return NotFound();
@@ -57,71 +64,70 @@ namespace WebMVC.Controllers
 
             return View(project);
         }
-
+        [Authorize]
         // GET: Projects/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
             return View();
         }
 
-        // POST: Projects/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectId,ProjectName,FounderId,CategoryId")] Project project)
+        public async Task<IActionResult> Create([Bind("ProjectId,ProjectName,FounderId,CategoryId,ShortDescription,FullDescription,RisksAndChallenges,Background,StartBudget,StartDate")] Project project)
         {
             if (ModelState.IsValid)
             {
-                string id = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
-
-                if (_context.Founders.Where(x => x.UserId == id) == null)
-                {
-                    Founder founder = new Founder();
-                    founder.UserId = id;
-                   // founder.Name = userManager.GetUserName(User);
-                    _context.Founders.Add(founder);
-                }
-                    project.FounderId = id;
-                _context.Add(project);
+                Project create = project;
+                create.FounderId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
+                _unitOfWork.AddProject(create);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", project.CategoryId);
-             return View(project);
+            return View(project);
         }
-
+        [Authorize]
         // GET: Projects/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var project = await _context.Projects.FindAsync(id);
+
+            var project =  _unitOfWork.GetById(id);
+            var current = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
+
+            if (project.FounderId != current)
+            {
+                return RedirectToAction("Index");
+            }
             if (project == null)
             {
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", project.CategoryId);
-            ViewData["FounderId"] = new SelectList(_context.Founders, "FounderId", "FounderId", project.FounderId);
             return View(project);
         }
 
-        // POST: Projects/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectId,ProjectName,FounderId,CategoryId")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectId,ProjectName,FounderId,CategoryId,ShortDescription,FullDescription,RisksAndChallenges,Background,StartBudget,StartDate")] Project project)
         {
             if (id != project.ProjectId)
             {
                 return NotFound();
             }
+            var current = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
 
+            if (project.FounderId != current)
+            {
+                return RedirectToAction("Index");
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -143,22 +149,18 @@ namespace WebMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", project.CategoryId);
-            ViewData["FounderId"] = new SelectList(_context.Founders, "FounderId", "FounderId", project.FounderId);
             return View(project);
         }
 
-        // GET: Projects/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var project = await _context.Projects
-                .Include(p => p.Category)
-                .Include(p => p.Founder)
-                .FirstOrDefaultAsync(m => m.ProjectId == id);
+            var project =  _unitOfWork.GetByIdWithCategory(id);
             if (project == null)
             {
                 return NotFound();
@@ -167,13 +169,13 @@ namespace WebMVC.Controllers
             return View(project);
         }
 
-        // POST: Projects/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
-            _context.Projects.Remove(project);
+           
+            _unitOfWork.RemoveProject(id);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

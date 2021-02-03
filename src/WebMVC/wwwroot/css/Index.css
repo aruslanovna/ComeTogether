@@ -225,26 +225,6 @@ ul {
     margin-bottom: 20px;
 }
 
-.button {
-    font-size: 17px;
-    line-height: 18px;
-    padding: 12px 36px;
-    border: 1px solid #242424;
-    border-radius: 2px;
-    text-transform: none;
-    transition: 0.3s ease;
-}
-
-    .button:hover {
-        background-color: #242424;
-        color: #ffffff;
-        transition: 0.3s ease;
-    }
-
-    .button::after {
-        content: none;
-    }
-
 .palette {
     display: flex;
     justify-content: space-between;
@@ -628,17 +608,19 @@ ul {
     border: 1px solid #242424;
     outline: none;
     background-color: transparent;
+    color: #3c3636;
 }
 
 .newsletter__button {
     width: auto;
 }
-
 .newsletter__input {
+    background-color: white;
     border: none;
     text-align: center;
     letter-spacing: 1.2px;
     font-size: 24px;
+    border-radius: 3em;
 }
 
 .newsletter__description {
@@ -808,17 +790,6 @@ h1 {
     color: #3b365ecb;
 }
 
-button {
-    padding: 0.9rem 1.2rem;
-    border-radius: 25px;
-    background-color: var(--blue);
-    border: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    font-size: 1rem;
-    color: var(--white);
-    cursor: pointer;
-}
 
 svg {
     
@@ -1535,8 +1506,8 @@ svg {
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 2vmax;
-    left: 15vmax;
+   
+    
     width: 5vmax;
     height: 12vmax;
     animation: lamp 1s ease infinite alternate;
@@ -1546,7 +1517,7 @@ svg {
         content: '';
         position: absolute;
         width: 1vmax;
-        height: 1vmax;
+        
         left: calc(50% - .5vmax);
         bottom: 0;
         border-radius: 50%;
@@ -1558,7 +1529,7 @@ svg {
     display: flex;
     justify-content: center;
     width: 0.25vmax;
-    height: 70%;
+    height: 10%;
     background-color: #001164;
 }
 
@@ -1724,3 +1695,4 @@ svg {
         background-color: #241a3e;
     }
 }
+

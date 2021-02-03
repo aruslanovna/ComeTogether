@@ -1,0 +1,114 @@
+[
+  {
+    "outputFileName": "wwwroot/css/bundleStyle.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "wwwroot/css/miniStyle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/bundleStyle.min.css",
+    "inputFiles": [
+      "wwwroot/js/bundleStyle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bundleStyle.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.min.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bundleStyle.min.js",
+    "inputFiles": [
+      "wwwroot/js/bundleStyle.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/signalRbundle.js",
+    "inputFiles": [
+      "wwwroot/js/signalr/dist/browser/signalr.min.js",
+      "wwwroot/js/signal.js",
+      "wwwroot/js/notification.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/signalRbundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/signalRbundle.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Index.min.css",
+    "inputFiles": [
+      "wwwroot/css/Index.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Account.min.css",
+    "inputFiles": [
+      "wwwroot/css/Account.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Admin.min.css",
+    "inputFiles": [
+      "wwwroot/css/Admin.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Article.min.css",
+    "inputFiles": [
+      "wwwroot/css/Article.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/BackUp.min.css",
+    "inputFiles": [
+      "wwwroot/css/BackUp.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Login.min.css",
+    "inputFiles": [
+      "wwwroot/css/Login.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Projects.min.css",
+    "inputFiles": [
+      "wwwroot/css/Projects.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/CreateArticle.min.css",
+    "inputFiles": [
+      "wwwroot/css/CreateArticle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/styles.min.css",
+    "inputFiles": [
+      "wwwroot/css/styles.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/miniStyle.min.css",
+    "inputFiles": [
+      "wwwroot/css/miniStyle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Deal.min.css",
+    "inputFiles": [
+      "wwwroot/css/Deal.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/SelectLan.min.css",
+    "inputFiles": [
+      "wwwroot/css/SelectLan.css"
+    ]
+  }
+]

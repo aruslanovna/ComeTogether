@@ -1,28 +1,26 @@
 ﻿using ComeTogether.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComeTogether.Service
 {
    public interface IProjectService
     {
-        void AddProject(Project e);
+        Task AddProject(Project e);
 
-        void EditProject(int id, Project e);
+        Task EditProject(int id, Project e);
 
-        void RemoveProject(int id);
-         Project GetById(int id);
+        Task RemoveProject(int id);
+        Task<Project> GetById(int id);
 
-        Project GetByIdWithCategory(int id);
+        Task<Project> GetByIdWithCategory(int id);
 
-        Project GetByUserIdWithCategory(string id);
-        IEnumerable<Project> GetAll();
+        Task<IEnumerable<Project>> GetOrganized(string id);
+        Task<IEnumerable<Project>> GetAll();
 
-        IEnumerable<Project> GetProjectByTitle(string search);
+        Task<IEnumerable<Project>> GetProjectByTitle(string search);
 
-        IEnumerable<Project> GetProjectByDateStart(string date);
+        Task<IEnumerable<Project>> GetProjectByDateStart(string date);
 
        
 

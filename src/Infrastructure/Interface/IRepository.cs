@@ -11,29 +11,29 @@ namespace ComeTogether.Infrastructure.Interface
     public interface IRepository<TEntity>
         where TEntity : class
     {
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAll();
 
-        IEnumerable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> expression);
+        Task<IEnumerable<TEntity>> GetByCondition(Expression<Func<TEntity, bool>> expression);
 
-        void Create(TEntity entity);
+        Task Create(TEntity entity);
 
-        void Update(TEntity entity);
+        Task Update(TEntity entity);
 
-        void Delete(TEntity entity);
+        Task Delete(TEntity entity);
 
-        void Delete(object id);
+        Task Delete(object id);
 
         bool Exist(object id);
 
-        IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
+        Task<IEnumerable<TEntity>> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
 
-        IEnumerable<TEntity> GetWithInclude(Func<TEntity, bool> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
+        Task<IEnumerable<TEntity>> GetWithInclude(Func<TEntity, bool> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
 
-        IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties);
+        Task<IQueryable<TEntity>> Include(params Expression<Func<TEntity, object>>[] includeProperties);
 
-        IQueryable<TEntity> GetAllLazyLoad(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] children);
+        Task<IQueryable<TEntity>> GetAllLazyLoad(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] children);
 
-        TEntity GetById(object id);
+        Task<TEntity> GetById(object id);
     }
 
 

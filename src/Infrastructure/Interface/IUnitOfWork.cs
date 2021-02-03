@@ -1,4 +1,5 @@
 ﻿using ComeTogether.Domain.Entities;
+using ComeTogether.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,10 +9,11 @@ namespace ComeTogether.Infrastructure.Interface
 {
     public interface IUnitOfWork
     {
-        IRepository<Project> Projects { get; }
-        IRepository<Deal> Deals { get; }
-        IRepository<Category> Categories { get; }
-
-        Task SaveChangesAsync();
+        IRepository<Article> ArticlesRepository { get; }
+        IRepository<Project> ProjectsRepository { get; }
+        IRepository<Deal> DealsRepository { get; }
+        IRepository<Category> CategoriesRepository { get; }
+        void Save();
+        void SaveChangesAsync();
     }
 }

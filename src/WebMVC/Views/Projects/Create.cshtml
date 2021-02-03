@@ -1,243 +1,213 @@
-﻿
-
-
-
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @using System.Text.Encodings.Web
 @inject JavaScriptEncoder encoder
 @model ComeTogether.Domain.Entities.Project
 
+<link rel="stylesheet" href="~/css/CreateArticle.min.css" />
 
-<style>
-
-    body {
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
-        letter-spacing: 1px;
-        line-height: 1.6em;
-        font-weight: 300;
-        color: #555;
-    }
-
-    p {
-        margin-bottom: 2em;
-    }
-
-    header {
-        margin: 0 0 20px 0;
-    }
-
-    .pageTitle,
-    .pageSubTitle {
-        font-family: 'Titillium', sans-serif;
-        text-transform: uppercase;
-        color: #333;
-        white-space: nowrap;
-        border-bottom: solid 1px #e0e0e0;
-        text-align: center;
-    }
-
-    .pageTitle {
-        color: #FF7600;
-    }
-
-    .pageTitle {
-        font-size: 2em;
-        font-weight: 700;
-        line-height: 2em;
-    }
-
-    .pageSubTitle {
-        line-height: 2em;
-        font-size: 1.4em;
-        font-weight: 300;
-    }
-
-
-
-    .wrapper {
-        width: 70%
-        padding: 60px;
-        margin: 20px auto;
-        background: #fff;
-        box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.25);
-    }
-
-    .form-group {
-        position: center;
-    }
-</style>
-
-
-
-
-@using (Html.BeginForm("Create", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Projects", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <article class="wrapper">
+        @ViewBag.Ok
+        <a class=" iconBtn ">@ViewBag.Created</a>
+        <header>
+            <h1 class="pageTitle">Title</h1>
 
-
-
-
-<article class="wrapper">
-    @ViewBag.Ok
-    <header>
-        <h1 class="pageTitle">Title</h1>
-
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.ProjectName, new
-       {
-           htmlAttributes = new
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.ProjectName, new
            {
-               @class = "form-control"
-           }
-       })
-            @Html.ValidationMessageFor(model => model.ProjectName, "", new
-       {
-           @class =
- "text-danger"
-       })
-
-        </div>
-
-
-    </header>
-    <section>
-        <p class="pageSubTitle">Background</p>
-
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.Background, new
-       {
-           htmlAttributes = new
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.ProjectName, "", new
            {
-               @class = "form-control"
-           }
-       })
-            @Html.ValidationMessageFor(model => model.Background, "", new
-       {
-           @class =
- "text-danger"
-       })
-        </div>
+               @class =
+     "text-danger"
+           })
+            </div>
 
-    </section>
-    <section>
-        <h2 class="pageSubTitle"> Short description </h2>
+        </header>
+        <section>
+            <p class="pageSubTitle">Background</p>
 
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.ShortDescription, new
-       {
-           htmlAttributes = new
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Background, new
            {
-               @class = "form-control"
-           }
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.Background, "", new
+           {
+               @class =
+     "text-danger"
+           })
+            </div>
 
-            })
-            @Html.ValidationMessageFor(model => model.ShortDescription, "", new
-       {
-           @class =
-    "text-danger"
-       })
+        </section>
+        <section>
+            <h2 class="pageSubTitle"> Short description </h2>
 
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.ShortDescription, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+
+                })
+                @Html.ValidationMessageFor(model => model.ShortDescription, "", new
+           {
+               @class =
+        "text-danger"
+           })
+
+            </div>
+        </section>
+
+        <section>
+            <h2 class="pageSubTitle"> Category </h2>
+            <div class="form-group">
+
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+
+        </section>
+        <section>
+            <p class="pageSubTitle">Full description</p>
+
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FullDescription, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.FullDescription, "", new
+           {
+               @class =
+     "text-danger"
+           })
+            </div>
+
+        </section>
+        <section>
+            <p class="pageSubTitle">RisksAndChallenges</p>
+
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.RisksAndChallenges, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.RisksAndChallenges, "", new
+           {
+               @class =
+     "text-danger"
+           })
+            </div>
+
+        </section>
+        <section>
+            <p class="pageSubTitle">Start Budget</p>
+
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.StartBudget, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.StartBudget, "", new
+           {
+               @class =
+     "text-danger"
+           })
+            </div>
+
+        </section>
+
+        <section>
+            <p class="pageSubTitle">Start Date</p>
+
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.StartDate, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control"
+               }
+           })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new
+           {
+               @class =
+     "text-danger"
+           })
+            </div>
+
+        </section>
+        <div align="center" class="mt-1">
+            <img src="~/images/users_icons/Путь_к_картинке" class="img" width="100%">
         </div>
-    </section>
+        <div align="center">
+            <label id="profile-image">
+                <small>@Localizer["Upload"]</small>
+                <small>
+                    <input type="file" name="Image" id="Imageinput" hidden onchange="imgprev(this)">
 
-    <section>
-        <h2 class="pageSubTitle"> Category </h2>
+                    <i class="fa fa-camera" aria-hidden="true"></i>
+                </small>
+            </label>
+        </div>
         <div class="form-group">
-            <label asp-for="CategoryId" class="control-label"></label>
-            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
-
-    </section>
-    <section>
-        <p class="pageSubTitle">Full description</p>
-
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.FullDescription, new
-       {
-           htmlAttributes = new
-           {
-               @class = "form-control"
-           }
-       })
-            @Html.ValidationMessageFor(model => model.FullDescription, "", new
-       {
-           @class =
- "text-danger"
-       })
-        </div>
-
-    </section>
-    <section>
-        <p class="pageSubTitle">RisksAndChallenges</p>
-
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.RisksAndChallenges, new
-       {
-           htmlAttributes = new
-           {
-               @class = "form-control"
-           }
-       })
-            @Html.ValidationMessageFor(model => model.RisksAndChallenges, "", new
-       {
-           @class =
- "text-danger"
-       })
-        </div>
-
-    </section>
-    <section>
-        <p class="pageSubTitle">Start Budget</p>
-
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.StartBudget, new
-       {
-           htmlAttributes = new
-           {
-               @class = "form-control"
-           }
-       })
-            @Html.ValidationMessageFor(model => model.StartBudget, "", new
-       {
-           @class =
- "text-danger"
-       })
-        </div>
-
-    </section>
-
-    <section>
-        <p class="pageSubTitle">Start Date</p>
-
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.StartDate, new
-       {
-           htmlAttributes = new
-           {
-               @class = "form-control"
-           }
-       })
-            @Html.ValidationMessageFor(model => model.StartDate, "", new
-       {
-           @class =
- "text-danger"
-       })
-        </div>
-
-    </section>
-    <input type="file" name="ImageData" id="ImageData" style="margin:1.5em" />
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</article>
+    </article>
 
 
 }
-
-
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <script src="~/js/photoLoad.js"></script>
+}
+<script>
+    function imgprev(input) {
+        if (input.files[0]) {
+            var uploading = new FileReader();
+            var imgType = input.files[0].type;
+            if (imgType == "image/png" || imgType == "image/jpeg" || imgType == "image/bmp") {
+                uploading.onload = function (displayImg) {
+                    $(".img").attr("src", displayImg.target.result)
+                }
+                uploading.readAsDataURL(input.files[0])
+            } else {
+                $(".error-msg").append("We support only BMP, JPG AND PNG format");
+            }
+        }
+    }
+    function snapshoot(input) {
+        if (input.files.length > 0) {
+            var fileReader = new FileReader();
+            var currentImageType = input.files[input.files.length - 1].type;
+            if (imgType == "image/png" || imgType == "image/jpeg" || imgType == "image/bmp") {
+
+            }
+
+        }
+    }
+</script>

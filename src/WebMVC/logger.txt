@@ -1,0 +1,274 @@
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,753ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+Failed executing DbCommand (2,136ms) [Parameters=[@p0='?' (Size = 530), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 230), @p4='?' (Size = -1) (DbType = Binary), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Int32), @p7='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Articles] ([Briefly], [CategoryId], [Description], [Name], [Photo], [PostDate], [TopicId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [ArticleId]
+FROM [Articles]
+WHERE @@ROWCOUNT = 1 AND [ArticleId] = scope_identity();
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.

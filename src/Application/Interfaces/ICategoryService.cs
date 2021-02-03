@@ -2,23 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComeTogether.Service.Interfaces
 {
     public interface ICategoryService
     {
-        void Add(Category e);
+        Task Add(Category e);
 
-        void Edit(int id, Category e);
+        Task Edit(int id, Category e);
 
-        void Remove(int id);
-        Category GetById(int id);
+        Task Remove(int id);
+        Task<Category> GetById(int id);
 
        
 
-        IEnumerable<Category> GetAll();
+        Task<IEnumerable<Category>> GetAll();
 
-        IEnumerable<Category> GetCategoryByTitle(string search);
+        Task<IEnumerable<Category>> GetCategoryByTitle(string search);
 
     
 

@@ -16,6 +16,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using ComeTogether.Infrastructure;
+using ComeTogether.Domain.Entities;
 
 namespace WebMVC.API
 {

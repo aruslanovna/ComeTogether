@@ -1,33 +1,31 @@
-﻿using System;
+﻿using ComeTogether.Domain.Entities;
+using ComeTogether.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ComeTogether.Domain.Entities;
-
-using ComeTogether.Infrastructure.Persistence;
-using ComeTogether.Infrastructure;
-using ComeTogether.Service.Interfaces;
 
 namespace WebMVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        ApplicationDbContext _context;
-        ICategoryService _unitOfWork;
-        public CategoriesController(ApplicationDbContext context, ICategoryService unitOfWork)
+        private readonly ApplicationDbContext _context;
+
+        private readonly UnitOfWork _unitOfWork;
+        public CategoriesController(ApplicationDbContext context, UnitOfWork unitOfWork)
         {
-             _unitOfWork = unitOfWork;
-             _context = context;
+            _unitOfWork = unitOfWork;
+
+            _context = context;
         }
 
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            var categories = _context.Categories.ToList();
+            List<Category> categories = _context.Categories.ToList();
             return View(categories);
         }
 
@@ -39,7 +37,7 @@ namespace WebMVC.Controllers
                 return NotFound();
             }
 
-            var category = _unitOfWork.GetById(id);
+            Task<Category> category = _unitOfWork.CategoriesRepository.GetById(id);
             //.FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
@@ -63,7 +61,7 @@ namespace WebMVC.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Add(category);
+                _unitOfWork.CategoriesRepository.Create(category);
                 _context.SaveChanges();
 
 
@@ -82,13 +80,16 @@ namespace WebMVC.Controllers
             {
                 return NotFound();
             }
-            Category category = _unitOfWork.GetById(id);
+            Category category = await _unitOfWork.CategoriesRepository.GetById(id);
             if (category == null)
+            {
                 return NotFound();
+            }
+
             return View(category);
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName,Description,Picture")] Category category)
@@ -129,7 +130,7 @@ namespace WebMVC.Controllers
                 return NotFound();
             }
 
-            var category = _unitOfWork.GetById(id);
+            Task<Category> category = _unitOfWork.CategoriesRepository.GetById(id);
             if (category == null)
             {
                 return NotFound();
@@ -143,15 +144,23 @@ namespace WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            _unitOfWork.Remove(id);
-           await _context.SaveChangesAsync();
-          
+
+
+
+             _unitOfWork.CategoriesRepository.Delete(id);
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
+
+
+
+       
+
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(x=>x.CategoryId==id);
+            return _context.Categories.Any(x => x.CategoryId == id);
         }
     }
 }

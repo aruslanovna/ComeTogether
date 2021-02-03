@@ -1,10 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-WebMVC-258A6715-8713-4841-9F27-EEE047D40F26</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
-
+  <ItemGroup>
+    <Content Remove="wwwroot\js\notification.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\notification.min.js" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Identity\Pages\Account\AccessDenied.cshtml.cs" />
     <Content Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml.cs" />
@@ -38,8 +44,8 @@
     <Content Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml.cs" />
     <Content Include="Areas\Identity\Pages\Error.cshtml.cs" />
   </ItemGroup>
-
   <ItemGroup>
+    <None Include="wwwroot\js\notification.min.js" />
     <None Include="wwwroot\Scripts\bootstrap.js" />
     <None Include="wwwroot\Scripts\bootstrap.min.js" />
     <None Include="wwwroot\Scripts\jquery-1.10.2.intellisense.js" />
@@ -48,9 +54,9 @@
     <None Include="wwwroot\Scripts\jquery-1.10.2.min.map" />
     <None Include="wwwroot\Scripts\jquery.signalR-2.0.1.js" />
     <None Include="wwwroot\Scripts\jquery.signalR-2.0.1.min.js" />
-    <None Include="wwwroot\Scripts\jsx\dashboard.jsx" />
-    <None Include="wwwroot\Scripts\jsx\form.jsx" />
-    <None Include="wwwroot\Scripts\jsx\piechart.jsx" />
+    <None Include="wwwroot\Scripts\dashboard.jsx" />
+    <None Include="wwwroot\Scripts\form.jsx" />
+    <None Include="wwwroot\Scripts\piechart.jsx" />
     <None Include="wwwroot\Scripts\modernizr-2.6.2.js" />
     <None Include="wwwroot\Scripts\react\JSXTransformer-0.12.2.js" />
     <None Include="wwwroot\Scripts\react\react-0.12.2.js" />
@@ -61,96 +67,57 @@
     <None Include="wwwroot\Scripts\respond.min.js" />
     <None Include="wwwroot\Scripts\_references.js" />
   </ItemGroup>
-
- 
   <ItemGroup>
-    
+    <PackageReference Include="BundlerMinifier.Core" Version="3.2.449" />
+    <PackageReference Include="DevExpress.Data" Version="20.2.5" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNet.Web.Optimization" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
-   
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
-   
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="3.1.3" />
-   
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.OpenApi" Version="1.1.4" />
     <PackageReference Include="Microsoft.Owin" Version="4.1.0" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.1.0" />
     <PackageReference Include="Microsoft.Owin.Security" Version="2.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
-  <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" />
-  <PackageReference Include="Owin" Version="1.0.0" />
- 
-  <PackageReference Include="Respond" Version="1.4.2" />
-  <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
-  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.7.0" />
-  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
-
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" />
+    <PackageReference Include="Moq" Version="4.14.7" />
+    <PackageReference Include="MSBuild.Gulp" Version="0.5.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSwag.Core" Version="13.5.0" />
+    <PackageReference Include="Owin" Version="1.0.0" />
+    <PackageReference Include="Respond" Version="1.4.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.7.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
+    <PackageReference Include="System.Net.Http.Formatting.Extension" Version="5.2.3" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Content.resx">
-      <LastGenOutput>Content.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Resources.resx">
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.ar.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.uk.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\Home\Index.ar.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\Home\Index.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\Home\Index.uk.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
-
   <ItemGroup>
     <ProjectReference Include="..\Application\Service.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
-
-
   <ItemGroup>
-    <Compile Update="Resources\Content.Designer.cs">
-      <DependentUpon>Content.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Resources.Designer.cs">
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
+    <Folder Include="wwwroot\Scripts\jsx\" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="20.2.5" />
   </ItemGroup>
-
 </Project>

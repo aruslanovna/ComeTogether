@@ -17,28 +17,35 @@ namespace ComeTogether.Service
             _unitOfWork = unitOfWork;
         }
 
-        public  Project GetById(int id)
+        public async Task<Project> GetById(int id)
         {
-            return  _unitOfWork.Projects.GetById(id);
+            if (id != null)
+            {
+                var eventList =await   _unitOfWork.ProjectsRepository.GetById(id);
+                return eventList;
+            }
+            return null;
         }
-        public IEnumerable<Project> GetAll()
+        public async Task<IEnumerable<Project>> GetAll()
         {
-            return _unitOfWork.Projects.GetAll();
+            return await Task.Run(() => _unitOfWork.ProjectsRepository.GetAll());
         }
-        public void AddProject(Project e)
+        public async Task AddProject(Project e)
         {
-            _unitOfWork.Projects.Create(e);
+            _unitOfWork.ProjectsRepository.Create(e);
+            _unitOfWork.SaveChangesAsync();
         }
-        public  Project GetByIdWithCategory(int id)
+        public async Task<Project> GetByIdWithCategory(int id)
         {
-            var project =  _unitOfWork.Projects.GetAllLazyLoad(p => p.ProjectId == id, p => p.Category).AsNoTracking().First();
+            var project = await Task.Run(() => _unitOfWork.ProjectsRepository.GetById(id));
+           
             return project;
         }
 
-        public void RemoveProject(int id)
+        public async Task RemoveProject(int id)
         {
-            var ProjectForRemoving = _unitOfWork.Projects.GetById(id);
-            _unitOfWork.Projects.Delete(ProjectForRemoving);
+            var ProjectForRemoving = _unitOfWork.ProjectsRepository.GetById(id);
+            _unitOfWork.ProjectsRepository.Delete(ProjectForRemoving);
         }
 
         //public void EditProject(int id, Project e)
@@ -63,27 +70,31 @@ namespace ComeTogether.Service
         //    return ProjectList;
         //}
 
-        public IEnumerable<Project> GetProjectByTitle(string search)
+        public async Task<IEnumerable<Project>> GetProjectByTitle(string search)
         {
-            var ProjectList = _unitOfWork.Projects.GetByCondition(s => s.ProjectName.Contains(search)).OrderBy(s => s.ProjectName);
-            return ProjectList;
+            var projectList = await Task.Run(() =>  _unitOfWork.ProjectsRepository.GetByCondition(s => s.ProjectName.Contains(search)));
+
+            return projectList.OrderBy(s => s.StartDate).ToList();
         }
 
-        public IEnumerable<Project> GetProjectByDateStart(string date)
+        public async Task<IEnumerable<Project>> GetProjectByDateStart(string date)
         {
             DateTime searchDate = DateTime.Parse(date);
-            var ProjectList = _unitOfWork.Projects.GetByCondition(s => s.StartDate == searchDate).OrderBy(s => s.StartDate);
-            return ProjectList;
+            //var ProjectList = _unitOfWork.ProjectsRepository.GetByCondition(s => s.StartDate == searchDate).OrderBy(s => s.StartDate);
+            //return ProjectList;
+
+            var eventList = await Task.Run(() => _unitOfWork.ProjectsRepository.GetByCondition(s => s.StartDate == searchDate));
+            return eventList.OrderBy(s => s.StartDate).ToList();
         }
 
-        public void EditProject(int id, Project e)
+        public async Task EditProject(int id, Project e)
         {
             throw new NotImplementedException();
         }
 
-        public Project GetByUserIdWithCategory(string id)
+        public async Task<IEnumerable<Project>> GetOrganized(string id)
         {
-            var project = _unitOfWork.Projects.GetAllLazyLoad(p => p.FounderId == id, p => p.Category).AsNoTracking().First();
+            var project = await Task.Run(() => _unitOfWork.ProjectsRepository.GetByCondition(p => p.FounderId == id));
             return project;
         }
     }

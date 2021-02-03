@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using ComeTogether.Infrastructure.Identity;
+using ComeTogether.Domain.Entities;
 
 namespace WebMVC.Areas.Identity.Pages.Account
 {

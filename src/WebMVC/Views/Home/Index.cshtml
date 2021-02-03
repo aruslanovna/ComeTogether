@@ -1,19 +1,19 @@
 ﻿@using System.Text.Encodings.Web;
 @inject JavaScriptEncoder encoder;
-    <link rel="stylesheet" href="~/css/Index.css" />
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<link rel="stylesheet" href="~/css/Index.min.css" />
 <div class="background"></div>
 <div class="background-texture"></div>
 <header class="header">
     <div class="left-content">
-        <p class="stay-home">Stay Home!!</p>
-        <h1>Be a good party-goer</h1>
+        <p class="stay-home"> @Localizer["Stay"]</p>
+        <h1> @Localizer["Party"]</h1>
         <p></p>
         <p class="para">
-            I wanna stay home today
-            Don't wanna go out
-
+            @Localizer["MainQuote"]
         </p>
-        <button>Online Events</button>
+        @*<button>Online Events</button>*@
     </div>
     <svg width="60vw" height="90vh" viewBox="0 0 728 914" fill="none" xmlns="http://www.w3.org/2000/svg">
 
@@ -204,10 +204,7 @@
 </header>
 @section scripts {
 
-    <script src="~/Scripts/jquery.signalR-2.0.1.min.js"></script>
-
-
-    <script src="~/signalr/hubs"></script>
+  
     <script src="~/Scripts/react/react-0.12.2.min.js"></script>
-    <script src="~/Scripts/jsx/form.jsx"></script>
+  
 }

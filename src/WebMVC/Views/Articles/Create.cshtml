@@ -1,75 +1,14 @@
 ﻿@model ComeTogether.Domain.Entities.Article
-<style>
-
-    body {
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
-        letter-spacing: 1px;
-        line-height: 1.6em;
-        font-weight: 300;
-        color: #555;
-    }
-
-    p {
-        margin-bottom: 2em;
-    }
-
-    header {
-        margin: 0 0 20px 0;
-    }
-
-    .pageTitle,
-    .pageSubTitle {
-        font-family: 'Titillium', sans-serif;
-        text-transform: uppercase;
-        color: #333;
-        white-space: nowrap;
-        border-bottom: solid 1px #e0e0e0;
-        text-align: center;
-    }
-
-    .pageTitle {
-        color: #FF7600;
-    }
-
-    .pageTitle {
-        font-size: 2em;
-        font-weight: 700;
-        line-height: 2em;
-    }
-
-    .pageSubTitle {
-        line-height: 2em;
-        font-size: 1.4em;
-        font-weight: 300;
-    }
-
-
-
-    .wrapper {
-        width: 500px;
-        padding: 60px;
-        margin: 20px auto;
-        background: #fff;
-        box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.25);
-    }
-
-    .form-group {
-        position: center;
-    }
-</style>
-
-
-
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@section ExternalDependencies {
+    <script src="https://unpkg.com/devextreme-quill/dist/dx-quill.min.js"></script>
+}
 @using (Html.BeginForm("Create", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-
-
-
-    <article class="wrapper">
-        @ViewBag.Ok;
+    <article class="wrapper col-sm-8">
+        @ViewBag.Ok
+        <a class=" iconBtn ">@ViewBag.Created</a>
         <header>
             <h1 class="pageTitle">Title</h1>
 
@@ -115,13 +54,102 @@
             <p class="pageSubTitle">Body</p>
 
             <div class="col-md-12">
-                @Html.EditorFor(model => model.Description, new
-           {
-               htmlAttributes = new
-               {
-                   @class = "form-control"
-               }
-           })
+                @(Html.DevExtreme().HtmlEditorFor(model => model.Description)
+    .ID("html-editor")
+    .Height(725)
+    .Content(@<text>
+
+    </text>)
+    .Toolbar(toolbar => toolbar.Items(
+        items => {
+            items.Add().FormatName(HtmlEditorToolbarItem.Undo);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Redo);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add()
+                .FormatName("size")
+                .FormatValues(new[] { "8pt", "10pt", "12pt", "14pt", "18pt", "24pt", "36pt" });
+
+            items.Add()
+                .FormatName("font")
+                .FormatValues(new[] { "Arial", "Courier New", "Georgia", "Impact", "Lucida Console", "Tahoma", "Times New Roman", "Verdana" });
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Bold);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Italic);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Strike);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Underline);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.AlignLeft);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.AlignCenter);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.AlignRight);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.AlignJustify);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.OrderedList);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.BulletList);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add()
+                .FormatName("header")
+                .FormatValues(new JS("[false, 1, 2, 3, 4, 5]"));
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Color);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Background);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Link);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Image);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Clear);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.CodeBlock);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Blockquote);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.Separator);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.InsertTable);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.DeleteTable);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.InsertRowAbove);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.InsertRowBelow);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.DeleteRow);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.InsertColumnLeft);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.InsertColumnRight);
+
+            items.Add().FormatName(HtmlEditorToolbarItem.DeleteColumn);
+        })
+    )
+    .MediaResizing(m => m.Enabled(true))
+)
+              
                 @Html.ValidationMessageFor(model => model.Description, "", new
            {
                @class =
@@ -130,15 +158,53 @@
             </div>
 
         </section>
-        <input type="file" name="ImageData" id="ImageData" style="margin:1.5em" />
+        <div align="center" class="mt-1">
+            <img src="~/images/users_icons/Путь_к_картинке" class="img" width="100%">
+        </div>
+        <div align="center">
+            <label id="profile-image">
+                <small>@Localizer["Upload"]</small>
+                <small>
+                    <input type="file" name="Image" id="Imageinput" hidden onchange="imgprev(this)">
+
+                    <i class="fa fa-camera" aria-hidden="true"></i>
+                </small>
+            </label>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </article>
-
-
 }
 
 
+<div class="options">
+    <div class="caption">Options</div>
+    <div class="option">
+        @(Html.DevExtreme().CheckBox()
+            .Value(true)
+            .Text("Multiline toolbar")
+            .OnValueChanged("change_multiline")
+        )
+    </div>
+</div>
+
+<script>
+    function change_multiline(e) {
+        $("#html-editor")
+            .dxHtmlEditor("instance")
+            .option("toolbar.multiline", e.value);
+    }
+</script>
+
+<link rel="stylesheet" href="~/css/CreateArticle.min.css" />
+
+
+
+@section Scripts {
+
+    <script src="~/js/photoLoad.js"></script>
+
+}

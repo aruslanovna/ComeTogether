@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using ComeTogether.Infrastructure.Identity;
+using ComeTogether.Domain.Entities;
 
 namespace WebMVC.Areas.Identity.Pages.Account.Manage
 {

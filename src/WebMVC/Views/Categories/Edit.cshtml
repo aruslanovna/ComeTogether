@@ -1,40 +1,65 @@
 ﻿@model ComeTogether.Domain.Entities.Category
 
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Edit";
 }
+<link rel="stylesheet" href="~/css/CreateArticle.min.css" />
 
-<h1>Edit</h1>
 
-<h4>Category</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CategoryId" />
-            <div class="form-group">
-                <label asp-for="CategoryName" class="control-label"></label>
-                <input asp-for="CategoryName" class="form-control" />
-                <span asp-validation-for="CategoryName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" class="form-control" />
-                <span asp-validation-for="Picture" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
+
+
+@using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+    <article class="wrapper">
+        <a class=" iconBtn ">@ViewBag.Edited</a>
+        @ViewBag.Ok
+        <header>
+            <h1 class="pageTitle">@Localizer["Title"]</h1>
+
+            <div class="col-md-12">
+                <h1 class="pageTitle"> @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })</h1>
+
+            </div>
+
+
+        </header>
+        <section>
+            <h2 class="pageSubTitle">@Localizer["Description"]   </h2>
+            <div class="form-group">
+
+                <h1 class="pageTitle"> @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })</h1>
+            </div>
+
+        </section>
+        <div align="center" class="mt-1">
+            <img src="~/images/users_icons/Путь_к_картинке" class="img" width="100%">
+        </div>
+        <div align="center">
+            <label id="profile-image">
+                <small>@Localizer["Upload"]</small>
+                <small>
+                    <input type="file" name="Image" id="Imageinput" hidden onchange="imgprev(this)">
+
+                    <i class="fa fa-camera" aria-hidden="true"></i>
+                </small>
+            </label>
+        </div>
+        <a href="/Categories/Edit">
+            <button class="iconBtn" id="createProjectBtn">
+                <div class="iconBtn__content">
+
+                    @Localizer["Edit"]
+                </div>
+            </button>
+        </a>
+    </article>
+}
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

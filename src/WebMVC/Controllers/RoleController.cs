@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ComeTogether.Domain.Entities;
 using ComeTogether.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace WebMVC.Controllers
 {
 
-    [Authorize(Roles = "Admin")]
+   
     public class RoleController : Controller
     {
         
             private RoleManager<IdentityRole> roleManager;
             private UserManager<ApplicationUser> userManager;
-
-            public RoleController(RoleManager<IdentityRole> roleMgr, UserManager<ApplicationUser> userMrg)
-            {
+        private static readonly IStringLocalizer<BaseController> _localizer;
+        public RoleController(RoleManager<IdentityRole> roleMgr, UserManager<ApplicationUser> userMrg) 
+        {
                 roleManager = roleMgr;
                 userManager = userMrg;
             }

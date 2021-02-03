@@ -10,38 +10,33 @@ using ComeTogether.Infrastructure;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNet.SignalR;
+using Microsoft.Extensions.Localization;
 
 namespace WebMVC.Controllers
 {
-    [Authorize]
+ 
     public class DealsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        // private readonly UserManager<ApplicationUser> userManager;
-
-        public DealsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor/*, UserManager<ApplicationUser> userMgr*/)
+     
+        public DealsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor/*, UserManager<ApplicationUser> userMgr*/) 
         {
             _httpContextAccessor = httpContextAccessor;
-            //  userManager = userMgr;
-            //signInManager = signinMgr;
+       
             _context = context;
         }
 
-        // GET: Deals
+     
         public async Task<IActionResult> Index()
         {
             return View(await _context.Deals.ToListAsync());
         }
 
-        // GET: Deals/Details/5
+      
         public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+         
             var deal = await _context.Deals
                 .FirstOrDefaultAsync(m => m.DealId == id);
             if (deal == null)
@@ -52,32 +47,38 @@ namespace WebMVC.Controllers
             return View(deal);
         }
 
-        // GET: Deals/Create
-        public IActionResult Create()
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Create(int id)
         {
+            ViewBag.ProjectId = id;
             return View();
         }
-
-        // POST: Deals/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        public async Task<IActionResult> Create( int id)
+        public async Task<IActionResult> Create(int id, IFormFile g)
         {
-           
+       
                 Deal deal = new Deal();
-                deal.Partner = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
+                deal.PartnerId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
                  deal.ProjectId = id;
+
+            if (_context.Deals.Where(x=>x.PartnerId == deal.PartnerId && x.ProjectId==deal.ProjectId).Any())
+            {
+                return RedirectToAction("Index", "Projects");
+            }
                 _context.Add(deal);
+           
                 await _context.SaveChangesAsync();
-            Project p = _context.Projects.First(i => i.ProjectId == id);
-            return View($"../Projects/Details",p );
+           
+           
+            return RedirectToAction("Index","Projects" );
 
         }
         [Authorize]
-        // GET: Deals/Edit/5
+       
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -93,10 +94,7 @@ namespace WebMVC.Controllers
             return View(deal);
         }
 
-        // POST: Deals/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id")] Deal deal)
         {
@@ -146,7 +144,7 @@ namespace WebMVC.Controllers
             return View(deal);
         }
 
-        // POST: Deals/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+using System.Linq;
 namespace ComeTogether.Domain.Entities
 {
     public class Comment

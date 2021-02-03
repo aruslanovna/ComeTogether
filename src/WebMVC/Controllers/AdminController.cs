@@ -1,148 +1,207 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ComeTogether.Domain.Entities;
+using ComeTogether.Domain.MessageModel;
 using ComeTogether.Infrastructure.Identity;
+using ComeTogether.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Localization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace WebMVC.Controllers
 {
     [Authorize]
     public class AdminController : Controller
     {
-      
-            private UserManager<ApplicationUser> userManager;
-            private IPasswordHasher<ApplicationUser> passwordHasher;
-            private IPasswordValidator<ApplicationUser> passwordValidator;
-            private IUserValidator<ApplicationUser> userValidator;
 
-            public AdminController(UserManager<ApplicationUser> usrMgr, IPasswordHasher<ApplicationUser> passwordHash, IPasswordValidator<ApplicationUser> passwordVal, IUserValidator<ApplicationUser> userValid)
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IPasswordHasher<ApplicationUser> passwordHasher;
+        private readonly IPasswordValidator<ApplicationUser> passwordValidator;
+        private readonly IUserValidator<ApplicationUser> userValidator;
+        private static readonly IStringLocalizer<BaseController> _localizer;
+
+
+
+        private readonly IEmailSender _emailSender;
+
+
+
+        public AdminController(IEmailSender emailSender, UserManager<ApplicationUser> usrMgr, IPasswordHasher<ApplicationUser> passwordHash, IPasswordValidator<ApplicationUser> passwordVal, IUserValidator<ApplicationUser> userValid)
+        {
+            userManager = usrMgr;
+            passwordHasher = passwordHash;
+            passwordValidator = passwordVal;
+            userValidator = userValid;
+            _emailSender = emailSender;
+        }
+
+        public IActionResult Index()
+        {
+            return View(userManager.Users);
+        }
+
+        public ViewResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(User user)
+        {
+            if (ModelState.IsValid)
             {
-                userManager = usrMgr;
-                passwordHasher = passwordHash;
-                passwordValidator = passwordVal;
-                userValidator = userValid;
-            }
-
-            public IActionResult Index()
-            {
-                return View(userManager.Users);
-            }
-
-            public ViewResult Create() => View();
-
-            [HttpPost]
-            public async Task<IActionResult> Create(User user)
-            {
-                if (ModelState.IsValid)
+                ApplicationUser ApplicationUser = new ApplicationUser
                 {
-                    ApplicationUser ApplicationUser = new ApplicationUser
-                    {
-                        UserName = user.Name,
-                        Email = user.Email,
-                       
-                    };
+                    UserName = user.Name,
+                    Email = user.Email,
 
-                    IdentityResult result = await userManager.CreateAsync(ApplicationUser, user.Password);
-                    if (result.Succeeded)
-                        return RedirectToAction("Index");
-                    else
-                    {
-                        foreach (IdentityError error in result.Errors)
-                            ModelState.AddModelError("", error.Description);
-                    }
-                }
-                return View(user);
-            }
+                };
 
-            public async Task<IActionResult> Update(string id)
-            {
-                ApplicationUser user = await userManager.FindByIdAsync(id);
-                if (user != null)
-                    return View(user);
-                else
+                IdentityResult result = await userManager.CreateAsync(ApplicationUser, user.Password);
+                if (result.Succeeded)
+                {
                     return RedirectToAction("Index");
-            }
-
-            [HttpPost]
-            public async Task<IActionResult> Update(string id, string email, string password, int age, string country, string salary)
-            {
-                ApplicationUser user = await userManager.FindByIdAsync(id);
-                if (user != null)
-                {
-                    IdentityResult validEmail = null;
-                    if (!string.IsNullOrEmpty(email))
-                    {
-                        validEmail = await userValidator.ValidateAsync(userManager, user);
-                        if (validEmail.Succeeded)
-                            user.Email = email;
-                        else
-                            Errors(validEmail);
-                    }
-                    else
-                        ModelState.AddModelError("", "Email cannot be empty");
-
-                    IdentityResult validPass = null;
-                    if (!string.IsNullOrEmpty(password))
-                    {
-                        validPass = await passwordValidator.ValidateAsync(userManager, user, password);
-                        if (validPass.Succeeded)
-                            user.PasswordHash = passwordHasher.HashPassword(user, password);
-                        else
-                            Errors(validPass);
-                    }
-                    else
-                        ModelState.AddModelError("", "Password cannot be empty");
-
-                   
-
-                    //Country myCountry;
-                    //Enum.TryParse(country, out myCountry);
-                    //user.Country = myCountry;
-
-                   
-
-                    if (validEmail != null && validPass != null && validEmail.Succeeded && validPass.Succeeded && !string.IsNullOrEmpty(salary))
-                    {
-                        IdentityResult result = await userManager.UpdateAsync(user);
-                        if (result.Succeeded)
-                            return RedirectToAction("Index");
-                        else
-                            Errors(result);
-                    }
                 }
                 else
-                    ModelState.AddModelError("", "User Not Found");
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(user);
+        }
 
+        public async Task<ActionResult> Email(string Content)
+        {
+            if (!String.IsNullOrEmpty(Content))
+            {
+                string id = userManager.GetUserId(User);
+                ApplicationUser user = await userManager.FindByIdAsync(id);
+                string[] send = userManager.Users.Select(x => x.Email).ToArray();
+                Message message = new Message(send, "Message from ComeTogether", Content + "\n Sincerely,\n ComeTogether administarator\n" + DateTime.Now);
+                _emailSender.SendEmail(message);
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> Update(string id)
+        {
+            ApplicationUser user = await userManager.FindByIdAsync(id);
+            if (user != null)
+            {
                 return View(user);
             }
-
-         
-            void Errors(IdentityResult result)
+            else
             {
-                foreach (IdentityError error in result.Errors)
-                    ModelState.AddModelError("", error.Description);
+                return RedirectToAction("Index");
             }
+        }
 
-            [HttpPost]
-            public async Task<IActionResult> Delete(string id)
+        [HttpPost]
+        public async Task<IActionResult> Update(string id, string email, string password, int age, string country, string salary)
+        {
+            ApplicationUser user = await userManager.FindByIdAsync(id);
+            if (user != null)
             {
-                ApplicationUser user = await userManager.FindByIdAsync(id);
-                if (user != null)
+                IdentityResult validEmail = null;
+                if (!string.IsNullOrEmpty(email))
                 {
-                    IdentityResult result = await userManager.DeleteAsync(user);
-                    if (result.Succeeded)
-                        return RedirectToAction("Index");
+                    validEmail = await userValidator.ValidateAsync(userManager, user);
+                    if (validEmail.Succeeded)
+                    {
+                        user.Email = email;
+                    }
                     else
-                        Errors(result);
+                    {
+                        Errors(validEmail);
+                    }
                 }
                 else
-                    ModelState.AddModelError("", "User Not Found");
-                return View("Index", userManager.Users);
+                {
+                    ModelState.AddModelError("", "Email cannot be empty");
+                }
+
+                IdentityResult validPass = null;
+                if (!string.IsNullOrEmpty(password))
+                {
+                    validPass = await passwordValidator.ValidateAsync(userManager, user, password);
+                    if (validPass.Succeeded)
+                    {
+                        user.PasswordHash = passwordHasher.HashPassword(user, password);
+                    }
+                    else
+                    {
+                        Errors(validPass);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Password cannot be empty");
+                }
+
+
+
+                //Country myCountry;
+                //Enum.TryParse(country, out myCountry);
+                //user.Country = myCountry;
+
+
+
+                if (validEmail != null && validPass != null && validEmail.Succeeded && validPass.Succeeded && !string.IsNullOrEmpty(salary))
+                {
+                    IdentityResult result = await userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        Errors(result);
+                    }
+                }
             }
+            else
+            {
+                ModelState.AddModelError("", "User Not Found");
+            }
+
+            return View(user);
+        }
+
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            ApplicationUser user = await userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    Errors(result);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "User Not Found");
+            }
+
+            return View("Index", userManager.Users);
+        }
         public async Task<ActionResult> Back()
         {
             DateTime d = DateTime.Now;
@@ -165,7 +224,7 @@ namespace WebMVC.Controllers
 
             con.Close();
             return View();
-            
+
         }
         public ActionResult OtherAction()
         {

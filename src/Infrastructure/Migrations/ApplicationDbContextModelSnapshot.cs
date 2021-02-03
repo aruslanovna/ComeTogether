@@ -37,19 +37,18 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("HomePhone")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Info")
                         .HasColumnType("nvarchar(max)");
@@ -64,10 +63,12 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -87,9 +88,6 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Region")
                         .HasColumnType("nvarchar(max)");
 
@@ -100,16 +98,23 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<string>("WorkPlace")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
 
-                    b.ToTable("ApplicationUser");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Article", b =>
@@ -120,7 +125,8 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Briefly")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(530)")
+                        .HasMaxLength(530);
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -129,7 +135,8 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(230)")
+                        .HasMaxLength(230);
 
                     b.Property<byte[]>("Photo")
                         .HasColumnType("varbinary(max)");
@@ -205,13 +212,17 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Partner")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("PartnerId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ProjectId")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
                     b.HasKey("DealId");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Deals");
                 });
@@ -256,6 +267,55 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.ToTable("Followings");
                 });
 
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Partner", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("foundedPartnerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("joinedPartnerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Partners");
+                });
+
             modelBuilder.Entity("ComeTogether.Domain.Entities.PartnerTerritory", b =>
                 {
                     b.Property<int>("PartnerId")
@@ -270,7 +330,7 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.HasIndex("TerritoryId");
 
-                    b.ToTable("PartnerTerritories");
+                    b.ToTable("PartnerTerritory");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.PollOption", b =>
@@ -317,6 +377,9 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int?>("ProjectDetailsProjectId")
                         .HasColumnType("int");
@@ -411,104 +474,6 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.HasIndex("RegionId");
 
                     b.ToTable("Territories");
-                });
-
-            modelBuilder.Entity("ComeTogether.Infrastructure.Identity.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Info")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("WorkPlace")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -814,13 +779,6 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.ToTable("Votes");
                 });
 
-            modelBuilder.Entity("ComeTogether.Domain.Entities.ApplicationUser", b =>
-                {
-                    b.HasOne("ComeTogether.Domain.Entities.Project", null)
-                        .WithMany("Partners")
-                        .HasForeignKey("ProjectId");
-                });
-
             modelBuilder.Entity("ComeTogether.Domain.Entities.Article", b =>
                 {
                     b.HasOne("ComeTogether.Domain.Entities.Category", "Category")
@@ -835,6 +793,17 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Deal", b =>
+                {
+                    b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", "Partner")
+                        .WithMany("Deals")
+                        .HasForeignKey("PartnerId");
+
+                    b.HasOne("ComeTogether.Domain.Entities.Project", "project")
+                        .WithMany("Deals")
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.PartnerTerritory", b =>
@@ -886,7 +855,7 @@ namespace ComeTogether.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ComeTogether.Infrastructure.Identity.ApplicationUser", null)
+                    b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -895,7 +864,7 @@ namespace ComeTogether.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ComeTogether.Infrastructure.Identity.ApplicationUser", null)
+                    b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -910,7 +879,7 @@ namespace ComeTogether.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ComeTogether.Infrastructure.Identity.ApplicationUser", null)
+                    b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -919,7 +888,7 @@ namespace ComeTogether.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ComeTogether.Infrastructure.Identity.ApplicationUser", null)
+                    b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

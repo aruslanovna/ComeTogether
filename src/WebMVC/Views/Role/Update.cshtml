@@ -17,7 +17,7 @@
         }
         else
         {
-            @foreach (ApplicationUser user in Model.NonMembers)
+            @foreach (ComeTogether.Domain.Entities.ApplicationUser user in Model.NonMembers)
             {
                 <tr>
                     <td>@user.UserName</td>
@@ -37,7 +37,7 @@
         }
         else
         {
-            @foreach (ApplicationUser user in Model.Members)
+            @foreach (ComeTogether.Domain.Entities.ApplicationUser user in Model.Members)
             {
                 <tr>
                     <td>@user.UserName</td>

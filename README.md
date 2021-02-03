@@ -14,6 +14,7 @@
 
 ## Technologies
 
+* [DevExpress for ASP.NET Core](https://www.devexpress.com/)
 * [.NET Core 3.1](https://dotnet.microsoft.com/download)
 * [ASP.NET Core 3.1](https://docs.microsoft.com/en-us/aspnet/core)
 * [Entity Framework Core 3.1](https://docs.microsoft.com/en-us/ef/core)

@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using ComeTogether.Domain.ViewModel;
-using ComeTogether.Infrastructure.Repository;
-using Microsoft.AspNet.SignalR;
+﻿
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Reflection.Metadata;
 using WebMVC.Models;
-using WebMVC.Resources;
+
 using ActionResult = Microsoft.AspNetCore.Mvc.ActionResult;
 using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
 
 namespace WebMVC.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
        
         private readonly ILogger<HomeController> _logger;
         private static readonly IStringLocalizer<BaseController> _localizer;
-        private static readonly IStringLocalizer<SharedResource> _sharedLocalizer;
-        public HomeController(ILogger<HomeController> logger) :base(_localizer, _sharedLocalizer)
+      //  private static readonly IStringLocalizer<SharedResource> _sharedLocalizer;
+        public HomeController(ILogger<HomeController> logger) 
         {
            
             _logger = logger;
@@ -32,6 +30,7 @@ namespace WebMVC.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
      

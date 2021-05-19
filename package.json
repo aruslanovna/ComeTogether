@@ -1,0 +1,27 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "te"
+  },
+  "keywords": [
+    "te"
+  ],
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-target": "^1.0.0"
+  },
+  "author": "aruslanovna",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "course"
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  }
+}

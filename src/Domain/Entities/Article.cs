@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Data;
+using System.Linq;
 
 namespace ComeTogether.Domain.Entities
 {
@@ -11,7 +12,7 @@ namespace ComeTogether.Domain.Entities
         public int ArticleId { get; set; }
         //[Required(ErrorMessageResourceType = typeof(Resources.Content),
         //          ErrorMessageResourceName = "TitleRequired")]
-        [StringLength(30, ErrorMessage = "Max length is 30 symbols")]
+        [StringLength(230, ErrorMessage = "Max length is 30 symbols")]
         public string Name { get; set; }
         public string UserId { get; set; }
         //[Required(ErrorMessageResourceType = typeof(Resources.Content),
@@ -20,7 +21,7 @@ namespace ComeTogether.Domain.Entities
         public string Description { get; set; }
         //[Required(ErrorMessageResourceType = typeof(Resources.Content),
         //        ErrorMessageResourceName = "BrieflyRequired")]
-        [StringLength(30, ErrorMessage = "Max length is 30 symbols")]
+        [StringLength(530, ErrorMessage = "Max length is 30 symbols")]
         public string Briefly { get; set; }
         public DateTime? PostDate { get; set; }
         public byte[] Photo { get; set; }

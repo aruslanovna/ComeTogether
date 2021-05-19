@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using ComeTogether.Infrastructure.Identity;
+using Microsoft.Extensions.Localization;
+using ComeTogether.Domain.Entities;
 
 namespace WebMVC.Controllers
 {
@@ -17,7 +19,7 @@ namespace WebMVC.Controllers
 
         private UserManager<ApplicationUser> userManager;
         private IAuthorizationService authService;
-
+        private static readonly IStringLocalizer<BaseController> _localizer;
         public ClaimController(UserManager<ApplicationUser> userMgr, IAuthorizationService auth)
         {
             userManager = userMgr;

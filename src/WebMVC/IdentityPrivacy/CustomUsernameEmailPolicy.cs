@@ -1,5 +1,5 @@
 ﻿
-using ComeTogether.Infrastructure.Identity;
+using ComeTogether.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

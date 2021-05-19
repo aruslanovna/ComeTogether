@@ -1,0 +1,149 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.Web.Http;
+using VotingApplication.Data.Context;
+using VotingApplication.Data.Model;
+using VotingApplication.Web.Api.Metrics;
+using VotingApplication.Web.Api.Models.DBViewModels;
+using VotingApplication.Web.Api.SignalR;
+using VotingApplication.Web.Api.Validators;
+
+namespace VotingApplication.Web.Api.Controllers
+{
+    public class PollVoteController : WebApiController
+    {
+        private readonly IVoteValidatorFactory _voteValidatorFactory;
+        private const string ValidVoterNameRegex = @"[^\w\.@ -]";
+
+        public PollVoteController() { }
+
+        public PollVoteController(IContextFactory contextFactory, IMetricHandler metricHandler, IVoteValidatorFactory voteValidatorFactory)
+            : base(contextFactory, metricHandler)
+        {
+            _voteValidatorFactory = voteValidatorFactory;
+        }
+
+        [HttpPut]
+        public void Put(Guid pollId, Guid tokenGuid, BallotRequestModel ballotRequest)
+        {
+            using (IVotingContext context = _contextFactory.CreateContext())
+            {
+                if (ballotRequest == null)
+                {
+                    ThrowError(HttpStatusCode.BadRequest);
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    ThrowError(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                Poll poll = context
+                    .Polls
+                    .Where(p => p.UUID == pollId)
+                    .Include(p => p.Ballots)
+                    .Include(p => p.Choices)
+                    .SingleOrDefault();
+
+                if (poll == null)
+                {
+                    ThrowError(HttpStatusCode.NotFound, String.Format("Poll {0} not found", pollId));
+                }
+
+                if (poll.ExpiryDateUtc.HasValue && poll.ExpiryDateUtc < DateTime.UtcNow)
+                {
+                    ThrowError(HttpStatusCode.Forbidden, String.Format("Poll {0} has expired", pollId));
+                }
+
+
+                foreach (VoteRequestModel voteRequest in ballotRequest.Votes)
+                {
+                    if (poll.Choices.All(o => o.Id != voteRequest.ChoiceId))
+                    {
+                        ModelState.AddModelError("OptionId", "Option choice not valid for this poll");
+                    }
+                }
+
+                Ballot ballot = poll
+                    .Ballots
+                    .SingleOrDefault(t => t.TokenGuid == tokenGuid);
+
+                if (ballot == null)
+                {
+                    if (poll.InviteOnly)
+                    {
+                        ThrowError(HttpStatusCode.Forbidden, String.Format("Token {0} not valid for this poll", tokenGuid));
+                    }
+                    else
+                    {
+                        ballot = new Ballot() { TokenGuid = tokenGuid };
+                        poll.Ballots.Add(ballot);
+                    }
+                }
+
+                // Poll specific validation
+                IVoteValidator voteValidator = _voteValidatorFactory.CreateValidator(poll.PollType);
+                voteValidator.Validate(ballotRequest.Votes, poll, ModelState);
+
+                if (!ModelState.IsValid)
+                {
+                    ThrowError(HttpStatusCode.BadRequest, ModelState);
+                }
+
+                List<Vote> existingVotes = context
+                    .Votes
+                    .Include(v => v.Poll)
+                    .Where(v => v.Ballot.TokenGuid == tokenGuid && v.Poll.UUID == pollId)
+                    .ToList();
+
+                foreach (Vote contextVote in existingVotes)
+                {
+                    _metricHandler.HandleVoteDeletedEvent(contextVote, pollId);
+                    context.Votes.Remove(contextVote);
+                }
+
+                // For some reason, we don't have an addrange function on Entity Framework
+                foreach (VoteRequestModel voteRequest in ballotRequest.Votes)
+                {
+                    Choice option = context
+                        .Choices
+                        .Single(o => o.Id == voteRequest.ChoiceId);
+
+                    Vote modelToVote = ModelToVote(voteRequest, ballot, option, poll);
+                    context.Votes.Add(modelToVote);
+
+                    _metricHandler.HandleVoteAddedEvent(modelToVote, pollId);
+                }
+
+                if (!String.IsNullOrEmpty(ballotRequest.VoterName))
+                {
+                    ballot.VoterName = Regex.Replace(ballotRequest.VoterName, ValidVoterNameRegex, "");
+                }
+
+                ballot.HasVoted = true;
+
+                poll.LastUpdatedUtc = DateTime.UtcNow;
+
+                context.SaveChanges();
+
+                ClientSignaller.SignalUpdate(poll.UUID.ToString());
+            }
+        }
+
+        private static Vote ModelToVote(VoteRequestModel voteRequest, Ballot ballot, Choice option, Poll poll)
+        {
+            return new Vote
+            {
+                Choice = option,
+                Poll = poll,
+                Ballot = ballot,
+                VoteValue = voteRequest.VoteValue
+            };
+
+        }
+    }
+}

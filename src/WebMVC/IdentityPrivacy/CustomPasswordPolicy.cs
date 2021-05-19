@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ComeTogether.Infrastructure.Identity;
+using ComeTogether.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace WebMVC.IdentityPrivacy

@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using ComeTogether.Domain.Entities;
 using ComeTogether.Infrastructure.Interface;
-using ComeTogether.Infrastructure.Persistence;
+
 using ComeTogether.Infrastructure.Repository;
 
 namespace ComeTogether.Infrastructure
@@ -12,68 +12,54 @@ namespace ComeTogether.Infrastructure
     {
         private readonly ApplicationDbContext db;
 
-        private IRepository<Deal> _deals;
+        private Repository<Deal> _dealsRepository;
+        private Repository<Article> _artRepository;
 
-        private IRepository<Project> _projects;
+        private Repository<Project> _projectRepository;
 
-        private IRepository<Category> _categories;
+        private Repository<Category> _categoriesRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
             db = context;
         }
+
+        public IRepository<Deal> DealsRepository
+        {
+            get
+            {
+                return _dealsRepository ??
+                   (_dealsRepository = new Repository<Deal>(db));
+            }
+        }
+
+        public IRepository<Category> CategoriesRepository
+        {
+            get
+            {
+                return _categoriesRepository ??
+                    (_categoriesRepository = new Repository<Category>(db));
+            }
+        }
+        public IRepository<Project> ProjectsRepository
+        {
+            get
+            {
+                return _projectRepository ??
+                    (_projectRepository = new Repository<Project>(db));
+            }
+        }
+
+        public IRepository<Article> ArticlesRepository
+        {
+            get
+            {
+                return _artRepository ??
+                   (_artRepository = new Repository<Article>(db));
+            }
+        }
+
      
-        public IRepository<Deal> Deals
-        {
-            get
-            {
-                return _deals ??
-                   (_deals = new Repository<Deal>(db));
-            }
-        }
-
-        public IRepository<Category> Categories
-        {
-            get
-            {
-                return _categories ??
-                    (_categories = new Repository<Category>(db));
-            }
-        }
-        public IRepository<Project> Projects
-        {
-            get
-            {
-                return _projects ??
-                    (_projects = new Repository<Project>(db));
-            }
-        }
-
-
-        //private ProjectRepository projectRepository;
-        //private CategoryRepository categoryRepository;
-
-        //public ProjectRepository Project
-        //{
-        //    get
-        //    {
-        //        if (projectRepository == null)
-        //            projectRepository = new ProjectRepository(db);
-        //        return projectRepository;
-        //    }
-        //}
-
-        //public CategoryRepository Category
-        //{
-        //    get
-        //    {
-        //        if (categoryRepository == null)
-        //            categoryRepository = new CategoryRepository(db);
-        //        return categoryRepository;
-        //    }
-        //}
-
-
 
         public void Save()
         {
@@ -100,9 +86,9 @@ namespace ComeTogether.Infrastructure
             GC.SuppressFinalize(this);
         }
 
-        public Task SaveChangesAsync()
+        public void SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            db.SaveChangesAsync();
         }
     }
 }

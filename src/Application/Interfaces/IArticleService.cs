@@ -2,30 +2,31 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComeTogether.Service.Interfaces
 {
    public interface IArticleService
     {
        
-            void Add(Article e);
+      void Add(Article e);
 
-            void Edit(int id, Article e);
+        Task Edit(int id, Article e);
 
-            void Remove(int id);
-        Article GetById(int id);
+        Task Remove(int? id);
+       Article GetById(int? id);
 
-        Article GetByIdWithCategory(int id);
-
-
-            IEnumerable<Article> GetAll();
-
-            IEnumerable<Article> GetArticleByTitle(string search);
-
-            IEnumerable<Article> GetArticleByDateStart(string date);
+        Task<IEnumerable<Article>> GetByIdWithCategory(int id);
 
 
+        Task<IEnumerable<Article>> GetAll();
 
-        
+       IEnumerable<Article> GetArticleByTitle(string search);
+
+        Task<IEnumerable<Article>> GetArticleByDateStart(string date);
+
+        Task<bool> Exist(int? id);
+
+
     }
 }

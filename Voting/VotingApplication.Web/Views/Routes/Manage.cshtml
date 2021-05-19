@@ -1,0 +1,141 @@
+﻿<div ng-app="GVA.Manage" ng-controller="ManagePageController">
+    <div class="manage-area centered">
+
+        <h2>
+            Poll Management
+        </h2>
+        <div class="manage-section" id="manage-name-section">
+            <div>
+                <span class="fa fa-question-circle pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">
+                    Question
+                    <span id="edit-link" class="pull-right"><a class="clickable" ng-click="toggleNameEdit=true" ng-hide="toggleNameEdit">Edit</a></span>
+                </h4>
+            </div>
+            <div>
+                <form ng-submit="toggleNameEdit=false;updateQuestion()">
+                    <span class="icon-padded-left">
+                        <span ng-if="!toggleNameEdit">
+                            {{Question}}
+                        </span>
+                        <span ng-if="toggleNameEdit">
+                            <input class="wide-input manage-input" ng-model="$parent.Question" required />
+                            <span class="fa fa-remove pull-right clickable form-aligned-top" ng-click="$parent.toggleNameEdit=false;$parent.discardNameChanges()"></span>
+                            <span class="fa fa-check pull-right clickable form-aligned-top" ng-click="$parent.toggleNameEdit=false;$parent.updateQuestion()"></span>
+                        </span>
+                    </span>
+                </form>
+            </div>
+        </div>
+        <div class="manage-section" id="manage-choices-section">
+            <div>
+                <span class="fa fa-list pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">
+                    Choices
+                    <span id="edit-link" class="pull-right"><a href="{{manageSubPageUrl('Choices')}}">Edit</a></span>
+                </h4>
+            </div>
+            <div>
+                <span class="icon-padded-left">{{poll.Choices.length}} Choice{{poll.Choices.length !== 1 ? 's' : ''}}</span>
+            </div>
+        </div>
+        <div class="manage-section" id="manage-poll-type-section">
+            <div>
+                <span class="fa fa-check-square-o pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">
+                    Poll Style
+                    <span id="edit-link" class="pull-right"><a href="{{manageSubPageUrl('PollType')}}">Edit</a></span>
+                </h4>
+            </div>
+            <div>
+                <span class="icon-padded-left">{{poll.PollType}}</span>
+            </div>
+        </div>
+        <div class="manage-section" id="manage-misc-section">
+            <div>
+                <span class="fa fa-cog pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">
+                    Miscellaneous Settings
+                    <span id="edit-link" class="pull-right"><a href="{{manageSubPageUrl('Misc')}}">Edit</a></span>
+                </h4>
+            </div>
+        </div>
+        <div class="manage-section" id="manage-expiry-section">
+            <div>
+                <span class="fa fa-clock-o pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">
+                    Expires
+                    <span id="edit-link" class="pull-right"><a href="{{manageSubPageUrl('Expiry')}}">Edit</a></span>
+                </h4>
+            </div>
+            <div>
+                <span class="icon-padded-left">{{formatPollExpiry()}}</span>
+            </div>
+        </div>
+        <div class="manage-section" id="manage-invitees-section">
+            <div>
+                <span class="fa fa-users pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">
+                    Invitations
+                    <span id="edit-link" class="pull-right"><a href="{{manageSubPageUrl('Invitees')}}">Edit</a></span>
+                </h4>
+            </div>
+            <div>
+                <span class="icon-padded-left">{{poll.InviteeCount}} Invitation{{poll.InviteeCount !== 1 ? 's' : ''}}</span>
+            </div>
+        </div>
+        <div class="manage-section" id="manage-voters-section">
+            <div>
+                <span class="fa fa-bar-chart pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">
+                    Ballots
+                    <span id="edit-link" class="pull-right"><a href="{{ manageSubPageUrl('Voters') }}">Edit</a></span>
+                </h4>
+            </div>
+            <div>
+                <span class="icon-padded-left">{{ poll.VotersCount }} Ballot{{poll.VotersCount !== 1 ? 's' : ''}}</span>
+            </div>
+        </div>
+        <div class="manage-section" ng-show="!poll.InviteOnly" id="manage-share-section">
+            <div class="icon-margin-bottom">
+                <span class="fa fa-share-alt pull-left" aria-hidden="true"></span>
+                <div class="pull-right">
+                    <i ng-click="toggleQRCode=!toggleQRCode" class="fa fa-qrcode fa-2x clickable"></i>
+                    <a href="mailto:&amp;body={{fullPollUrl()}}"><i class="fa fa-envelope-square fa-2x"></i></a>
+                </div>
+                <h4 class="icon-padded-left">Share</h4>
+            </div>
+            <qrcode version="7" ng-show="toggleQRCode" data="{{fullPollUrl()}}" size="300" download></qrcode>
+        </div>
+        <div class="manage-section" ng-show="!poll.InviteOnly" id="manage-link-section">
+            <div>
+                <span class="fa fa-link pull-left" aria-hidden="true"></span>
+                <h4 class="icon-padded-left">Link</h4>
+            </div>
+            <div>
+                <div class="icon-margin-left input-btn-group" ng-if="!copyError">
+                    <input class="manage-input" contenteditable="false" ng-readonly="true" ng-value="fullPollUrl()" />
+                    <button id="copy-button"
+                            class="active-btn"
+                            ui-zeroclip
+                            zeroclip-copied="copied=true"
+                            zeroclip-model="fullPollUrl()"
+                            zeroclip-on-error="$parent.copyError=true">
+                        <i class="fa fa-clipboard"></i>
+                    </button>
+                </div>
+                <div class="margin-right-medium" ng-if="copyError">
+                    <input class="manage-input icon-margin-left full-width" ng-value="fullPollUrl()" />
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="manage-section flexbox">
+            <div class="centered">
+                <a href="{{pollUrl()}}">
+                    <button class="active-btn btn-large">Go to poll</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

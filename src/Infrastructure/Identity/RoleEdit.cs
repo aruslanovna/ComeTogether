@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
- using Microsoft.AspNetCore.Identity;
+using ComeTogether.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
     
 namespace ComeTogether.Infrastructure.Identity
 {

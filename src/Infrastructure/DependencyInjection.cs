@@ -1,6 +1,6 @@
 ﻿
 using ComeTogether.Infrastructure.Interface;
-using ComeTogether.Infrastructure.Persistence;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +17,7 @@ namespace ComeTogether.Infrastructure
         {
            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-          
+      
 
             return services;
         }

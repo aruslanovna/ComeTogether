@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ComeTogether.Domain.Entities
+﻿namespace ComeTogether.Domain.Entities
 {
-   public class Deal
+    public class Deal
     {
         public int DealId { get; set; }
-        
-        public int ProjectId { get; set; }
-        public string Partner { get; set; }
+
+        public int? ProjectId { get; set; }
+        public Project project { get; set; }
+        public string PartnerId { get; set; }
+        public ApplicationUser Partner { get; set; }
     }
 }

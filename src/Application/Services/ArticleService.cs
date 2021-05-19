@@ -1,51 +1,92 @@
 ﻿using ComeTogether.Domain.Entities;
+using ComeTogether.Infrastructure.Interface;
 using ComeTogether.Service.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
+
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ComeTogether.Service.Services
 {
     public class ArticleService : IArticleService
     {
+
+        public readonly IUnitOfWork _unitOfWork;
+        public ArticleService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
         public void Add(Article e)
         {
-            throw new NotImplementedException();
+             _unitOfWork.ArticlesRepository.Create(e);
+            _unitOfWork.Save();
         }
 
-        public void Edit(int id, Article e)
+        public async Task Edit(int id, Article e)
         {
-            throw new NotImplementedException();
+            Article edit =  GetById(id);
+            edit = e;
+            _unitOfWork.SaveChangesAsync();
         }
 
-        public IEnumerable<Article> GetAll()
+        public async Task<IEnumerable<Article>> GetAll()
         {
-            throw new NotImplementedException();
+            var eventList = await _unitOfWork.ArticlesRepository.GetAll();
+            return eventList.OrderBy(s => s.Name).ToList();
         }
 
-        public Article GetById(int id)
+        public Article GetById(int? id)
         {
-            throw new NotImplementedException();
+            if (id != null)
+            {
+                var eventList = _unitOfWork.ArticlesRepository.GetById(id);
+                return eventList;
+            }
+            return null;
         }
 
-        public Article GetByIdWithCategory(int id)
+        public async Task<IEnumerable<Article>> GetByIdWithCategory(int id)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => _unitOfWork.ArticlesRepository.GetWithInclude(x => x.Category));
         }
 
-        public IEnumerable<Article> GetArticleByDateStart(string date)
+        public async Task<IEnumerable<Article>> GetArticleByDateStart(string date)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => _unitOfWork.ArticlesRepository.GetByCondition(x => x.PostDate == DateTime.Parse(date)));
+        }
+        public async Task<IEnumerable<Article>> GetArticleByDateStartAndLater(string date)
+        {
+            return await Task.Run(() => _unitOfWork.ArticlesRepository.GetByCondition(x => x.PostDate <= DateTime.Parse(date)));
         }
 
+        public async Task<IEnumerable<Article>> GetArticleByDateStartAndearlier(string date)
+        {
+            return await Task.Run(() => _unitOfWork.ArticlesRepository.GetByCondition(x => x.PostDate >= DateTime.Parse(date)));
+        }
         public IEnumerable<Article> GetArticleByTitle(string search)
         {
-            throw new NotImplementedException();
+            var eventList = _unitOfWork.ArticlesRepository.GetByCondition(s => s.Name.StartsWith(search));
+            return eventList.OrderBy(s => s.Name).ToList();
         }
 
-        public void Remove(int id)
+
+        public async Task Remove(int? id)
         {
-            throw new NotImplementedException();
+            if (id != null)
+            {
+                var eventList = await Task.Run(() => _unitOfWork.ArticlesRepository.GetById(id));
+                _unitOfWork.ArticlesRepository.Delete(id);
+                _unitOfWork.SaveChangesAsync();
+
+            }
+
+        }
+
+
+        public async Task<bool> Exist(int? id)
+        {
+            return await Task.Run(() => _unitOfWork.ArticlesRepository.Exist(id));
         }
     }
 }

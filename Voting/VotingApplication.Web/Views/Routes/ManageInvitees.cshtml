@@ -1,0 +1,33 @@
+﻿<div ng-app="GVA.Manage" ng-controller="ManageInviteesController">
+    <div class="manage-area centered">
+        <h2>Poll Invitees</h2>
+
+        <h4>Invited</h4>
+        <p ng-if="invitedUsers.length === 0">You haven't invited anybody yet</p>
+        <div class="pill-box">
+            <div class="invitee-pill" ng-repeat="invitee in invitedUsers">
+                <span class="invitee-pill-text">{{invitee.Email}}</span>
+                <span class="fa fa-times invitee-pill-delete" ng-click="deleteInvitedVoter(invitee)" aria-hidden="true"></span>
+            </div>
+        </div>
+
+        <h4>Pending</h4>
+        <form ng-submit="inviteString = inviteString + '\n'; emailUpdated()">
+            <input id="new-invitee" name="new-invitee" ng-model="inviteString" ng-change="emailUpdated()" ng-trim="false" />
+            <span class="fa fa-plus clickable" ng-click="addInvitee(inviteString);"></span>
+        </form>
+        <p ng-if="pendingUsers.length === 0">No pending invitations</p>
+        <div class="pill-box">
+            <div class="invitee-pill" ng-repeat="pending in pendingUsers">
+                <span class="invitee-pill-text">{{pending.Email}}</span>
+                <span class="fa fa-times invitee-pill-delete" ng-click="deletePendingVoter(pending)" aria-hidden="true"></span>
+            </div>
+        </div>
+
+        <div class="manage-section">
+            <button class="manage-btn" ng-click="discardChanges()">Cancel</button>
+            <button class="manage-btn" ng-disabled="isSaving || sendingInvitations" ng-click="saveChanges()">Save</button>
+            <button class="manage-btn" ng-disabled="isSaving || sendingInvitations" ng-click="addInvitee(inviteString); sendInvitations();" ng-if="pendingUsers.length > 0 || inviteString.length > 0">Invite Pending</button>
+        </div>
+    </div>
+</div>

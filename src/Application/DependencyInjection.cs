@@ -17,8 +17,9 @@ namespace ComeTogether.Service
            
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IArticleService, ArticleService>();
-            services.AddTransient<ICategoryService, CategoryService>();
-          
+          //  services.AddTransient<ICategoryService, CategoryService>();
+
+            services.AddScoped<IEmailSender, EmailSender>();
 
             return services;
         }

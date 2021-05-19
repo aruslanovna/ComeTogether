@@ -27,7 +27,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 
-
+src\WebMVC/appsettings.Development
 src\WebMVC/appsettings.Production.Development
 src\WebMVC/appsettings.Production
 src\WebMVC/appsettings.Production.Development.json

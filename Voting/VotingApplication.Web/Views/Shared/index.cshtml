@@ -12,7 +12,7 @@
 <body>
 
     <div layout="column" flex layout-fill>
-        <div class="mainWindow">
+        <div class="mainWindow" style="margin-left:15%">
 
             <div class="mainWindow__leftSide navbar">
                 <div class="navbar__navigation">
@@ -214,9 +214,10 @@
         </div>
         <toolbar></toolbar>
 
-        <div ng-view></div>
+        <div ng-view ></div>
 
     </div>
+    
     @Scripts.Render("~/Bundles/ScriptLib/JQuery")
     @Scripts.Render("~/Bundles/ScriptLib/JQuerySignalR")
 
@@ -233,5 +234,6 @@
     @Scripts.Render("~/Bundles/ScriptLib/moment")
 
     @Scripts.Render("~/Bundles/Script")
+      
 </body>
 </html>

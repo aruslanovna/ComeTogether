@@ -25,7 +25,7 @@ namespace ComeTogether.Infrastructure.Repository
             return await Task.Run(() => modelDb);
         }
 
-        public async Task<IEnumerable<TEntity>> GetByCondition(Expression<Func<TEntity, bool>> expression)
+        public IEnumerable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> expression)
         {
             return modelDb.Where(expression);
         }
@@ -57,7 +57,7 @@ namespace ComeTogether.Infrastructure.Repository
             Delete(entityToDelete);
         }
 
-        public async Task<TEntity> GetById(object id)
+        public TEntity GetById(object id)
         {
             return modelDb.Find(id);
         }

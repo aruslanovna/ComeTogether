@@ -18,10 +18,9 @@
         <toolbar>
 
         </toolbar>
-        <br />
-        <br />  <br />  <br /> <md-content md-theme="default">
-            @*md-center-tabs Should be true. This is a stupid IE Bug*@
-            @*https://github.com/angular/material/issues/2391*@
+       <md-content  style="margin-left:14%">
+         
+         
             <md-tabs md-center-tabs="false" md-dynamic-height="true" md-selected="currentStep" class="md-primary md-hue-2">
                 <md-tab ng-repeat="step in steps" ng-disabled="step.locked">
                     <md-tab-label>{{step.label}}</md-tab-label>

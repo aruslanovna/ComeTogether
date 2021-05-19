@@ -118,28 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Actual" xml:space="preserve">
-    <value>Actual Events</value>
+    <value>Актуальні події</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
+    <value>Адміністратор</value>
   </data>
   <data name="AllEvents" xml:space="preserve">
     <value>All events</value>
   </data>
   <data name="Category" xml:space="preserve">
-    <value>Category</value>
+    <value>Категорії</value>
   </data>
   <data name="Connect" xml:space="preserve">
-    <value>Connect with us</value>
+    <value>Зв'яжіться з нами</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Put your email to contact us</value>
   </data>
   <data name="Enter" xml:space="preserve">
     <value>Enter</value>
-  </data>
-  <data name="Evento" xml:space="preserve">
-    <value>Evento</value>
   </data>
   <data name="Footer" xml:space="preserve">
     <value>2020 - Evento</value>
@@ -164,10 +161,10 @@
     <value>News</value>
   </data>
   <data name="Notification" xml:space="preserve">
-    <value>Notification</value>
+    <value>Повідомлення</value>
   </data>
   <data name="Online" xml:space="preserve">
-    <value>Online Events</value>
+    <value>Онлайн події</value>
   </data>
   <data name="Party" xml:space="preserve">
     <value>Be a good party-goer</value>
@@ -179,7 +176,7 @@
     <value>“There is a lot of adventures out there, waiting for us to live them!”</value>
   </data>
   <data name="QuouteFooter" xml:space="preserve">
-    <value>“Make your life the best adventure!”</value>
+    <value>"Зробіть своє життя найкращою пригодою!"</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>

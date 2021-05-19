@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ComeTogether.Domain.Entities.Project>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
-<link href="~/css/Projects.min.css" rel="stylesheet" />
+<link href="~/css/Projects.css" rel="stylesheet" />
 
 <div id="container">
     <div class="mockup">
@@ -34,12 +34,12 @@
                     </div>
                 </form>
                 <div class="filter">
-                    <div class="pill active">Art</div>
-                    <div class="pill">Clothes</div>
-                    <div class="pill">Food&Craft</div>
-                    <div class="pill">Technology</div>
-                    <div class="pill">Film</div>
-                    <div class="pill">Music</div>
+                    <div class="pill active">@Localizer["Art"]</div>
+                    <div class="pill">@Localizer["Clothes"]</div>
+                    <div class="pill">@Localizer["Food&Craft"]</div>
+                    <div class="pill">@Localizer["Technology"]</div>
+                    <div class="pill">@Localizer["Film"]</div>
+                    <div class="pill">@Localizer["Music"]</div>
                     <i class="material-icons">keyboard_arrow_right</i>
                 </div>
             </div>
@@ -94,46 +94,46 @@
                 <h1>Today</h1>
                 @foreach (var item in Model)
                 {
-                     <div class="card">
-                         <div class="add">
-                             <a href="@Url.Action("Details", "Projects", new { id = item.ProjectId }, null)"><i class="material-icons">add</i></a>
-                         </div>
-                         @{ if (@item.Photo != null)
-                             {
-                                 var base64 = Convert.ToBase64String(@item.Photo);
-                                 var imagesrc = string.Format("data:image/jpeg;base64,{0}", base64);
+                    <div class="card">
+                        <div class="add">
+                            <a href="@Url.Action("Details", "Projects", new { id = item.ProjectId }, null)"><i class="material-icons">add</i></a>
+                        </div>
+                        @{ if (@item.Photo != null)
+                            {
+                                var base64 = Convert.ToBase64String(@item.Photo);
+                                var imagesrc = string.Format("data:image/jpeg;base64,{0}", base64);
 
-                                 <img src="@imagesrc" alt="" class="recipe-item__img" />
-                             }
-                             else
-                             {
-                                 <img src="https://images.unsplash.com/photo-1572627614289-96a849461dd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80" alt="" class="recipe-item__img" />
-                             }
-                         }
-                         <div class="card-footer">
-                             @*<div class="card-info">
-                <h4>@Html.DisplayFor(modelItem => item.ProjectName)</h4>
-                <span class="card-maker">@Html.DisplayFor(modelItem => item.Category.CategoryName)</span>
-            </div>*@
-                             <div class="card-vote">
+                                <img src="@imagesrc" alt="" class="recipe-item__img" />
+                            }
+                            else
+                            {
+                                <img src="https://images.unsplash.com/photo-1572627614289-96a849461dd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80" alt="" class="recipe-item__img" />
+                            }
+                        }
+                        <div class="card-footer">
+                            @*<div class="card-info">
+                            <h4>@Html.DisplayFor(modelItem => item.ProjectName)</h4>
+                            <span class="card-maker">@Html.DisplayFor(modelItem => item.Category.CategoryName)</span>
+                        </div>*@
+                            <div class="card-vote">
 
 
-                                 <span class="card-maker">@Html.DisplayFor(modelItem => item.ProjectName)</span>
-                                 <span class="card-maker">@Html.DisplayFor(modelItem => item.ShortDescription)</span>
-                             </div>
-                             <div class="card-vote">
+                                <span class="card-maker">@Html.DisplayFor(modelItem => item.ProjectName)</span>
+                                <span class="card-maker">@Html.DisplayFor(modelItem => item.ShortDescription)</span>
+                            </div>
+                            <div class="card-vote">
 
-                              
-                                 <span class="card-maker">Partners</span>
-                             </div>
-                         </div>
-                     </div>
-                    
+
+                                <span class="card-maker">Partners</span>
+                            </div>
+                        </div>
+                    </div>
+
 
                 }
 
             </div>
-            <div class="yesterday s-2">
+            <div class="yesterday s-2" style="display:grid">
                 <h1>Yesterday</h1>
                 <div class="card">
                     <div class="add"><i class="material-icons">add</i></div>

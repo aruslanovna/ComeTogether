@@ -25,7 +25,7 @@ namespace ComeTogether.Service.Services
 
         public async Task Edit(int id, Article e)
         {
-            Article edit = await GetById(id);
+            Article edit =  GetById(id);
             edit = e;
             _unitOfWork.SaveChangesAsync();
         }
@@ -36,11 +36,11 @@ namespace ComeTogether.Service.Services
             return eventList.OrderBy(s => s.Name).ToList();
         }
 
-        public async Task<Article> GetById(int? id)
+        public Article GetById(int? id)
         {
             if (id != null)
             {
-                var eventList = await _unitOfWork.ArticlesRepository.GetById(id);
+                var eventList = _unitOfWork.ArticlesRepository.GetById(id);
                 return eventList;
             }
             return null;
@@ -64,9 +64,9 @@ namespace ComeTogether.Service.Services
         {
             return await Task.Run(() => _unitOfWork.ArticlesRepository.GetByCondition(x => x.PostDate >= DateTime.Parse(date)));
         }
-        public async Task<IEnumerable<Article>> GetArticleByTitle(string search)
+        public IEnumerable<Article> GetArticleByTitle(string search)
         {
-            var eventList = await Task.Run(() => _unitOfWork.ArticlesRepository.GetByCondition(s => s.Name.StartsWith(search)));
+            var eventList = _unitOfWork.ArticlesRepository.GetByCondition(s => s.Name.StartsWith(search));
             return eventList.OrderBy(s => s.Name).ToList();
         }
 

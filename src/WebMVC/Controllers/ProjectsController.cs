@@ -19,6 +19,9 @@ using WebMVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.SignalR.Hubs;
 
+using DevExtreme.AspNet.Data;
+using DevExtreme.AspNet.Mvc;
+
 namespace WebMVC.Controllers
 {
     [Authorize]
@@ -57,7 +60,20 @@ namespace WebMVC.Controllers
             var events = _context.Projects.ToList();
             return View(events);
         }
-       
+
+
+        public IActionResult GetAllProjects()
+        {
+            return View();            
+        }
+
+        [HttpGet]
+        public object Get(DataSourceLoadOptions loadOptions)
+        {
+            var events = _context.Projects.ToList();
+           
+            return DataSourceLoader.Load(events, loadOptions);
+        }
 
         [Authorize]
         public async Task<IActionResult> MyProjects()
@@ -140,6 +156,15 @@ namespace WebMVC.Controllers
        Category = x.Category.CategoryName,
        FounderId = x.FounderId,
        Founder = x.Founder,
+       CPO = x.CPO,
+       CAC = x.CAC,
+       ROMI = x.ROMI,
+       ROI = x.ROI,
+       ROAS = x.ROAS,
+       ARPU = x.ARPU,
+       AOV = x.AOV,
+       LTV = x.LTV,
+       Country=x.Country,
        Partners = _context.Projects
                 .Where(user => user.ProjectId == x.ProjectId)
                 .Include(user => user.Deals)
@@ -199,7 +224,7 @@ namespace WebMVC.Controllers
        
         [Authorize]
         // GET: Projects/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
             if (id == null)
             {

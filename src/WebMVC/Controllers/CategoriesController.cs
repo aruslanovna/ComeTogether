@@ -37,7 +37,7 @@ namespace WebMVC.Controllers
                 return NotFound();
             }
 
-            Task<Category> category = _unitOfWork.CategoriesRepository.GetById(id);
+           Category category = _unitOfWork.CategoriesRepository.GetById(id);
             //.FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
@@ -80,7 +80,7 @@ namespace WebMVC.Controllers
             {
                 return NotFound();
             }
-            Category category = await _unitOfWork.CategoriesRepository.GetById(id);
+            Category category =  _unitOfWork.CategoriesRepository.GetById(id);
             if (category == null)
             {
                 return NotFound();
@@ -130,7 +130,7 @@ namespace WebMVC.Controllers
                 return NotFound();
             }
 
-            Task<Category> category = _unitOfWork.CategoriesRepository.GetById(id);
+            Category category = _unitOfWork.CategoriesRepository.GetById(id);
             if (category == null)
             {
                 return NotFound();

@@ -64,15 +64,7 @@ namespace ComeTogether.Infrastructure
             // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
-    public class EventoDBContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
-    {
-        public ApplicationDbContext CreateDbContext(string[] args)
-        {
-            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionBuilder.UseSqlServer("Server=DESKTOP-2A033PF\\SQLEXPRESS;Initial Catalog=ComeTogetherDB;Persist Security Info=False;User ID=user;Password=user;MultipleActiveResultSets=True;Encrypt=False;TrustServerCertificate=False");
-            return new ApplicationDbContext(optionBuilder.Options);
-        }
-    }
+   
 
 
 }

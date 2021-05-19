@@ -88,7 +88,7 @@
                         }
 
                     #container .mockup .top .user_control #notifications {
-                        width: 35px;
+                        width: auto;
                         height: 35px;
                         margin-right: 20px;
                         border-radius: 50%;
@@ -197,9 +197,9 @@
                     }
 
                         #container .mockup .outer-search .search-filter .filter .pill {
-                            width: 85px;
+                            width: auto;
                             height: 35px;
-                            margin-right: 10px;
+                            margin-right: 20px;
                             border-radius: 50px;
                             box-shadow: 0 3px 20px -4px rgba(0, 0, 0, 0.08);
                             text-align: center;
@@ -208,21 +208,25 @@
                             line-height: 35px;
                             color: #8099aa;
                             font-weight: 600;
+                            padding: 0 7px 0 7px;
                         }
 
                             #container .mockup .outer-search .search-filter .filter .pill:hover {
                                 box-shadow: 0 3px 15px -4px rgba(0, 0, 0, 0.33);
                                 transition: all 0.3s ease;
+                                padding: 0 7px 0 7px;
                             }
 
                             #container .mockup .outer-search .search-filter .filter .pill:active {
                                 box-shadow: inset 0 2px 15px -4px rgba(0, 0, 0, 0.20);
+                                padding: 0 7px 0 7px;
                             }
 
                         #container .mockup .outer-search .search-filter .filter .active {
                             background-image: linear-gradient(to right, #0084ff, #58d3ff);
                             box-shadow: 0 3px 25px -5px #58d3ff;
                             color: white;
+                            padding: 0 7px 0 7px;
                         }
 
                         #container .mockup .outer-search .search-filter .filter .material-icons {
@@ -530,8 +534,9 @@
             }
 
         .card img {
-            width: 100%;
+            width: auto;
             cursor: pointer;
+            height: 500px;
         }
 
         .card .card-footer {
@@ -794,4 +799,52 @@ ul.ev-content li.active .ev-content-body {
 .ev-content-body > p {
     line-height: 1.35;
     margin: 0.25em 0;
+}
+
+
+#gridContainer .dx-datagrid-header-panel {
+    padding: 0;
+    background-color: rgba(85, 149, 222, 0.6);
+}
+
+    #gridContainer .dx-datagrid-header-panel .dx-toolbar {
+        margin: 0;
+        padding-right: 20px;
+        background-color: transparent;
+    }
+
+    #gridContainer .dx-datagrid-header-panel .dx-toolbar-items-container {
+        height: 70px;
+    }
+
+    #gridContainer .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item:not(:first-child) {
+        background-color: rgba(103, 171, 255, 0.6);
+    }
+
+    #gridContainer .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item:last-child {
+        padding-right: 10px;
+    }
+
+    #gridContainer .dx-datagrid-header-panel .dx-selectbox {
+        margin: 17px 10px;
+    }
+
+    #gridContainer .dx-datagrid-header-panel .dx-button {
+        margin: 17px 0;
+    }
+
+#gridContainer .informer {
+    height: 70px;
+    width: 130px;
+    text-align: center;
+    color: #fff;
+}
+
+#gridContainer .count {
+    padding-top: 15px;
+    line-height: 27px;
+    font-size: 28px;
+    margin: 0;
+    font-weight: normal;
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, Verdana, sans-serif;
 }

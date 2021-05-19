@@ -14,14 +14,14 @@ namespace ComeTogether.Service.Interfaces
         Task Edit(int id, Article e);
 
         Task Remove(int? id);
-        Task<Article> GetById(int? id);
+       Article GetById(int? id);
 
         Task<IEnumerable<Article>> GetByIdWithCategory(int id);
 
 
         Task<IEnumerable<Article>> GetAll();
 
-        Task<IEnumerable<Article>> GetArticleByTitle(string search);
+       IEnumerable<Article> GetArticleByTitle(string search);
 
         Task<IEnumerable<Article>> GetArticleByDateStart(string date);
 

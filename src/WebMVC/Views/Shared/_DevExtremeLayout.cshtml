@@ -11,51 +11,22 @@
     <title>WebMVC</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
-    @* Uncomment to use the HtmlEditor control *@
+   
     <script src="https://unpkg.com/devextreme-quill/dist/dx-quill.min.js"></script>
 
-    @* Uncomment to use the Gantt control *@
-    @*<link href="~/css/devextreme/dx-gantt.css" rel="stylesheet" />*@
-
-    @* Uncomment to use the Diagram control *@
-    @*<link href="~/css/devextreme/dx-diagram.css" rel="stylesheet" />*@
+ 
 
     <link href="~/css/devextreme/bootstrap.css" rel="stylesheet" />
 
     <link href="~/css/devextreme/dx.common.css" rel="stylesheet" />
 
-    @* Predefined themes: https://js.devexpress.com/DevExtreme/Guide/Themes_and_Styles/Predefined_Themes/ *@
+ 
     <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
-
-    @* Uncomment to use the Gantt control *@
-    @*<script src="~/js/devextreme/dx-gantt.js"></script>*@
-
-    @* Uncomment to use the Diagram control *@
-    @*<script src="~/js/devextreme/dx-diagram.js"></script>*@
 
     <script src="~/js/devextreme/jquery.js"></script>
     <script src="~/js/devextreme/bootstrap.js"></script>
 
-    @* Uncomment to use Globalize for localization *@
-    @* Docs: https://docs.devexpress.com/AspNetCore/400577#globalize *@
-    @*<script src="~/js/devextreme/cldr.js"></script>*@
-    @*<script src="~/js/devextreme/cldr/event.js"></script>*@
-    @*<script src="~/js/devextreme/cldr/supplemental.js"></script>*@
-    @*<script src="~/js/devextreme/cldr/unresolved.js"></script>*@
-    @*<script src="~/js/devextreme/globalize.js"></script>*@
-    @*<script src="~/js/devextreme/globalize/message.js"></script>*@
-    @*<script src="~/js/devextreme/globalize/number.js"></script>*@
-    @*<script src="~/js/devextreme/globalize/currency.js"></script>*@
-    @*<script src="~/js/devextreme/globalize/date.js"></script>*@
-
-    @* Uncomment to enable client-side export *@
-    @*<script src="~/js/devextreme/jszip.js"></script>*@
-
     <script src="~/js/devextreme/dx.all.js"></script>
-
-    @* Uncomment to provide geo-data for the VectorMap control *@
-    @* Docs: https://js.devexpress.com/DevExtreme/Guide/Widgets/VectorMap/Providing_Data/#Data_for_Areas *@
-    @*<script src="~/js/devextreme/vectormap-data/world.js"></script>*@
 
     <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js"></script>
     <script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
@@ -101,8 +72,7 @@
     <link href="https://coderthemes.com/hyper/saas/assets/css/app.min.css">
 </head>
 
-<body >
-
+<body class="body--light">
     @using System.Text.Encodings.Web;
     @using System.Web.Optimization
     @inject JavaScriptEncoder encoder;
@@ -199,11 +169,11 @@
                 </div>
                 <div class="topbar-right">
                     <div class="notificationBell">
-                        <img class="notificationBell__icon" src="http://stark-schwarz.de/wp-content/uploads/2019/12/bell-solid.svg">
+                        <img src="https://img.icons8.com/plasticine/32/000000/appointment-reminders.png" />
                         <div class="notificationBell__value"></div>
                     </div>
                     <button class="darkModeBtn">
-                        <img src="http://stark-schwarz.de/wp-content/uploads/2019/12/moon-solid.svg">
+                        <img src="https://img.icons8.com/cotton/64/000000/light-switch--v1.png" />
 
                     </button>
                     <div class="profile">
@@ -214,8 +184,8 @@
                     </div>
                 </div>
             </div>
-            <div class="content" style="padding-top: 8rem;">
-               
+            <div class="content">
+                <br><br><br><br>
 
                 @RenderBody()
 
@@ -266,7 +236,7 @@
     <script src="~/js/signalRbundle.min.js"></script>
 
     @RenderSection("Scripts", required: false)
-    @RenderSection("ExternalDependencies", required: false)
+
 </body>
 
 </html>

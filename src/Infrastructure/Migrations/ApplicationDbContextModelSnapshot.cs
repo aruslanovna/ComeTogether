@@ -366,17 +366,35 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AOV")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ARPU")
+                        .HasColumnType("int");
+
                     b.Property<string>("Background")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CAC")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CPO")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FounderId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LTV")
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("Photo")
                         .HasColumnType("varbinary(max)");
@@ -386,6 +404,15 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.Property<string>("ProjectName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ROAS")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ROI")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ROMI")
+                        .HasColumnType("int");
 
                     b.Property<string>("RisksAndChallenges")
                         .HasColumnType("nvarchar(max)");
@@ -417,14 +444,38 @@ namespace ComeTogether.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AOV")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ARPU")
+                        .HasColumnType("int");
+
                     b.Property<string>("Background")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CAC")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CPO")
+                        .HasColumnType("int");
 
                     b.Property<int>("FounderId")
                         .HasColumnType("int");
 
                     b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LTV")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ROAS")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ROI")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ROMI")
+                        .HasColumnType("int");
 
                     b.Property<string>("RisksAndChallenges")
                         .HasColumnType("nvarchar(max)");

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection.Metadata;
 using WebMVC.Models;
 
 using ActionResult = Microsoft.AspNetCore.Mvc.ActionResult;
@@ -28,6 +30,7 @@ namespace WebMVC.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
      

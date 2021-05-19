@@ -14,7 +14,7 @@ using ComeTogether.Domain.Entities;
 
 namespace WebMVC.Controllers
 {
-  
+  [Authorize]
     public class AccountController : Controller
     {
         private readonly IHttpContextAccessor _httpContextAccessor;

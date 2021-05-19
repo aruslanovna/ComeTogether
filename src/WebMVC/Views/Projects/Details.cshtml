@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-<link rel="stylesheet" href="~/css/CreateArticle.min.css" />
+<link rel="stylesheet" href="~/css/CreateArticle.css" />
 <link rel="stylesheet" href="~/css/Projects.min.css" />
 <script>
     const button = document.querySelector('.product__button');
@@ -23,7 +23,7 @@
                 <div class="container">
                     <div class="header">
                         <div class="header-logo">
-                            Project Page
+                            @Localizer["ProjectPage"] 
                         </div>
                         <nav class="header-nav">
                             <i class="ion-ios-cart"></i>
@@ -70,8 +70,6 @@
                                                 </li>
 
 
-
-
                                             }
                                         </ul>
                                     </div>
@@ -80,16 +78,16 @@
                                         <a href="~/Deals/Create?id=@item.ProjectId">
                                             <button class="iconBtn" id="createProjectBtn">
                                                 <div class="iconBtn__content">
-
-                                                    Join project
+                                                    @Localizer["Joinproject"]
+                                                    
                                                 </div>
                                             </button>
                                         </a>
                                         <a href="~/Projects/DetailsForPartner?id=@item.ProjectId">
                                             <button class="iconBtn" id="createProjectBtn">
                                                 <div class="iconBtn__content">
-
-                                                    Details for partners
+                                                    @Localizer["Detailsforpartners"]
+                                                    
                                                 </div>
                                             </button>
                                         </a>
@@ -100,7 +98,8 @@
                                        
                                             <a href="/Identity/Account/Login" class="iconBtn" id="createProjectBtn">
                                                 <div class="iconBtn__content">
-                                                    Login to join project
+                                                    @Localizer["Logintojoinproject"]
+                                                    
                                                 </div>
                                             </a>
                                        

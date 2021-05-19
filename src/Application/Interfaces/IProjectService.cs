@@ -6,14 +6,14 @@ namespace ComeTogether.Service
 {
    public interface IProjectService
     {
-        Task AddProject(Project e);
+        void AddProject(Project e);
 
         Task EditProject(int id, Project e);
 
         Task RemoveProject(int id);
-        Task<Project> GetById(int id);
+        Project GetById(int id);
 
-        Task<Project> GetByIdWithCategory(int id);
+        Project GetByIdWithCategory(int id);
 
         Task<IEnumerable<Project>> GetOrganized(string id);
         Task<IEnumerable<Project>> GetAll();

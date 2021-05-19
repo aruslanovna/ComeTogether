@@ -1,0 +1,26 @@
+﻿
+.btn-group-middle {
+    font-size: 16px;
+    margin: 6px 0;
+    padding: 3px 3px 3px 3px;
+    font-weight: 400;
+    width: 36px;
+    min-width: 36px;
+    border-radius: 0;
+}
+
+.btn-group-left {
+    @extend .btn-group-middle;
+    border-radius: 3px 0 0 3px;
+}
+
+.btn-group-right {
+    @extend .btn-group-middle;
+    border-radius: 0 3px 3px 0;
+}
+
+.btn-group-label {
+    min-width: 48px;
+    width: 48px;
+    text-align: center;
+}

@@ -1,4 +1,5 @@
-﻿ 
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @using System.Linq
 @model IEnumerable<ComeTogether.Domain.ViewModel.UserProfileModel>
 
@@ -43,28 +44,28 @@
             <ul id="comments-list" class="comments-list">
 
                 <li>
-                    @using (Html.BeginForm("AddComment", "Articles", new { articleId = item.ArticleId , style="padding:0"}))
+                    @using (Html.BeginForm("AddComment", "Articles", new { articleId = item.ArticleId, style = "padding:0" }))
                     {
                         <div class="comment-main-level">
                             <!-- Avatar -->
                             @*<div class="comment-avatar">
-                                @{
-                                    if (@ViewBag.Photo != null)
-                                    {
-                                        var base64 = Convert.ToBase64String(@ViewBag.Photo);
-                                        var imagesrc = string.Format("data:image/jpeg;base64,{0}", base64);
+                                    @{
+                                        if (@ViewBag.Photo != null)
+                                        {
+                                            var base64 = Convert.ToBase64String(@ViewBag.Photo);
+                                            var imagesrc = string.Format("data:image/jpeg;base64,{0}", base64);
 
-                                        <img src="@imagesrc" style=" background-size: cover;border-radius: 50%; height: 42px; margin-right: .9rem;position: relative;top: 8px; width: 42px;" />
+                                            <img src="@imagesrc" style=" background-size: cover;border-radius: 50%; height: 42px; margin-right: .9rem;position: relative;top: 8px; width: 42px;" />
+                                        }
+                                        else
+                                        {
+
+
+                                            <img src="~/Resource/thuan-pham-1Kj0OZiwLN8-unsplash.jpg" style=" background-size: cover;border-radius: 50%;height: 42px; margin-right: .9rem;  position: relative;  top: 8px;  width: 42px;" />
+
+                                        }
                                     }
-                                    else
-                                    {
-
-
-                                        <img src="~/Resource/thuan-pham-1Kj0OZiwLN8-unsplash.jpg" style=" background-size: cover;border-radius: 50%;height: 42px; margin-right: .9rem;  position: relative;  top: 8px;  width: 42px;" />
-
-                                    }
-                                }
-                            </div>*@ <!-- Contenedor del Comentario -->
+                                </div>*@ <!-- Contenedor del Comentario -->
                             <div class="comment-box">
                                 <div class="comment-head">
                                     <h6 class="comment-name">@ViewBag.Name</h6>
@@ -90,11 +91,11 @@
                         @for (int i = 0; i < @item.Comment.Count; i++)
                         {
                             <div class="comment-main-level">
-                                
+
                                 <div class="comment-box">
                                     <div class="comment-head">
                                         <h6 class="comment-name"><a href="#">@item.CommentedUserName[i]</a></h6>
-                                        
+
                                         <i class="fa fa-reply"></i>
                                         <i class="fa fa-heart"></i>
                                     </div>

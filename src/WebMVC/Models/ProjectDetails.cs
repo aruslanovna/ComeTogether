@@ -18,11 +18,18 @@ namespace WebMVC.Models
         public string ProjectName { get; set; }
         public string FounderId { get; set; }
         public int? CategoryId { get; set; }
-
+        public int? CPO { get; set; }
+        public int? CAC { get; set; }
+        public int? ROMI { get; set; }
+        public int? ROI { get; set; }
+        public int? ROAS { get; set; }
+        public int? ARPU { get; set; }
+        public int? AOV { get; set; }
+        public int? LTV { get; set; }
         public byte[] Photo { get; set; }
         public string Category { get; set; }
         public ApplicationUser Founder { get; set; }
-       
+        public string Country { get; set; }
         public string ShortDescription { get; set; }
       
         public string FullDescription { get; set; }
@@ -36,5 +43,7 @@ namespace WebMVC.Models
        public IQueryable<List<string>> PartnerUserName { get; set; }
 
          public ICollection<object> Partners { get; set; }
+
+       
     }
 }

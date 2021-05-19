@@ -13,7 +13,7 @@ namespace ComeTogether.Infrastructure.Interface
     {
         Task<IEnumerable<TEntity>> GetAll();
 
-        Task<IEnumerable<TEntity>> GetByCondition(Expression<Func<TEntity, bool>> expression);
+        IEnumerable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> expression);
 
         Task Create(TEntity entity);
 
@@ -33,7 +33,7 @@ namespace ComeTogether.Infrastructure.Interface
 
         Task<IQueryable<TEntity>> GetAllLazyLoad(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] children);
 
-        Task<TEntity> GetById(object id);
+        TEntity GetById(object id);
     }
 
 

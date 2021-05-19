@@ -32,20 +32,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.IO;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using WebMVC.Areas.Identity.Pages.Account;
-using ComeTogether.Service.Services;
-using Microsoft.Extensions.Logging;
+
 
 namespace WebMVC
 {
     public class Startup
     {
-        private readonly OpenApiInfo openApiInfo = new OpenApiInfo
-        {
-            Title = "Sense HAT API",
-            Version = "v1"
-        };
+       
         public Startup(IConfiguration configuration )
         {
              //manager= _manaoer;
@@ -96,30 +89,14 @@ namespace WebMVC
                     policy.AddRequirements(new AllowPrivatePolicy());
                 });
             });
-            services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null)
-              .AddNewtonsoftJson();
-
-            // Swagger generator
-            services.AddSwaggerGen(o =>
-            {
-                o.SwaggerDoc(openApiInfo.Version, openApiInfo);
-            });
-
-            // SenseHatService (emulation mode is obtained from appsettings.json)
            
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            //{
-            //    options.RequireHttpsMetadata = false;
-            //    options.SaveToken = true;
-            //    options.TokenValidationParameters = new TokenValidationParameters()
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = true,
-            //        ValidAudience = Configuration["Jwt:Audience"],
-            //        ValidIssuer = Configuration["Jwt:Issuer"],
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-            //    };
-            //});
+            services
+               .AddControllersWithViews()
+               .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+          
+           
+
+           
 
             services.AddIdentity<ApplicationUser, IdentityRole>(opts =>
             {
@@ -131,22 +108,15 @@ namespace WebMVC
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = true;
                 opts.Password.RequireDigit = true;
-            }).AddEntityFrameworkStores<ApplicationDbContext>()/*.AddDefaultTokenProviders()*/;
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders()
+                .AddDefaultUI()/*.AddDefaultTokenProviders()*/;
             services.AddMvc();
             services.AddScoped<UserManager<ApplicationUser>, UserManager<ApplicationUser>>();
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(
-                Configuration.GetConnectionString("ApplicationConnection")));
+            services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Transient); 
          //   services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
          //.AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
-           
-               //.AddDataAnnotationsLocalization()
-               // .AddViewLocalization().AddRazorOptions(
-               //  options => {
-               //  options.ViewLocationFormats.Add("/Account/Login.cshtml");
-               //  });
 
             services.AddLocalization(options => options.ResourcesPath = "LanguageResources");
             services.AddControllersWithViews()

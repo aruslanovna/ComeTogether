@@ -1,114 +1,179 @@
 [
   {
-    "outputFileName": "wwwroot/css/bundleStyle.css",
+    "outputFileName": "wwwroot/css/vendor.css",
     "inputFiles": [
-      "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
-      "wwwroot/css/miniStyle.css"
-    ]
+      // Uncomment to use the Gantt control
+      //"wwwroot/css/devextreme/dx-gantt.css",
+
+      // Uncomment to use the Diagram control
+      //"wwwroot/css/devextreme/dx-diagram.css",
+
+      "wwwroot/css/devextreme/bootstrap.css",
+
+      "wwwroot/css/devextreme/dx.common.css",
+
+      // Predefined themes: https://js.devexpress.com/DevExtreme/Guide/Themes_and_Styles/Predefined_Themes/
+      "wwwroot/css/devextreme/dx.light.css"
+    ],
+    "minify": {
+      "enabled": false
+    }
   },
   {
-    "outputFileName": "wwwroot/css/bundleStyle.min.css",
+    "outputFileName": "wwwroot/js/vendor.js",
     "inputFiles": [
-      "wwwroot/js/bundleStyle.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/bundleStyle.js",
-    "inputFiles": [
-      "wwwroot/lib/jquery/dist/jquery.min.js",
-      "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/bundleStyle.min.js",
-    "inputFiles": [
-      "wwwroot/js/bundleStyle.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/signalRbundle.js",
-    "inputFiles": [
-      "wwwroot/js/signalr/dist/browser/signalr.min.js",
-      "wwwroot/js/signal.js",
-      "wwwroot/js/notification.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/signalRbundle.min.js",
-    "inputFiles": [
-      "wwwroot/js/signalRbundle.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Index.min.css",
-    "inputFiles": [
-      "wwwroot/css/Index.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Account.min.css",
-    "inputFiles": [
-      "wwwroot/css/Account.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Admin.min.css",
-    "inputFiles": [
-      "wwwroot/css/Admin.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Article.min.css",
-    "inputFiles": [
-      "wwwroot/css/Article.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/BackUp.min.css",
-    "inputFiles": [
-      "wwwroot/css/BackUp.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Login.min.css",
-    "inputFiles": [
-      "wwwroot/css/Login.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Projects.min.css",
-    "inputFiles": [
-      "wwwroot/css/Projects.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/CreateArticle.min.css",
-    "inputFiles": [
-      "wwwroot/css/CreateArticle.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/styles.min.css",
-    "inputFiles": [
-      "wwwroot/css/styles.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/miniStyle.min.css",
-    "inputFiles": [
-      "wwwroot/css/miniStyle.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Deal.min.css",
-    "inputFiles": [
-      "wwwroot/css/Deal.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/SelectLan.min.css",
-    "inputFiles": [
-      "wwwroot/css/SelectLan.css"
-    ]
-  }
+      // Uncomment to use the Gantt control
+      //"wwwroot/js/devextreme/dx-gantt.js",
+
+      // Uncomment to use the Diagram control
+      //"wwwroot/js/devextreme/dx-diagram.js",
+
+      "wwwroot/js/devextreme/jquery.js",
+      "wwwroot/js/devextreme/bootstrap.js",
+
+      // Uncomment to use Globalize for localization
+      // Docs: https://docs.devexpress.com/AspNetCore/400577#globalize
+      //"wwwroot/js/devextreme/cldr.js",
+      //"wwwroot/js/devextreme/cldr/event.js",
+      //"wwwroot/js/devextreme/cldr/supplemental.js",
+      //"wwwroot/js/devextreme/cldr/unresolved.js",
+      //"wwwroot/js/devextreme/globalize.js",
+      //"wwwroot/js/devextreme/globalize/message.js",
+      //"wwwroot/js/devextreme/globalize/number.js",
+      //"wwwroot/js/devextreme/globalize/currency.js",
+      //"wwwroot/js/devextreme/globalize/date.js",
+
+      // Uncomment to enable client-side export
+      //"wwwroot/js/devextreme/jszip.js",
+
+      "wwwroot/js/devextreme/dx.all.js",
+
+      // Uncomment to provide geo-data for the VectorMap control
+      // Docs: https://js.devexpress.com/DevExtreme/Guide/Widgets/VectorMap/Providing_Data/#Data_for_Areas
+      //"wwwroot/js/devextreme/vectormap-data/world.js",
+
+      "wwwroot/js/devextreme/aspnet/dx.aspnet.mvc.js",
+      "wwwroot/js/devextreme/aspnet/dx.aspnet.data.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    {
+      "outputFileName": "wwwroot/css/bundleStyle.css",
+      "inputFiles": [
+        "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+        "wwwroot/css/miniStyle.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/bundleStyle.min.css",
+      "inputFiles": [
+        "wwwroot/js/bundleStyle.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/js/bundleStyle.js",
+      "inputFiles": [
+        "wwwroot/lib/jquery/dist/jquery.min.js",
+        "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/js/bundleStyle.min.js",
+      "inputFiles": [
+        "wwwroot/js/bundleStyle.js"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/js/signalRbundle.js",
+      "inputFiles": [
+        "wwwroot/js/signalr/dist/browser/signalr.min.js",
+        "wwwroot/js/signal.js",
+        "wwwroot/js/notification.js"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/js/signalRbundle.min.js",
+      "inputFiles": [
+        "wwwroot/js/signalRbundle.js"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/Index.min.css",
+      "inputFiles": [
+        "wwwroot/css/Index.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/Account.min.css",
+      "inputFiles": [
+        "wwwroot/css/Account.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/Admin.min.css",
+      "inputFiles": [
+        "wwwroot/css/Admin.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/Article.min.css",
+      "inputFiles": [
+        "wwwroot/css/Article.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/BackUp.min.css",
+      "inputFiles": [
+        "wwwroot/css/BackUp.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/Login.min.css",
+      "inputFiles": [
+        "wwwroot/css/Login.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/Projects.min.css",
+      "inputFiles": [
+        "wwwroot/css/Projects.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/CreateArticle.min.css",
+      "inputFiles": [
+        "wwwroot/css/CreateArticle.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/styles.min.css",
+      "inputFiles": [
+        "wwwroot/css/styles.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/miniStyle.min.css",
+      "inputFiles": [
+        "wwwroot/css/miniStyle.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/Deal.min.css",
+      "inputFiles": [
+        "wwwroot/css/Deal.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/SelectLan.min.css",
+      "inputFiles": [
+        "wwwroot/css/SelectLan.css"
+      ]
+    },
+    {
+      "outputFileName": "wwwroot/css/ProjectDetails.min.css",
+      "inputFiles": [
+        "wwwroot/css/ProjectDetails.css"
+      ]
+    }
 ]

@@ -1,0 +1,143 @@
+﻿
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+    <link rel="stylesheet" href="~/css/Projects.css" />
+
+@(Html.DevExtreme().DataGrid<WebMVC.Models.ProjectDetailsModel>()
+    .ID("gridContainer")
+     .OnToolbarPreparing("toolbar_preparing")
+    .ShowBorders(true)
+    
+    .LoadPanel(p => p.Enabled(true))
+    .DataSource(d => d.Mvc().Controller("Projects").LoadAction("Get").Key("ProjectId"))
+    .Columns(columns => {
+        columns.AddFor(m => m.ProjectName);
+        columns.AddFor(m => m.Background );
+        columns.AddFor(m => m.Category );
+        columns.AddFor(m => m.Founder.UserName );
+        columns.AddFor(m => m.StartDate);
+        columns.AddFor(m => m.StartBudget);
+    })
+   
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .Grouping(g => g.AutoExpandAll(false))
+    .Selection(s => s.Mode(SelectionMode.Multiple))
+    .Summary(s => s
+    .TotalItems(totalItems => {
+        totalItems.AddFor(m => m.Country).SummaryType(SummaryType.Count);
+    })
+    .GroupItems(groupItems => {
+        groupItems.Add().SummaryType(SummaryType.Count);
+    })
+    )
+     .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+     .OnExporting("exporting")
+      .Sorting(s => s.Mode(GridSortingMode.None))
+     .Paging(p => p.PageSize(5))
+    .Pager(p => p
+        .ShowPageSizeSelector(true)
+        .AllowedPageSizes(new[] { 5, 25, 50, 100 })
+    )
+   .ColumnChooser(c => c.Enabled(true))
+    )
+
+
+<script>
+    function exporting(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Projects');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Projects.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+
+
+    function toolbar_preparing(e) {
+        var dataGrid = e.component;
+
+        e.toolbarOptions.items.unshift({
+            location: "before",
+            template: function () {
+                return $("<div/>")
+                    .addClass("informer")
+                    .append(
+                        $("<h2 />")
+                            .addClass("count")
+                            .text(getGroupCount("Country")),
+                        $("<span />")
+                            .addClass("name")
+                            .text("Total Count")
+                    );
+            }
+        }, {
+            location: "before",
+            widget: "dxSelectBox",
+            options: {
+                width: 200,
+                items: [{
+                    value: "Country",
+                    text: "Grouping by Country"
+                }, {
+                    value: "Founder.UserName",
+                    text: "Grouping by Founder"
+                }],
+                displayExpr: "text",
+                valueExpr: "value",
+                value: "Country",
+                onValueChanged: function (e) {
+                    dataGrid.clearGrouping();
+                    dataGrid.columnOption(e.value, "groupIndex", 0);
+                    $(".informer .count").text(getGroupCount(e.value));
+                }
+            }
+        }, {
+            location: "before",
+            widget: "dxButton",
+            options: {
+                text: "Collapse All",
+                width: 136,
+                onClick: function (e) {
+                    var expanding = e.component.option("text") === "Expand All";
+                    dataGrid.option("grouping.autoExpandAll", expanding);
+                    e.component.option("text", expanding ? "Collapse All" : "Expand All");
+                }
+            }
+        }, {
+            location: "after",
+            widget: "dxButton",
+            options: {
+                icon: "refresh",
+                onClick: function () {
+                    dataGrid.refresh();
+                }
+            }
+        });
+    }
+
+    function getGroupCount(groupField) {
+        var orders = [];
+
+        $("#gridContainer").dxDataGrid("instance")
+            .option("dataSource")
+            .store
+            .load()
+            .done(function (data) {
+                orders = data;
+            });
+
+        return DevExpress.data.query(orders)
+            .groupBy(groupField)
+            .toArray().length;
+    }
+</script>

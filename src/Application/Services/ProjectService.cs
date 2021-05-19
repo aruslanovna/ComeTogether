@@ -17,11 +17,11 @@ namespace ComeTogether.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Project> GetById(int id)
+        public Project GetById(int id)
         {
             if (id != null)
             {
-                var eventList =await   _unitOfWork.ProjectsRepository.GetById(id);
+                var eventList =  _unitOfWork.ProjectsRepository.GetById(id);
                 return eventList;
             }
             return null;
@@ -30,14 +30,14 @@ namespace ComeTogether.Service
         {
             return await Task.Run(() => _unitOfWork.ProjectsRepository.GetAll());
         }
-        public async Task AddProject(Project e)
+        public void AddProject(Project e)
         {
             _unitOfWork.ProjectsRepository.Create(e);
-            _unitOfWork.SaveChangesAsync();
+            _unitOfWork.Save();
         }
-        public async Task<Project> GetByIdWithCategory(int id)
+        public Project GetByIdWithCategory(int id)
         {
-            var project = await Task.Run(() => _unitOfWork.ProjectsRepository.GetById(id));
+            var project =  _unitOfWork.ProjectsRepository.GetById(id);
            
             return project;
         }

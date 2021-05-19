@@ -1,10 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-WebMVC-258A6715-8713-4841-9F27-EEE047D40F26</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Areas\Identity\Pages\Account\LoginWith2fa - Copy.cshtml.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\js\notification.min.js" />
   </ItemGroup>
@@ -19,7 +22,9 @@
     <Content Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs" />
     <Content Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs" />
     <Content Include="Areas\Identity\Pages\Account\Lockout.cshtml.cs" />
-    <Content Include="Areas\Identity\Pages\Account\Login.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\LoginWith2fa - Copy.cshtml.cs">
+      <DependentUpon>LoginWith2fa.cshtml.cs</DependentUpon>
+    </Content>
     <Content Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml.cs" />
     <Content Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml.cs" />
     <Content Include="Areas\Identity\Pages\Account\Logout.cshtml.cs" />
@@ -45,6 +50,75 @@
     <Content Include="Areas\Identity\Pages\Error.cshtml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="wwwroot\css\devextreme\fonts\Roboto-300.woff2" />
+    <None Include="wwwroot\css\devextreme\fonts\Roboto-400.woff2" />
+    <None Include="wwwroot\css\devextreme\fonts\Roboto-500.woff2" />
+    <None Include="wwwroot\css\devextreme\fonts\Roboto-700.woff2" />
+    <None Include="wwwroot\css\devextreme\icons\dxicons.woff2" />
+    <None Include="wwwroot\css\devextreme\icons\dxiconsmaterial.woff2" />
+    <None Include="wwwroot\js\devextreme\aspnet\dx.aspnet.data.js" />
+    <None Include="wwwroot\js\devextreme\aspnet\dx.aspnet.mvc.js" />
+    <None Include="wwwroot\js\devextreme\bootstrap.js" />
+    <None Include="wwwroot\js\devextreme\bootstrap.min.js" />
+    <None Include="wwwroot\js\devextreme\cldr.js" />
+    <None Include="wwwroot\js\devextreme\cldr.min.js" />
+    <None Include="wwwroot\js\devextreme\cldr\event.js" />
+    <None Include="wwwroot\js\devextreme\cldr\event.min.js" />
+    <None Include="wwwroot\js\devextreme\cldr\supplemental.js" />
+    <None Include="wwwroot\js\devextreme\cldr\supplemental.min.js" />
+    <None Include="wwwroot\js\devextreme\cldr\unresolved.js" />
+    <None Include="wwwroot\js\devextreme\cldr\unresolved.min.js" />
+    <None Include="wwwroot\js\devextreme\dx-diagram.js" />
+    <None Include="wwwroot\js\devextreme\dx-diagram.min.js" />
+    <None Include="wwwroot\js\devextreme\dx-gantt.js" />
+    <None Include="wwwroot\js\devextreme\dx-gantt.min.js" />
+    <None Include="wwwroot\js\devextreme\dx.all.debug.js" />
+    <None Include="wwwroot\js\devextreme\dx.all.js" />
+    <None Include="wwwroot\js\devextreme\dx.viz.debug.js" />
+    <None Include="wwwroot\js\devextreme\dx.viz.js" />
+    <None Include="wwwroot\js\devextreme\dx.web.debug.js" />
+    <None Include="wwwroot\js\devextreme\dx.web.js" />
+    <None Include="wwwroot\js\devextreme\globalize.js" />
+    <None Include="wwwroot\js\devextreme\globalize.min.js" />
+    <None Include="wwwroot\js\devextreme\globalize\currency.js" />
+    <None Include="wwwroot\js\devextreme\globalize\currency.min.js" />
+    <None Include="wwwroot\js\devextreme\globalize\date.js" />
+    <None Include="wwwroot\js\devextreme\globalize\date.min.js" />
+    <None Include="wwwroot\js\devextreme\globalize\message.js" />
+    <None Include="wwwroot\js\devextreme\globalize\message.min.js" />
+    <None Include="wwwroot\js\devextreme\globalize\number.js" />
+    <None Include="wwwroot\js\devextreme\globalize\number.min.js" />
+    <None Include="wwwroot\js\devextreme\jquery.js" />
+    <None Include="wwwroot\js\devextreme\jquery.min.js" />
+    <None Include="wwwroot\js\devextreme\jszip.js" />
+    <None Include="wwwroot\js\devextreme\jszip.min.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.cs.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.de.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.el.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.en.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.es.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.fi.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.fr.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.hu.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.it.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.ja.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.nl.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.pt.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.ru.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.sl.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.sv.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.tr.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.vi.js" />
+    <None Include="wwwroot\js\devextreme\localization\dx.messages.zh.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-data\africa.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-data\canada.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-data\eurasia.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-data\europe.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-data\usa.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-data\world.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.debug.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.js" />
+    <None Include="wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.node.js" />
     <None Include="wwwroot\js\notification.min.js" />
     <None Include="wwwroot\Scripts\bootstrap.js" />
     <None Include="wwwroot\Scripts\bootstrap.min.js" />
@@ -68,8 +142,8 @@
     <None Include="wwwroot\Scripts\_references.js" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BundlerMinifier.Core" Version="3.2.449" />
-    <PackageReference Include="DevExpress.Data" Version="20.2.5" />
+    <PackageReference Include="BundlerMinifier.Core" Version="3.2.447" />
+    <PackageReference Include="DevExpress.Reporting.Core" Version="20.2.5" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.1" />
@@ -96,7 +170,7 @@
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.1.0" />
     <PackageReference Include="Microsoft.Owin.Security" Version="2.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" />
     <PackageReference Include="Moq" Version="4.14.7" />
     <PackageReference Include="MSBuild.Gulp" Version="0.5.1">
@@ -106,6 +180,7 @@
     <PackageReference Include="NSwag.Core" Version="13.5.0" />
     <PackageReference Include="Owin" Version="1.0.0" />
     <PackageReference Include="Respond" Version="1.4.2" />
+    <PackageReference Include="RESXManager" Version="1.7.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.7.0" />
@@ -117,7 +192,16 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Identity\NewFolder\" />
     <Folder Include="wwwroot\Scripts\jsx\" />
     <PackageReference Include="DevExtreme.AspNet.Core" Version="20.2.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="LanguageResources\Views\Shared\_DevExtremeLayout.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="LanguageResources\Views\Shared\_DevExtremeLayout.uk.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

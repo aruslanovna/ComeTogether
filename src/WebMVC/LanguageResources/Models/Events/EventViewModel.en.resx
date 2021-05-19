@@ -150,4 +150,16 @@
   <data name="TitleRequired" xml:space="preserve">
     <value>Title is required</value>
   </data>
+  <data name="StartBudget" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Detailsforpartners" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Logintojoinproject" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

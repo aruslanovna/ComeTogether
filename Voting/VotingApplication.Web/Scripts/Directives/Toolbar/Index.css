@@ -126,7 +126,7 @@ body {
 .navbar {
     margin-left: -1em;
     margin-top: -1.6em;
-    width: 220px;
+    width: 15%;
     height: 100vh;
     box-shadow: 0px 0px 40px #dbdbdb;
     display: flex;
@@ -174,7 +174,7 @@ body {
     }
 
 .topbar {
-    width: calc(100% - 200px);
+    width: calc(100% - 12%);
     min-height: 90px;
     padding: 5px 50px;
     box-sizing: border-box;
@@ -1731,4 +1731,12 @@ md-content {
 
      padding: 0 ; 
    
+}
+
+.md-display-3 {
+    margin-left: 15%;
+}
+
+.md-whiteframe-z1 > .md-default-theme > .md-toolbar-tools {
+    height: 34px;
 }

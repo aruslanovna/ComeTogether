@@ -1,0 +1,97 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using System.Text.Encodings.Web
+
+@model List<ComeTogether.Domain.Entities.hasSponsoring>
+
+<link rel="stylesheet" href="~/css/InvoiceStep4.css" />
+<div class="container">
+    <div class="invoice">
+        <div class="row">
+            <div class="col-7">
+                <img src="https://library.kissclipart.com/20181218/bhq/kissclipart-chart-logo-white-growth-clipart-computer-icons-bar-43f6b8fd6c7e0c5b.png" class="logo">
+            </div>
+            <div class="col-5">
+                <h1 class="document-type display-4">
+                    Come
+                    Together
+                </h1>
+                <p class="text-right"><strong>N°90T-17-01-0123</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <p>
+                    <strong>90TECH SAS</strong><br>
+                    Volodymyrska Street, 60, Kyiv, 01033<br>
+                    044 239 3333
+                </p>
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <h6>
+        </h6>
+        <br>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Project Id</th>
+                    <th>Initial budget</th>
+                    <th>hasSponsor</th>
+
+                </tr>
+            </thead>  @foreach (var mod in Model)
+            {
+
+                <tbody>
+
+                <td>Info</td>
+                <td>
+                    @Html.TextBoxFor(model => mod.ProjectId, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control"
+                   },
+                   disabled = "disabled",
+                   @readonly = "readonly"
+               })
+
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(model => mod.Initial_budget, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control"
+                   },
+                   disabled = "disabled",
+                        @readonly = "readonly"
+               })
+
+                </td>
+
+
+                <td class="text-right">
+                    @Html.TextBoxFor(model => mod.hasSponsor, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control"
+                   },
+                   disabled = "disabled",
+                   @readonly = "readonly"
+               })
+
+                </td>
+                </tbody>
+            }
+        </table>
+
+    </div>
+</div>

@@ -107,7 +107,7 @@ namespace WebMVC.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            //https://localhost:44353/
+            //https://cometogethe.azurewebsites.net/
 
             // If we got this far, something failed, redisplay form
             return Page();

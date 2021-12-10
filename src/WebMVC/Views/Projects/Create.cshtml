@@ -4,7 +4,7 @@
 @inject JavaScriptEncoder encoder
 @model ComeTogether.Domain.Entities.Project
 
-<link rel="stylesheet" href="~/css/CreateArticle.min.css" />
+<link rel="stylesheet" href="~/css/CreateArticle.css" />
 
 @using (Html.BeginForm("Create", "Projects", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -180,9 +180,7 @@
 
 }
 
-<div>
-    <a asp-action="Index">@Localizer["BacktoList"]</a>
-</div>
+
 
 @section Scripts {
     <script src="~/js/photoLoad.js"></script>

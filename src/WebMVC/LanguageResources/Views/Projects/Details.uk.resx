@@ -136,4 +136,10 @@
   <data name="Detailsforpartners" xml:space="preserve">
     <value>Деталі проекту для партнерів</value>
   </data>
+  <data name="CreateVoting" xml:space="preserve">
+    <value>Створити голосування</value>
+  </data>
+  <data name="ViewVotes" xml:space="preserve">
+    <value>Переглянути питання</value>
+  </data>
 </root>

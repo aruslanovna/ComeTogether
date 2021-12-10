@@ -38,7 +38,11 @@ namespace ComeTogether.Application.Common.Interfaces
 
 
         public DbSet<Following> Followings { get; set; }
-       
+        public DbSet<BusinessRegister> BusinessRegisters { get; set; }
+
+
+        public DbSet<Nacel> Nacels { get; set; }
+
 
         // public DbSet<PartnerTerritory> PartnerTerritories { get; set; }
         int SaveChanges();

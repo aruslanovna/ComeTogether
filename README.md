@@ -32,3 +32,4 @@
 * Authentication
 * Authorization
 * AspNetCore Google Authentication 
+"# MasterDegree" 

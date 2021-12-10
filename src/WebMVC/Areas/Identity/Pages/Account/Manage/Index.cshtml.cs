@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ComeTogether.Application.Common.Interfaces;
 using ComeTogether.Domain.Entities;
+using ComeTogether.Infrastructure;
 using ComeTogether.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +17,14 @@ namespace WebMVC.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-
+        private readonly IApplicationDbContext _context;
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
+            _signInManager = signInManager; _context = context;
         }
 
         public string Username { get; set; }
@@ -37,18 +40,65 @@ namespace WebMVC.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public string WorkPlace { get; set; }
+            public string Position { get; set; }
+            public string Info { get; set; }
+
+
+            public string LastName { get; set; }
+
+
+            public DateTime? BirthDate { get; set; }
+
+            public string Address { get; set; }
+            public string City { get; set; }
+            public string Region { get; set; }
+            public string PostalCode { get; set; }
+            public string Country { get; set; }
+
+            public string BusinessRegister { get; set; }
+            public MainNacel? MainNacel { get; set; }
+           
+            public ICollection<Deal> Deals { get; set; }
+            public ICollection<Nacel> BusinessRegisters { get; set; }
+
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
+
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var workPlace = user.WorkPlace ;
+            var lastName = user.LastName;
+            var position = user.Position ;
+            var address = user.Address ;
+            var city = user.City ;
+            var postalCode = user.PostalCode ;
+            var mainNacel = user.MainNacel;
+            var deals = user.Deals ;
+            var country = user.Country ;
+
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                WorkPlace = workPlace,
+                Position = position,
+
+                LastName = lastName,
+
+                Address = address,
+                City = city,
+
+                PostalCode = postalCode,
+                Country = country,
+                Deals = deals,
+                MainNacel = mainNacel
+
             };
         }
 
@@ -79,17 +129,31 @@ namespace WebMVC.Areas.Identity.Pages.Account.Manage
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            try
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
-                }
+                user.PhoneNumber = Input.PhoneNumber;
+                user.City = Input.City;
+                user.WorkPlace = Input.WorkPlace;
+                user.Position = Input.Position;
+                user.LastName = Input.LastName;
+                user.Address = Input.Address;
+                user.PostalCode = Input.PostalCode;
+                user.Country = Input.Country;
+                user.MainNacel = Input.MainNacel;
             }
+            catch
+            {
+               
+                    var userId = await _userManager.GetUserIdAsync(user);
+                    throw new InvalidOperationException($"Unexpected error occurred setting param for user with ID '{userId}'.");
+                
+            }
+               
+            
 
             await _signInManager.RefreshSignInAsync(user);
+            _userManager.UpdateAsync(user);
+            _context.SaveChanges();
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }

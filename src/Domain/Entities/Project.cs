@@ -37,14 +37,14 @@ namespace ComeTogether.Domain.Entities
         public ICollection<Deal> Deals { get; set; }
 
       
-        public int? CPO { get; set; }
-        public int? CAC { get; set; }
-        public int? ROMI { get; set; }
-        public int? ROI { get; set; }
-        public int? ROAS { get; set; }
-        public int? ARPU { get; set; }
-        public int? AOV { get; set; }
-        public int? LTV { get; set; }
+        //public int? CPO { get; set; }
+        //public int? CAC { get; set; }
+        //public int? ROMI { get; set; }
+        //public int? ROI { get; set; }
+        //public int? ROAS { get; set; }
+        //public int? ARPU { get; set; }
+        //public int? AOV { get; set; }
+        //public int? LTV { get; set; }
 
     }
 }

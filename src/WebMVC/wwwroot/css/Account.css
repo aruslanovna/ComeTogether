@@ -636,6 +636,9 @@ body {
 }
 
 
-.nobg2 div{
-    display:flex;
+.nobg2 div {
+    display: flex;
+    /* width: 900px; */
+  
+    flex-wrap: wrap;
 }

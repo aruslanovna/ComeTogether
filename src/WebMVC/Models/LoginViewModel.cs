@@ -23,6 +23,6 @@ namespace WebMVC.Models
         public string ReturnUrl { get; set; }
 
         // AuthenticationScheme is in Microsoft.AspNetCore.Authentication namespace
-       // public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 }

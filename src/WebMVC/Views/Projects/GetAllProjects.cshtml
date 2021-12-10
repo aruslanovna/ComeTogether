@@ -1,14 +1,14 @@
 ﻿
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
-    <link rel="stylesheet" href="~/css/Projects.css" />
-
-@(Html.DevExtreme().DataGrid<WebMVC.Models.ProjectDetailsModel>()
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+<link rel="stylesheet" href="~/css/Projects.css" />
+<div style="margin: 1em;">
+    @(Html.DevExtreme().DataGrid<WebMVC.Models.ProjectDetailsModel>()
     .ID("gridContainer")
      .OnToolbarPreparing("toolbar_preparing")
     .ShowBorders(true)
-    
+
     .LoadPanel(p => p.Enabled(true))
     .DataSource(d => d.Mvc().Controller("Projects").LoadAction("Get").Key("ProjectId"))
     .Columns(columns => {
@@ -19,7 +19,7 @@
         columns.AddFor(m => m.StartDate);
         columns.AddFor(m => m.StartBudget);
     })
-   
+   .OnSelectionChanged("selection_changed")
     .FilterRow(f => f.Visible(true))
     .HeaderFilter(f => f.Visible(true))
     .GroupPanel(p => p.Visible(true))
@@ -27,7 +27,7 @@
     .Selection(s => s.Mode(SelectionMode.Multiple))
     .Summary(s => s
     .TotalItems(totalItems => {
-        totalItems.AddFor(m => m.Country).SummaryType(SummaryType.Count);
+        totalItems.AddFor(m => m.ProjectId).SummaryType(SummaryType.Count);
     })
     .GroupItems(groupItems => {
         groupItems.Add().SummaryType(SummaryType.Count);
@@ -44,7 +44,20 @@
    .ColumnChooser(c => c.Enabled(true))
     )
 
+</div>
+<div id="employeeInfo">
+    <img class="employeePhoto" />
+    <p class="employeeNotes"></p>
+</div>
 
+<script>
+    function selection_changed(selectedItems) {
+        var data = selectedItems.selectedRowsData[0];
+        window.location = "https://cometogethe.azurewebsites.net/Projects/Details/"+data.ProjectId;
+        
+       
+    }
+</script>
 <script>
     function exporting(e) {
         var workbook = new ExcelJS.Workbook();
@@ -71,14 +84,7 @@
             template: function () {
                 return $("<div/>")
                     .addClass("informer")
-                    .append(
-                        $("<h2 />")
-                            .addClass("count")
-                            .text(getGroupCount("Country")),
-                        $("<span />")
-                            .addClass("name")
-                            .text("Total Count")
-                    );
+                   ;
             }
         }, {
             location: "before",

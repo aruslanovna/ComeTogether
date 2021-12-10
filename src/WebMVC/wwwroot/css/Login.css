@@ -125,7 +125,7 @@ a {
     margin: 15px 0;
 }
 
-button {
+#account > button {
     border-radius: 20px;
     border: 1px solid #FF4B2B;
     background-color: #FF4B2B;
@@ -137,6 +137,8 @@ button {
     text-transform: uppercase;
     transition: transform 80ms ease-in;
 }
+
+
 
     button:active {
         transform: scale(0.95);
@@ -316,3 +318,10 @@ input {
         height: 40px;
         width: 40px;
     }
+
+
+.social {
+    border: none;
+    background: none;
+    position: initial;
+}

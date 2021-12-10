@@ -4,42 +4,47 @@
 @{
     ViewData["Title"] = "Details";
 }
-<link rel="stylesheet" href="~/css/CreateArticle.css" />
-
-<article class="book-reader">
-    <input type="checkbox" id="invert">
-    <input type="checkbox" id="fullscreen">
-
-    <label for="invert"></label>
-    <label for="fullscreen"></label>
+<link rel="stylesheet" href="~/css/ArticleDetail.css" />
 
 
 
 
-    <section>
-        <div class="page">
-            <h1> Article </h1>
+
+<div class="container">
+    <article class="card">
+        <div class="card__media">
+            @if (@Model.Photo == null)
+            {
+                <img src="https://images.unsplash.com/photo-1484704324500-528d0ae4dc7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" alt="A flying flock of ducks">
+
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Photo)
+            }
+        </div>
+        <div class="card__content">
+            <h2>Article title</h2>
 
             <p>
                 @Html.DisplayFor(model => model.Name)
             </p>
+            <h2>Description</h2>
             <p>
                 @Html.DisplayFor(model => model.Description)
             </p>
+            <h2>Briefly</h2>
             <p>
                 @Html.DisplayFor(model => model.Briefly)
             </p>
+            <h2>PostDate</h2>
             <p>
                 @Html.DisplayFor(model => model.PostDate)
             </p>
-
-            @Html.DisplayFor(model => model.Photo)
         </div>
-    </section>
-</article>
-
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ArticleId">Edit</a> |
+    </article> <a asp-action="Edit" asp-route-id="@Model.ArticleId">Edit</a> |
     <a asp-action="Index">@Localizer["BacktoList"]</a>
 </div>
+
+
+

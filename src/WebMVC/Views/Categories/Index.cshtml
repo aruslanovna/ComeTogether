@@ -1,47 +1,83 @@
 ﻿@model IEnumerable<ComeTogether.Domain.Entities.Category>
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<link rel="stylesheet" href="~/css/Article.css" />
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Picture)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+
+<div class="container">
+
+    <main class="main">
+        <section class="recipe">
+            <h2 class="recipe__title">Categories</h2>
+            <form asp-action="Index" method="get" defaultbutton="SubmitButton" runat="server">
+                <div id="container">
+                    <div class="mockup">
+
+                        <div class="outer-search">
+                            <div class="search-filter">
+                                <div class="search-container">
+                                    <i class="material-icons search-icon">search</i>
+                                    <input type="text" id="search" name="SearchString" placeholder="search" value="@ViewData["currentFilter"]" />
+
+                                </div>
+                                <a href="/Categories/Index?SearchString" class="iconBtn" id="createProjectBtn">
+                                    <div class="iconBtn__content">
+
+                                        All Categories
+                                    </div>
+
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+
+
+            <div class="recipe-list">
+                <div class="recipe-scroll">
+                    @foreach (var item in Model)
+                    {
+                        <article class="recipe-item">
+                            <div class="recipe-item__bg">
+                                <a href="@Url.Action("Details", "Categories", new { id = item.CategoryId })">
+
+                                    @{ if (@item.Picture != null)
+                                        {
+                                            var base64 = Convert.ToBase64String(@item.Picture);
+                                            var imagesrc = string.Format("data:image/jpeg;base64,{0}", base64);
+
+                                            <img src="@imagesrc" alt="" class="recipe-item__img" />
+                                        }
+                                        else
+                                        {
+                                            <img src="https://images.unsplash.com/photo-1572627614289-96a849461dd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80" alt="" class="recipe-item__img" />
+                                        }
+                                    }
+                                </a>
+                            </div>
+                            <span class="recipe-item__name">@item.CategoryName</span>
+                            <div class="palette"><span class="palette__color" style="background-color:#aed9b7"></span><span class="palette__color" style="background-color:#f98667"></span><span class="palette__color" style="background-color:#97d1ec"></span></div>
+                        </article>
+                    }
+
+                </div>
+
+        </section>
+
+
+</div>
+

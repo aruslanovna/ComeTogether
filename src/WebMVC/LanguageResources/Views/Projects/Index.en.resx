@@ -160,4 +160,7 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="DetailedSearch" xml:space="preserve">
+    <value>Detailed Search</value>
+  </data>
 </root>

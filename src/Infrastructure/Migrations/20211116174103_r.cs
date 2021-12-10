@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ComeTogether.Infrastructure.Migrations
 {
-    public partial class firs : Migration
+    public partial class r : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,7 +50,9 @@ namespace ComeTogether.Infrastructure.Migrations
                     City = table.Column<string>(nullable: true),
                     Region = table.Column<string>(nullable: true),
                     PostalCode = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true)
+                    MainNacel = table.Column<int>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    Privilage = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,6 +72,22 @@ namespace ComeTogether.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Bill = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientId);
                 });
 
             migrationBuilder.CreateTable(
@@ -106,16 +124,33 @@ namespace ComeTogether.Infrastructure.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TimestampUtc = table.Column<DateTime>(nullable: false),
-                    MetricType = table.Column<int>(nullable: false),
-                    PollId = table.Column<Guid>(nullable: false),
-                    StatusCode = table.Column<int>(nullable: false),
-                    Value = table.Column<string>(nullable: true),
-                    Detail = table.Column<string>(nullable: true)
+                    Date = table.Column<DateTime>(nullable: false),
+                    CPO = table.Column<int>(nullable: false),
+                    CAC = table.Column<int>(nullable: false),
+                    ROMI = table.Column<int>(nullable: false),
+                    ROI = table.Column<int>(nullable: false),
+                    ROAS = table.Column<int>(nullable: false),
+                    ARPU = table.Column<int>(nullable: false),
+                    AOV = table.Column<int>(nullable: false),
+                    LTV = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Metrics", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Nacels",
+                columns: table => new
+                {
+                    NacelId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NacelName = table.Column<string>(nullable: true),
+                    Section = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Nacels", x => x.NacelId);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,19 +207,20 @@ namespace ComeTogether.Infrastructure.Migrations
                 name: "ProjectDetails",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(nullable: false)
+                    ProjectDetailId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FounderId = table.Column<int>(nullable: false),
-                    ShortDescription = table.Column<string>(nullable: true),
-                    FullDescription = table.Column<string>(nullable: true),
-                    RisksAndChallenges = table.Column<string>(nullable: true),
-                    Background = table.Column<string>(nullable: true),
-                    StartBudget = table.Column<int>(nullable: false),
-                    StartDate = table.Column<DateTime>(nullable: false)
+                    ProjectId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Profit = table.Column<int>(nullable: false),
+                    Initial_budget = table.Column<int>(nullable: false),
+                    Current_budget = table.Column<int>(nullable: false),
+                    Consumption = table.Column<int>(nullable: false),
+                    Clients_count = table.Column<int>(nullable: false),
+                    Marketing_expenses = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectDetails", x => x.ProjectId);
+                    table.PrimaryKey("PK_ProjectDetails", x => x.ProjectDetailId);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,6 +234,22 @@ namespace ComeTogether.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Region", x => x.RegionId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sponsors",
+                columns: table => new
+                {
+                    SponsorId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Charity = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sponsors", x => x.SponsorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -333,6 +385,32 @@ namespace ComeTogether.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BusinessRegisters",
+                columns: table => new
+                {
+                    BusinessRegisterId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NacelId = table.Column<int>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BusinessRegisters", x => x.BusinessRegisterId);
+                    table.ForeignKey(
+                        name: "FK_BusinessRegisters_Nacels_NacelId",
+                        column: x => x.NacelId,
+                        principalTable: "Nacels",
+                        principalColumn: "NacelId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BusinessRegisters_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ballots",
                 columns: table => new
                 {
@@ -401,47 +479,6 @@ namespace ComeTogether.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    ProjectId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProjectName = table.Column<string>(nullable: true),
-                    FounderId = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: true),
-                    Photo = table.Column<byte[]>(nullable: true),
-                    ShortDescription = table.Column<string>(nullable: true),
-                    FullDescription = table.Column<string>(nullable: true),
-                    RisksAndChallenges = table.Column<string>(nullable: true),
-                    Background = table.Column<string>(nullable: true),
-                    StartBudget = table.Column<int>(nullable: false),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    ProjectDetailsProjectId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.ProjectId);
-                    table.ForeignKey(
-                        name: "FK_Projects_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Projects_AspNetUsers_FounderId",
-                        column: x => x.FounderId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Projects_ProjectDetails_ProjectDetailsProjectId",
-                        column: x => x.ProjectDetailsProjectId,
-                        principalTable: "ProjectDetails",
-                        principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Territories",
                 columns: table => new
                 {
@@ -458,6 +495,69 @@ namespace ComeTogether.Infrastructure.Migrations
                         principalTable: "Region",
                         principalColumn: "RegionId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectName = table.Column<string>(nullable: true),
+                    FounderId = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: true),
+                    Photo = table.Column<byte[]>(nullable: true),
+                    ShortDescription = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    FullDescription = table.Column<string>(nullable: true),
+                    RisksAndChallenges = table.Column<string>(nullable: true),
+                    Background = table.Column<string>(nullable: true),
+                    StartBudget = table.Column<int>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    ClientId = table.Column<int>(nullable: true),
+                    MetricId = table.Column<long>(nullable: true),
+                    ProjectDetailsProjectDetailId = table.Column<int>(nullable: true),
+                    SponsorId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.ProjectId);
+                    table.ForeignKey(
+                        name: "FK_Projects_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_AspNetUsers_FounderId",
+                        column: x => x.FounderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_Metrics_MetricId",
+                        column: x => x.MetricId,
+                        principalTable: "Metrics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_ProjectDetails_ProjectDetailsProjectDetailId",
+                        column: x => x.ProjectDetailsProjectDetailId,
+                        principalTable: "ProjectDetails",
+                        principalColumn: "ProjectDetailId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_Sponsors_SponsorId",
+                        column: x => x.SponsorId,
+                        principalTable: "Sponsors",
+                        principalColumn: "SponsorId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -517,6 +617,25 @@ namespace ComeTogether.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PartnerTerritory",
+                columns: table => new
+                {
+                    PartnerId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TerritoryId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PartnerTerritory", x => x.PartnerId);
+                    table.ForeignKey(
+                        name: "FK_PartnerTerritory_Territories_TerritoryId",
+                        column: x => x.TerritoryId,
+                        principalTable: "Territories",
+                        principalColumn: "TerritoryId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Deals",
                 columns: table => new
                 {
@@ -539,25 +658,6 @@ namespace ComeTogether.Infrastructure.Migrations
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PartnerTerritory",
-                columns: table => new
-                {
-                    PartnerId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TerritoryId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PartnerTerritory", x => x.PartnerId);
-                    table.ForeignKey(
-                        name: "FK_PartnerTerritory_Territories_TerritoryId",
-                        column: x => x.TerritoryId,
-                        principalTable: "Territories",
-                        principalColumn: "TerritoryId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -611,6 +711,16 @@ namespace ComeTogether.Infrastructure.Migrations
                 column: "PollId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BusinessRegisters_NacelId",
+                table: "BusinessRegisters",
+                column: "NacelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BusinessRegisters_UserId",
+                table: "BusinessRegisters",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Choices_PollId",
                 table: "Choices",
                 column: "PollId");
@@ -646,14 +756,29 @@ namespace ComeTogether.Infrastructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Projects_ClientId",
+                table: "Projects",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Projects_FounderId",
                 table: "Projects",
                 column: "FounderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_ProjectDetailsProjectId",
+                name: "IX_Projects_MetricId",
                 table: "Projects",
-                column: "ProjectDetailsProjectId");
+                column: "MetricId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_ProjectDetailsProjectDetailId",
+                table: "Projects",
+                column: "ProjectDetailsProjectDetailId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_SponsorId",
+                table: "Projects",
+                column: "SponsorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Territories_RegionId",
@@ -694,6 +819,9 @@ namespace ComeTogether.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BusinessRegisters");
+
+            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
@@ -704,9 +832,6 @@ namespace ComeTogether.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Followings");
-
-            migrationBuilder.DropTable(
-                name: "Metrics");
 
             migrationBuilder.DropTable(
                 name: "Partners");
@@ -722,6 +847,9 @@ namespace ComeTogether.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Nacels");
 
             migrationBuilder.DropTable(
                 name: "Articles");
@@ -742,10 +870,19 @@ namespace ComeTogether.Infrastructure.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
+                name: "Clients");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Metrics");
+
+            migrationBuilder.DropTable(
                 name: "ProjectDetails");
+
+            migrationBuilder.DropTable(
+                name: "Sponsors");
 
             migrationBuilder.DropTable(
                 name: "Region");

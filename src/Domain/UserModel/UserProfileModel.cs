@@ -33,5 +33,7 @@ namespace ComeTogether.Domain.ViewModel
         public int CommentId { get; set; }
         public List<string> CommentedUserId { get; set; }
 
+        public ICollection<BusinessRegister> BusinessRegisters { get; set; }
+
     }
 }

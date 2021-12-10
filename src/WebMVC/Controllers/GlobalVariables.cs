@@ -13,7 +13,7 @@ namespace WebMVC.Controllers
 
         static GlobalVariables()
         {
-            WebApiClient.BaseAddress = new Uri("https://localhost:44353/api/");
+            WebApiClient.BaseAddress = new Uri("https://cometogethe.azurewebsites.net/api/");
             WebApiClient.DefaultRequestHeaders.Clear();
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

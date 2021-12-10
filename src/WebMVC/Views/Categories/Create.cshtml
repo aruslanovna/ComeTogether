@@ -1,11 +1,14 @@
 ﻿@model ComeTogether.Domain.Entities.Category
-
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@using System.Text.Encodings.Web
+@inject JavaScriptEncoder encoder
+
+
 @{
     ViewData["Title"] = "CreateNewCategory";
 }
-    <link rel="stylesheet" href="~/css/CreateArticle.min.css" />
+<link rel="stylesheet" href="~/css/CreateArticle.css" />
 
 <div class="container">
     <div class="col-sm-12">
@@ -13,91 +16,106 @@
         {
 
 
-        <article class="wrapper ">
-            <a class=" iconBtn ">@ViewBag.Created</a>
 
-            @ViewBag.Ok
-            <header>
-                <h1 class="pageTitle">@Localizer["Title"]</h1>
+                <article class="wrapper">
+                    @ViewBag.Ok
+                    <a class=" iconBtn ">@ViewBag.Created</a>
+                    <header>
+                        <h1 class="pageTitle"> @Localizer["Name"]</h1>
 
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.CategoryName, new
-               {
-                   htmlAttributes = new
-                   {
-                       @class = "form-control"
-                   }
-               })
-                    @Html.ValidationMessageFor(model => model.CategoryName, "", new
-               {
-                   @class =
-         "text-danger"
-               })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.CategoryName, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control"
+                           }
+                       })
+                            @Html.ValidationMessageFor(model => model.CategoryName, "", new
+                       {
+                           @class =
+                 "text-danger"
+                       })
+                        </div>
 
-                </div>
+                    </header>
+                    
+                    <section>
+                        <h2 class="pageSubTitle">
+                            @Localizer["Description"]
+                        </h2>
+
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Description, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control"
+                           }
+
+                            })
+                            @Html.ValidationMessageFor(model => model.Description, "", new
+                       {
+                           @class =
+                    "text-danger"
+                       })
+
+                        </div>
+                    </section>
+
+                   
+                    <div align="center" class="mt-1">
+                        <img src="~/images/users_icons/Путь_к_картинке" class="img" width="100%">
+                    </div>
+                    <div align="center">
+                        <label id="profile-image">
+                            <small>@Localizer["Upload"]</small>
+                            <small>
+                                <input type="file" name="image" id="Imageinput" hidden onchange="imgprev(this)">
+
+                                <i class="fa fa-camera" aria-hidden="true"></i>
+                            </small>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </article>
 
 
-            </header>
-            <section>
-                <h2 class="pageSubTitle">@Localizer["Description"]  </h2>
-
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.Description, new
-               {
-                   htmlAttributes = new
-                   {
-                       @class = "form-control",
-                       @placeholder = "Description"
-
-                   }
-
-               })
-                    @Html.ValidationMessageFor(model => model.Description, "", new
-               {
-                   @class =
-            "text-danger"
-               })
-
-                </div>
-            </section>
-
-            <div align="center" class="mt-1">
-                <img src="~/images/users_icons/Путь_к_картинке" class="img" width="100%">
-            </div>
-            <div align="center">
-                <label id="profile-image">
-                    <small>@Localizer["Upload"]</small>
-                    <small>
-                        <input type="file" name="Image" id="Imageinput" hidden onchange="imgprev(this)">
-
-                        <i class="fa fa-camera" aria-hidden="true"></i>
-                    </small>
-                </label>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-8">
-
-                    <input type="submit" value=@Localizer["Create"] id="createProjectBtn" class=" iconBtn " />
-                </div>
-            </div>
-
-        </article>
-
-        }
-    </div>
+            }
 
 
 
-</div>
-<div>
-   <a asp-action="Index">@Localizer["BacktoList"]</a>
-</div>
-@section Scripts {
+            @section Scripts {
+                <script src="~/js/photoLoad.js"></script>
+            }
+            <script>
+                function imgprev(input) {
+                    if (input.files[0]) {
+                        var uploading = new FileReader();
+                        var imgType = input.files[0].type;
+                        if (imgType == "image/png" || imgType == "image/jpeg" || imgType == "image/bmp") {
+                            uploading.onload = function (displayImg) {
+                                $(".img").attr("src", displayImg.target.result)
+                            }
+                            uploading.readAsDataURL(input.files[0])
+                        } else {
+                            $(".error-msg").append("We support only BMP, JPG AND PNG format");
+                        }
+                    }
+                }
+                function snapshoot(input) {
+                    if (input.files.length > 0) {
+                        var fileReader = new FileReader();
+                        var currentImageType = input.files[input.files.length - 1].type;
+                        if (imgType == "image/png" || imgType == "image/jpeg" || imgType == "image/bmp") {
 
-    <script src="~/js/photoLoad.js"></script>
+                        }
 
-}
-
-
-
-
+                    }
+                }
+            </script>
+          

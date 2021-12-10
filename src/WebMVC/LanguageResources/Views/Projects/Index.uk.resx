@@ -160,4 +160,7 @@
   <data name="AllProjects" xml:space="preserve">
     <value>Усі проекти</value>
   </data>
+  <data name="DetailedSearch" xml:space="preserve">
+    <value>Розширений пошук</value>
+  </data>
 </root>

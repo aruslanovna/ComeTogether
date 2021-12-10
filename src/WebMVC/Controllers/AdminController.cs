@@ -87,6 +87,19 @@ namespace WebMVC.Controllers
             return View();
         }
 
+        public async Task<ActionResult> EmailUser(string Content, string mail)
+        {
+            if (!String.IsNullOrEmpty(Content))
+            {
+                string id = userManager.GetUserId(User);
+                ApplicationUser user = await userManager.FindByIdAsync(id);
+                string[] send = new string[] { mail };
+                Message message = new Message(send, "Message from ComeTogether", Content + "\n Sincerely,\n ComeTogether administarator\n" + DateTime.Now);
+                _emailSender.SendEmail(message);
+            }
+            return View();
+        }
+
         public async Task<IActionResult> Update(string id)
         {
             ApplicationUser user = await userManager.FindByIdAsync(id);

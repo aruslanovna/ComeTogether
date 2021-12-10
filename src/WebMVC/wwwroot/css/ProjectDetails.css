@@ -1342,9 +1342,11 @@ a, a:hover, a:visited, a:link, a:active {
     }
 
     .rad-info-box .value {
+        display: flex;
         font-size: 2.1em;
         font-weight: 600;
         margin-top: 15px;
+        margin-left: 1em;
     }
 
 .rad-list-group-item {

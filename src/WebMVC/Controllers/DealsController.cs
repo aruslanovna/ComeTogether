@@ -74,7 +74,7 @@ namespace WebMVC.Controllers
                 await _context.SaveChangesAsync();
            
            
-            return RedirectToAction("Index","Projects" );
+            return RedirectToAction("Details","Projects" , id);
 
         }
         [Authorize]

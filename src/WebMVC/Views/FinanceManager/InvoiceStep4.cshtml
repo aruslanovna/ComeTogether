@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using System.Text.Encodings.Web
+
+@model ComeTogether.Domain.Entities.Invoice
+
+<link rel="stylesheet" href="~/css/InvoiceStep4.css" />
+<div class="container">
+    <div class="invoice">
+        <div class="row">
+            <div class="col-7">
+                <img src="https://library.kissclipart.com/20181218/bhq/kissclipart-chart-logo-white-growth-clipart-computer-icons-bar-43f6b8fd6c7e0c5b.png" class="logo">
+            </div>
+            <div class="col-5">
+                <h1 class="document-type display-4">
+                    Come
+                    Together
+                </h1>
+                <p class="text-right"><strong>N°90T-17-01-0123</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <p>
+                    <strong>90TECH SAS</strong><br>
+                    Volodymyrska Street, 60, Kyiv, 01033<br>
+                    044 239 3333
+                </p>
+            </div>
+            <div class="col-5">
+                <br><br><br>
+                <p>
+                    <strong>Employee</strong><br>
+                    Réf. Client <em>C00022</em><br>
+                    12 Rue de Verdun<br>
+                    54250 JARNY
+                </p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <h6>Period of work for which payment is made (1er Novembre 2016 - 30 Novembre 2016)</h6>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantitу</th>
+                    <th>Unite</th>
+                    <th>SalaryPerHour</th>
+                    <th>WorkingTime</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <td>Execution of work under the contract</td>
+            <td>4</td>
+            <td>Rapport</td>
+            <td class="text-right">@Model.SalaryPerHour€</td>
+            <td>@Model.WorkingTime</td>
+            <td class="text-right">@Model.Salary€</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-8">
+            </div>
+            @*<div class="col-4">
+                <table class="table table-sm text-right">
+                    <tr>
+                        <td><strong>Total HT</strong></td>
+                        <td class="text-right">@Model.Salary€</td>
+                    </tr>
+                    <tr>
+                        <td>TVA 20%</td>
+                        <td class="text-right">740,00€</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total TTC</strong></td>
+                        <td class="text-right">4 440,00€</td>
+                    </tr>
+                </table>
+            </div>*@
+        </div>
+
+        <p class="conditions">
+            Terms & Conditions
+            <br>
+            <br>
+            Payment terms: payment upon receipt of invoice, within 15 days.
+            <br>
+            No discount granted for early payment.
+            <br>
+            Payment by bank transfer.
+            <br><br>
+            In the event of late payment, lump sum compensation for recovery costs: 40 euros.
+        </p>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <p class="bottom-page text-right">
+            90TECH SAS - N° SIRET 80897753200015 RCS METZ<br>
+            6B, Rue aux Saussaies des Dames - 57950 MONTIGNY-LES-METZ 03 55 80 42 62 - www.90tech.fr<br>
+            Code APE 6201Z - N° TVA Intracom. FR 77 808977532<br>
+            IBAN FR76 1470 7034 0031 4211 7882 825 - SWIFT CCBPFRPPMTZ
+        </p>
+    </div>
+</div>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+    <input type="image" src="http://michaeltruong.ca/images/paypal.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+</form>
+<div id="legalcopy">
+    <p class="legal">
+        <strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
+    </p>
+</div>

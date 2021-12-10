@@ -1,0 +1,256 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using System.Text.Encodings.Web
+
+@model ComeTogether.Domain.Entities.Invoice
+
+<link rel="stylesheet" href="~/css/Invoice.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.9.4/styles/salesforce-lightning-design-system.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      @using (Html.BeginForm("GenerateInvoice", "FinanceManager", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+          <main class="projectname--form-page">
+
+        <!-- Header end over here. -->
+        <div class="projectname-container">
+            <div class="projectname-page--container">
+                <div class="projectname-container">
+                    <div class="slds-grid slds-wrap projectname-form-container">
+                        <div class="slds-col slds-size_3-of-12">
+                            <div class="projectname-vertical-wizard">
+                                <ul>
+                                    <li class="complete">
+                                        <a href="#">
+                                            Project <i class="ico fa fa-check ico-green"></i>
+                                            <span class="desc">Select your business to be analyzed</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="complete prev-step">
+                                        <a href="#">
+                                            Period <i class="ico fa fa-check ico-green"></i>
+                                            <span class="desc">Working time</span>
+                                        </a>
+                                    </li>
+                                    <li class="current">
+                                        <a href="#">
+                                            Employee
+                                            <span class="desc">Detailed information about worker</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Invoice
+                                            <span class="desc">Generate and download invoice</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_9-of-12 slds-p-left_xx-large">
+                            <div class="projectname-right--section">
+                                <div class="form--header">
+                                    <div class="form--header_heading">
+                                        <h2>Detailed invoice info</h2>
+                                        <div class="form--header_heading-description">
+                                            Fill the below form to generate invoice
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form--body">
+                                    <div class="slds-grid slds-gutters slds-wrap">
+                                        <div class="slds-col slds-size_1-of-3 slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="text-input-id-1">
+                                                    <abbr class="slds-required" title="required">* </abbr>Family Name
+                                                </label>
+                                                <div class="slds-form-element__control">
+                                                    @Html.EditorFor(model => model.FullName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control"
+                            }
+                        })
+                                                    @Html.ValidationMessageFor(model => model.FullName, "", new
+                                               {
+                                                   @class =
+                                         "text-danger"
+                                               })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-3">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="text-input-id-1">Email</label>
+                                                <div class="slds-form-element__control">
+                                                    @Html.EditorFor(model => model.Email, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control"
+                           }
+                       })
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new
+                                               {
+                                                   @class =
+                                         "text-danger"
+                                               })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-3">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="text-input-id-1"
+                                                       id="inline-text-label">Phone number</label>
+                                                <div class="slds-form-element__control">
+                                                    @Html.EditorFor(model => model.Phone, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control"
+                           }
+                       })
+                                                    @Html.ValidationMessageFor(model => model.Phone, "", new
+                                               {
+                                                   @class =
+                                         "text-danger"
+                                               })
+                                                    <div class="slds-form-element__help">example: +(380)111-2222</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="text-input-id-1">
+                                                    <abbr class="slds-required" title="required">* </abbr>Salary per hour
+                                                </label>
+                                                <div class="slds-form-element__control">
+                                                    @Html.EditorFor(model => model.SalaryPerHour, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control"
+                            }
+                        })
+                                                    @Html.ValidationMessageFor(model => model.SalaryPerHour, "", new
+                                               {
+                                                   @class =
+                                         "text-danger"
+                                               })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="text-input-id-1">
+                                                    <abbr class="slds-required" title="required">* </abbr>Working hours
+                                                </label>
+                                                <div class="slds-form-element__control">
+                                                    @Html.EditorFor(model => model.WorkingTime, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control"
+                            }
+                        })
+                                                    @Html.ValidationMessageFor(model => model.WorkingTime, "", new
+                                               {
+                                                   @class =
+                                         "text-danger"
+                                               })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="textarea-id-01">
+                                                  Comments
+                                                </label>
+                                                <div class="slds-form-element__control">
+                                                    @Html.EditorFor(model => model.Comment, new
+                         {
+                             htmlAttributes = new
+                             {
+                                 @class = "form-control"
+                             }
+                         })
+                                                    @Html.ValidationMessageFor(model => model.Comment, "", new
+                                               {
+                                                   @class =
+                                         "text-danger"
+                                               })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-m-bottom_medium">
+                                            <fieldset class="slds-form-element">
+                                                <legend class="slds-form-element__legend slds-form-element__label">
+                                                    Additional info
+                                                </legend>
+                                                <div class="slds-form-element__control">
+                                                    <div class="slds-checkbox">
+                                                        @Html.CheckBoxFor(model => model.SendOnEmail)
+                                                        <label class="slds-checkbox__label" for="checkbox-unique-id-74">
+                                                            <span class="slds-checkbox_faux"></span>
+                                                            <span class="slds-form-element__label">Send check on e-main</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="slds-checkbox">
+                                                        @Html.CheckBoxFor(model => model.IncludeTax)
+                                                        <label class="slds-checkbox__label" for="checkbox-unique-id-74">
+                                                            <span class="slds-checkbox_faux"></span>
+                                                            <span class="slds-form-element__label">Include tax</span>
+                                                        </label>
+                                                        <div class="slds-col slds-size_1-of-2 slds-m-bottom_medium">
+                                                            <div class="slds-form-element">
+                                                                <label class="slds-form-element__label" for="text-input-id-1">
+                                                                    <abbr class="slds-required" title="required">* </abbr>Salary per hour
+                                                                </label>
+                                                                <div class="slds-form-element__control">
+                                                                    @Html.EditorFor(model => model.TaxSize, new
+                                        {
+                                            htmlAttributes = new
+                                            {
+                                                @class = "form-control"
+                                            }
+                                        })
+                                                                    @Html.ValidationMessageFor(model => model.TaxSize, "", new
+                                                               {
+                                                                   @class =
+                                                         "text-danger"
+                                                               })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                                <div class="form--footer">
+                                    <button class="slds-button slds-button_neutral">Cancel</button>
+                                    <button class="slds-button slds-button_neutral">
+                                        <i class="fa fa-arrow-left slds-m-right_x-small"
+                                           aria-hidden="true"></i>Prev
+                                    </button>
+
+                                    <button class="slds-button slds-button_brand ">
+                                        <i class="fa fa-paper-plane slds-m-right_x-small"
+                                           aria-hidden="true"></i>Generate and submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+}
+

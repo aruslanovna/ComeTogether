@@ -21,7 +21,7 @@ namespace xUnitTest
         DbContextOptions<ApplicationDbContext> options;
         public ArticleControllerTest()
         {
-             options = Instantiate();
+            options = Instantiate();
         }
 
         public DbContextOptions<ApplicationDbContext> Instantiate()
@@ -32,14 +32,14 @@ namespace xUnitTest
 
             using (var context = new ApplicationDbContext(options))
             {
-               // context.Articles.Add(
-               //     new Article { ArticleId = 16, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" }
-               //);
+                // context.Articles.Add(
+                //     new Article { ArticleId = 16, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" }
+                //);
 
-               // context.Articles.Add(new Article { ArticleId = 17, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" });
-               // context.Articles.Add(new Article { ArticleId = 18, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" });
-               // context.Articles.Add(new Article { ArticleId = 19, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" });
-               // context.SaveChanges();
+                // context.Articles.Add(new Article { ArticleId = 17, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" });
+                // context.Articles.Add(new Article { ArticleId = 18, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" });
+                // context.Articles.Add(new Article { ArticleId = 19, Name = "dsfds", UserId = "dsf", Briefly = "fsdfsf" });
+                // context.SaveChanges();
             }
             return options;
         }
@@ -52,7 +52,7 @@ namespace xUnitTest
             ArticleService articleService = new ArticleService(mockUnit.Object);
             var mock = new Mock<IArticleService>();
             mock.Setup(u => u.GetAll()).Returns(GetTestUsersAsync());
-          
+
             Assert.Equal(articleService.GetAll().Result.Count(), mock.Object.GetAll().Result.Count());
         }
 
@@ -64,10 +64,8 @@ namespace xUnitTest
             var mockUnit = new Mock<IUnitOfWork>();
             mockUnit.Setup(u => u.ArticlesRepository);
             var mockServ = new Mock<IArticleService>();
-            mockServ.Setup(u => u.GetArticleByTitle(It.IsAny<string>())).Returns(GetTestUsersByTitleAsync(search));
-            //  ArticleService articleService = new ArticleService(mockUnit.Object);
+            mockServ.Setup(u => u.GetArticleByTitle(It.IsAny<string>())).Returns(GetTestArticlesByTitle(search));
             
-
             using (var context = new ApplicationDbContext(options))
             {
                 var http = new Mock<IHttpContextAccessor>();
@@ -78,23 +76,25 @@ namespace xUnitTest
 
                 // Assert
                 var viewResult = Assert.IsType<ViewResult>(result.Result);
-                var model = Assert.IsAssignableFrom<Task<IEnumerable<Article>>>(viewResult.Model);
-                Assert.Equal(GetTestUsersByTitleAsync(search).Result.Count(), model.Result.Count());
+                var model = Assert.IsAssignableFrom<IEnumerable<Article>>(viewResult.Model);
+                Assert.Equal(GetTestArticlesByTitle(search).Count(), model.Count());
             }
         }
 
 
-        [Fact]
+        
+    
+
+
+    [Fact]
         public async Task IndexReturnsAViewResultWithAListOfArticlesByTitle()
         {
             string search = "ok";
             var mockUnit = new Mock<IUnitOfWork>();
             mockUnit.Setup(u => u.ArticlesRepository);
             var mockServ = new Mock<IArticleService>();
-            mockServ.Setup(u => u.GetArticleByTitle(It.IsAny<string>())).Returns(GetTestUsersByTitleAsync(search));
-            //  ArticleService articleService = new ArticleService(mockUnit.Object);
-
-
+            mockServ.Setup(u => u.GetArticleByTitle(It.IsAny<string>())).Returns(GetTestArticlesByTitle(search));
+           
             using (var context = new ApplicationDbContext(options))
             {
                 var http = new Mock<IHttpContextAccessor>();
@@ -105,18 +105,17 @@ namespace xUnitTest
 
                 // Assert
                 var viewResult = Assert.IsType<ViewResult>(result.Result);
-                var model = Assert.IsAssignableFrom<Task<IEnumerable<Article>>>(viewResult.Model);
-                //  var model =await  Assert.IsType< Task<IEnumerable<Article>>>((Task<IEnumerable<Article>>)viewResult.ViewData.Model);
-                Assert.Equal(GetTestUsersByTitleAsync(search).Result.Count(), model.Result.Count());
+                var model = Assert.IsAssignableFrom<IEnumerable<Article>>(viewResult.Model);
+                Assert.Equal(GetTestArticlesByTitle(search).Count(), model.Count());
             }
         }
 
 
-        public  bool EqualArt(Article o1, Article o2)
+        public bool EqualArt(Article o1, Article o2)
         {
-           
-                return Equals(o2.ArticleId, o1.ArticleId) && Equals(o2.Name, o1.Name);
-            
+
+            return Equals(o2.ArticleId, o1.ArticleId) && Equals(o2.Name, o1.Name);
+
             return false;
         }
 
@@ -124,26 +123,26 @@ namespace xUnitTest
         public void ReturnsArticleByIDNotFound()
         {
             var mockUnit = new Mock<IUnitOfWork>();
-            mockUnit.Setup(u => u.ArticlesRepository.GetById(It.IsAny<int>())).ReturnsAsync(new Article());
+            mockUnit.Setup(u => u.ArticlesRepository.GetById(It.IsAny<int>())).Returns(new Article());
             ArticleService articleService = new ArticleService(mockUnit.Object);
 
-           
+
 
             using (var context = new ApplicationDbContext(options))
             {
                 var http = new Mock<IHttpContextAccessor>();
                 var controller = new ArticlesController(articleService, context, http.Object);
                 // Act
-                  var result = controller.Details(null);
+                var result = controller.Details(null);
                 // Assert
 
-                 var viewResult = Assert.IsType<NotFoundResult>(result.Result);
+                var viewResult = Assert.IsType<NotFoundResult>(result.Result);
             }
         }
-       
-        private  IEnumerable<Article> GetTestUsers()
+
+        private IEnumerable<Article> GetTestArticles()
         {
-            var users = new List<Article>
+            var articles = new List<Article>
             {
                 new Article { ArticleId=12, Name="aadsfds", UserId="dsf", Briefly="fsdfsf" },
                new Article { ArticleId=13, Name="dsfds", UserId="dsf", Briefly="fsdfsf" },
@@ -151,18 +150,18 @@ namespace xUnitTest
                new Article { ArticleId=15, Name="dsfds", UserId="dsf", Briefly="fsdfsf" }
 
             };
-            return users;
+            return articles;
         }
         private async Task<IEnumerable<Article>> GetTestUsersAsync()
         {
-            var users = await Task.Run(() => GetTestUsers());
-           
-            return users;
+            var articles = await Task.Run(() => GetTestArticles());
+
+            return articles;
         }
-        private async Task<IEnumerable<Article>> GetTestUsersByTitleAsync(string search)
+        private IEnumerable<Article> GetTestArticlesByTitle(string search)
         {
-            var users = await Task.Run(() => GetTestUsers().Where(x => x.Name.StartsWith(search)).ToList());
-            return users;
+            var articles= GetTestArticles().Where(x => x.Name.StartsWith(search)).ToList();
+            return articles;
         }
     }
 }

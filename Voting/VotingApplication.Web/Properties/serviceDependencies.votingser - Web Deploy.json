@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/nurediplom/databases/diplom",
+      "type": "mssql.azure",
+      "connectionId": "VotingContext",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

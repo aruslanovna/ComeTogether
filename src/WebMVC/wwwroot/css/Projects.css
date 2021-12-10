@@ -450,9 +450,15 @@
                         }
 
                 #container .mockup .feeds .today {
+                    width: 35%;
+                    display: flex;
                     flex-basis: 640px;
                     flex-grow: 2;
                     flex-shrink: 2;
+                    flex-direction: row;
+                   
+                    justify-content: center;
+                    flex-wrap: wrap;
                 }
 
                 #container .mockup .feeds .yesterday {
@@ -461,20 +467,20 @@
                     flex-shrink: 3;
                 }
 
-    .card {
-        position: relative;
-       
-        height: auto;
-        border-radius: 15px;
-        box-shadow: 0 5px 30px -10px rgba(0, 0, 0, 0.20);
-        flex-basis: auto;
-        flex-shrink: 2;
-        flex-grow: 2;
-        margin-bottom: 25px;
-        margin-right: 20px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
+.card {
+    position: relative;
+    width: auto;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px -10px rgba(0, 0, 0, 0.20);
+    flex-basis: auto;
+    flex-shrink: 2;
+    flex-grow: 2;
+    margin-bottom: 25px;
+    margin-right: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
 
         .card:hover {
             box-shadow: 0 10px 45px -15px rgba(0, 0, 0, 0.35);
@@ -538,6 +544,12 @@
             cursor: pointer;
             height: 500px;
         }
+
+   .yesterday .card img {
+        width: auto;
+        cursor: pointer;
+        height: 300px;
+    }
 
         .card .card-footer {
             position: absolute;
@@ -619,7 +631,8 @@
 
 
 
-ul.ev-user {
+ul.ev-user { 
+    display:flex;
     margin: 0;
     padding: 1em 0 0;
     position: relative;
@@ -633,7 +646,7 @@ ul.ev-user {
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         display: inline-block;
-        margin: 10px;
+        margin: 10px 25px 10px 25px;
         padding: 1em 0 2em;
         position: relative;
         text-align: center;
@@ -847,4 +860,14 @@ ul.ev-content li.active .ev-content-body {
     margin: 0;
     font-weight: normal;
     font-family: "Helvetica Neue", "Segoe UI", Helvetica, Verdana, sans-serif;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.buttons a {
+   margin-left:1em;
 }

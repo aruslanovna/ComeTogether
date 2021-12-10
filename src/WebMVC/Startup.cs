@@ -32,7 +32,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.IO;
-
+using ComeTogether.Service.Interfaces;
+using ComeTogether.Service.Services;
 
 namespace WebMVC
 {
@@ -50,6 +51,8 @@ namespace WebMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddSignalR();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -109,19 +112,26 @@ namespace WebMVC
                 opts.Password.RequireUppercase = true;
                 opts.Password.RequireDigit = true;
             }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders()
-                .AddDefaultUI()/*.AddDefaultTokenProviders()*/;
+                .AddDefaultUI();
+
+
+            services.AddAuthentication()
+       .AddGoogle(options =>
+       {
+           options.ClientId = Configuration["Authentication:Google:ClientId"];
+           options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+       }).AddFacebook(facebookOptions =>
+       {
+           facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+           facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+       }); 
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddMvc();
             services.AddScoped<UserManager<ApplicationUser>, UserManager<ApplicationUser>>();
-            services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Transient); 
-         //   services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-         //.AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Transient);       
             services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
-
             services.AddLocalization(options => options.ResourcesPath = "LanguageResources");
-            services.AddControllersWithViews()
-                  .AddDataAnnotationsLocalization()
-                 .AddViewLocalization();
+            services.AddControllersWithViews().AddDataAnnotationsLocalization().AddViewLocalization();
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Identity/Account/Login");
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -187,8 +197,6 @@ namespace WebMVC
             app.UseStaticFiles();
              app.UseCookiePolicy();
 
-            app.UseRouting();
-            // app.UseRequestLocalization();
              app.UseCors();
 
             app.UseAuthentication();

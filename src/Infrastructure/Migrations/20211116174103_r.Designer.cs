@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComeTogether.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210430144344_sec")]
-    partial class sec
+    [Migration("20211116174103_r")]
+    partial class r
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,9 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<int?>("MainNacel")
+                        .HasColumnType("int");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -89,6 +92,9 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Privilage")
+                        .HasColumnType("int");
 
                     b.Property<string>("Region")
                         .HasColumnType("nvarchar(max)");
@@ -159,6 +165,28 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.ToTable("Articles");
                 });
 
+            modelBuilder.Entity("ComeTogether.Domain.Entities.BusinessRegister", b =>
+                {
+                    b.Property<int>("BusinessRegisterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("NacelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("BusinessRegisterId");
+
+                    b.HasIndex("NacelId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BusinessRegisters");
+                });
+
             modelBuilder.Entity("ComeTogether.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -178,6 +206,30 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Client", b =>
+                {
+                    b.Property<int>("ClientId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Bill")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ClientId");
+
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Comment", b =>
@@ -267,6 +319,24 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Followings");
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Nacel", b =>
+                {
+                    b.Property<int>("NacelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NacelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Section")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NacelId");
+
+                    b.ToTable("Nacels");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Partner", b =>
@@ -374,16 +444,25 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FounderId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FullDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("MetricId")
+                        .HasColumnType("bigint");
+
                     b.Property<byte[]>("Photo")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int?>("ProjectDetailsProjectId")
+                    b.Property<int?>("ProjectDetailsProjectDetailId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectName")
@@ -395,6 +474,9 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SponsorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StartBudget")
                         .HasColumnType("int");
 
@@ -405,42 +487,51 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("ClientId");
+
                     b.HasIndex("FounderId");
 
-                    b.HasIndex("ProjectDetailsProjectId");
+                    b.HasIndex("MetricId");
+
+                    b.HasIndex("ProjectDetailsProjectDetailId");
+
+                    b.HasIndex("SponsorId");
 
                     b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.ProjectDetails", b =>
                 {
-                    b.Property<int>("ProjectId")
+                    b.Property<int>("ProjectDetailId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Background")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FounderId")
+                    b.Property<int>("Clients_count")
                         .HasColumnType("int");
 
-                    b.Property<string>("FullDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RisksAndChallenges")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StartBudget")
+                    b.Property<int>("Consumption")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<int>("Current_budget")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ProjectId");
+                    b.Property<int>("Initial_budget")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Marketing_expenses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Profit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProjectDetailId");
 
                     b.ToTable("ProjectDetails");
                 });
@@ -458,6 +549,30 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.HasKey("RegionId");
 
                     b.ToTable("Region");
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.Sponsor", b =>
+                {
+                    b.Property<int>("SponsorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Charity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SponsorId");
+
+                    b.ToTable("Sponsors");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Territory", b =>
@@ -638,7 +753,7 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.HasIndex("PollId");
 
-                    b.ToTable("Ballot");
+                    b.ToTable("Ballots");
                 });
 
             modelBuilder.Entity("VotingApplication.Data.Model.Choice", b =>
@@ -664,7 +779,46 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.HasIndex("PollId");
 
-                    b.ToTable("Choice");
+                    b.ToTable("Choices");
+                });
+
+            modelBuilder.Entity("VotingApplication.Data.Model.Metric", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AOV")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ARPU")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CAC")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CPO")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LTV")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ROAS")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ROI")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ROMI")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Metrics");
                 });
 
             modelBuilder.Entity("VotingApplication.Data.Model.Poll", b =>
@@ -718,7 +872,7 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Poll");
+                    b.ToTable("Polls");
                 });
 
             modelBuilder.Entity("VotingApplication.Data.Model.Vote", b =>
@@ -748,7 +902,7 @@ namespace ComeTogether.Infrastructure.Migrations
 
                     b.HasIndex("PollId");
 
-                    b.ToTable("Vote");
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Article", b =>
@@ -756,6 +910,17 @@ namespace ComeTogether.Infrastructure.Migrations
                     b.HasOne("ComeTogether.Domain.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("ComeTogether.Domain.Entities.BusinessRegister", b =>
+                {
+                    b.HasOne("ComeTogether.Domain.Entities.Nacel", "nacel")
+                        .WithMany("BusinessRegisters")
+                        .HasForeignKey("NacelId");
+
+                    b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", "User")
+                        .WithMany("BusinessRegisters")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Comment", b =>
@@ -798,13 +963,25 @@ namespace ComeTogether.Infrastructure.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("ComeTogether.Domain.Entities.Client", null)
+                        .WithMany("Projects")
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("ComeTogether.Domain.Entities.ApplicationUser", "Founder")
                         .WithMany()
                         .HasForeignKey("FounderId");
 
+                    b.HasOne("VotingApplication.Data.Model.Metric", null)
+                        .WithMany("Projects")
+                        .HasForeignKey("MetricId");
+
                     b.HasOne("ComeTogether.Domain.Entities.ProjectDetails", null)
                         .WithMany("Projects")
-                        .HasForeignKey("ProjectDetailsProjectId");
+                        .HasForeignKey("ProjectDetailsProjectDetailId");
+
+                    b.HasOne("ComeTogether.Domain.Entities.Sponsor", null)
+                        .WithMany("Projects")
+                        .HasForeignKey("SponsorId");
                 });
 
             modelBuilder.Entity("ComeTogether.Domain.Entities.Territory", b =>

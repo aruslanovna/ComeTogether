@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ProjectDetailsModel>
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link rel="stylesheet" href="~/css/FinanceManager.css" />
+
+@section Scripts {
+
+    <script src="~/js/FinanceManager.js"></script>
+
+}
+<div id="templateContainer">
+
+    <h1>Dashboards</h1>
+
+    <div class="container-fluid alta-theme">
+        <div class="col-md-12 main alta-theme">
+
+            <div class="row placeholders">
+
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <div class="circular-menu">
+                        <div class="circle">
+                            <a href="@Url.Action("InvoiceStep3", "Projects")"><p>Створити Invoice(офіціант)</p></a>
+                            <a href="@Url.Action("InvoiceStep3", "Projects")"><p>Створити Invoice(менеджер)</p></a>
+                            <a href="@Url.Action("InvoiceStep3", "Projects")"><p>Створити Invoice(директор)</p></a>
+                        </div>
+                        <button class="dashboard-item menu-button" style="background-color: #ff7455;">
+                            <span class="fa fa-group"></span>
+                        </button>
+                    </div>
+                    <h4>Employee manager</h4>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <div class="circular-menu">
+                        <div class="circle">
+                            <a href="@Url.Action("CurrentBudget", "FinanceManager", new { projectId = 4 })"><p>Поточний бюджет</p></a>
+                            <a href=""><p>Прибуток за поточний місяць</p></a>
+                            <a href="@Url.Action("BenefitInYear", "FinanceManager")"><p>Прибуток за поточний рік</p></a>
+                            <a href="@Url.Action("notEnoughtClients", "FinanceManager")"><p>Бізнес, який не набрав клієнтів</p></a>
+                            <a href="@Url.Action("hasSponsoring", "FinanceManager")"><p>Бізнес без спонсорів</p></a>
+
+                        </div>
+                        <button class="dashboard-item menu-button" style="background-color:#68C182;">
+                            <span class="fa fa-line-chart"></span>
+                        </button>
+                    </div>
+                    <h4>Finance report</h4>
+                </div>
+
+
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <div class="circular-menu">
+                        <div class="circle">
+                            <a href="" style=" left: 70%; top: -70px; " "><p>Розрахунок бюджету на основі попереднього місяця</p></a>
+                            <a href="@Url.Action("BudgetWithTaxesAndCharity", "FinanceManager")" style=" left: 70%; top: -70px; " ><p> Розрахунок бюджету на основі попереднього місяця з урахуванням податків та споносорів</p></a>
+                        </div>
+                        <button class="dashboard-item menu-button" style="background-color:#989fa8;">
+                            <span class="fa fa-wrench"></span>
+                        </button>
+                    </div>
+                    <h4>Automatization</h4>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <div class="circular-menu">
+                        <div class="circle">
+                            <a href="" style="left: 50%;top: 3%;"><p>База даних клієнтів</p></a>
+                            <a href="@Url.Action("Expenses", "FinanceManager")"><p>Витрати на клієнта (поточний місяць)</p></a>
+                            <a href="@Url.Action("BenefitInTheEndOfMonth", "FinanceManager")"><p>Прибуток за поточний місяць(за клієнтами)</p></a>
+
+                            <a href="@Url.Action("Bill", "FinanceManager", new { userId = "ba87e4ae-038a-4711-ba5e-c2914122a61a" })"><p>Чек клієнта</p></a>
+                            <a href="@Url.Action("ClientsCountPerYear", "FinanceManager")"><p>Кількість клієнтів за місяць</p></a>
+                        </div>
+                        <button class="dashboard-item menu-button" style="background-color:#6DDBDB;">
+                            <span class="fa fa-shopping-cart"></span>
+                        </button>
+                    </div>
+                    <h4>Clients</h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

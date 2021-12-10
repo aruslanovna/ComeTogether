@@ -137,9 +137,15 @@ namespace WebMVC.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
-            InputModel login = new InputModel();
+            LoginViewModel model = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = signInManager.GetExternalAuthenticationSchemesAsync().Result.ToList()
+            };
+
+            //InputModel login = new InputModel();
             // login.ReturnUrl = returnUrl;
-            return View(login);
+            return View(model);
         }
 
         [AllowAnonymous]

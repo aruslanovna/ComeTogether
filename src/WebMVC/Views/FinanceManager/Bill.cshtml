@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using System.Text.Encodings.Web
+
+@model List<ComeTogether.Domain.Entities.Bill>
+
+<link rel="stylesheet" href="~/css/Bill.css" />
+@foreach (var mod in Model)
+{
+    <div id="showScroll" class="container">
+        <div class="receipt">
+            <h1 class="logo">CVS/Cafe</h1>
+            <div class="address">
+                666 Lincoln St. Santa Monica, CA
+            </div>
+            <div class="transactionDetails">
+                <div class="detail">Reg#17</div>
+                <div class="detail">TRN#1313</div>
+                <div class="detail">CSHR#00097655</div>
+                <div class="detail">str#9852</div>
+            </div>
+
+            <div class="centerItem bold">
+                <div class="item">ExtraCare Card #: *********1875</div>
+            </div>
+            <div class="transactionDetails">
+                <div class="detail">1</div>
+                <div class="detail">OB Glide 3CT</div>
+                <div class="detail">@mod.BillVal</div>
+            </div>
+            <div class="survey bold">
+                <p>Survey ID #</p>
+                <p class="surveyID">6588 4755 3256 544 21</p>
+            </div>
+            <div class="paymentDetails bold">
+                <div class="detail">TOTAL</div>
+                <div class="detail">@mod.BillVal</div>
+            </div>
+            <div class="paymentDetails">
+                <div class="detail">CHARGE</div>
+                <div class="detail">@mod.BillVal</div>
+            </div>
+            <div class="paymentDetails">
+                <div class="detail">************4023</div>
+                <div class="detail">CH</div>
+            </div>
+            <div class="creditDetails">
+                <p>VISA CREDIT &nbsp;&nbsp;&nbsp;&nbsp; ****************</p>
+                <p>approved# 09773B</p>
+                <p>ref# 013589</p>
+                <p>tran type: SALE</p>
+                <p>AID: 30000000090755</p>
+                <p>TC: B7A2A4044AEE380A4</p>
+                <p>terminal: 69010003</p>
+                <p>no signature required</p>
+                <p>CVM: 1e0300</p>
+                <p>TMR(95): 0080081111</p>
+                <p>TS(9B): E900</p>
+            </div>
+
+            <div class="paymentDetails">
+                <div class="detail">CHANGE</div>
+                <div class="detail">@mod.BillVal</div>
+            </div>
+            <div class="receiptBarcode">
+                <div class="barcode">
+                    @mod.ClientName
+                </div>
+                2003 0998 9000 8730 21
+            </div>
+            <div class="returnPolicy bold">
+                Returns with receipt, subject to CVS Return Policy, thru 12/04/2018
+            </div>
+            <div class="returnPolicy">
+                <div class="detail">@mod.Date</div>
+                <div class="detail">10:16 AM</div>
+            </div>
+            <div class="tripSummary">
+                <div class="bold">Trip Summary:</div>
+                <div class="item">
+                    <div>Today You Saved:</div>
+                    <div>.00</div>
+                </div>
+                <div class="item">
+                    <div>Savings Value</div>
+                    <div>0%</div>
+                </div>
+            </div>
+            <div class="feedback">
+                <div class="break">
+                    *************************************
+                </div>
+                <p class="center">
+                    We would love to hear your feedback on your recent experience with us. This survey will only take 1 minute to complete.
+                </p>
+                <h3 class="clickBait">Share Your Feedback</h3>
+                <h4 class="web">www.CVSHealthSurvey.com</h4>
+                <p class="center">
+                    Hablamos español
+                </p>
+                <div class="break">
+                    *************************************
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}

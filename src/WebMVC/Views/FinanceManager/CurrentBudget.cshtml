@@ -1,0 +1,118 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using System.Text.Encodings.Web
+
+@model List<ComeTogether.Domain.Entities.Report>
+
+<link rel="stylesheet" href="~/css/InvoiceStep4.css" />
+<div class="container">
+    <div class="invoice">
+        <div class="row">
+            <div class="col-7">
+                <img src="https://library.kissclipart.com/20181218/bhq/kissclipart-chart-logo-white-growth-clipart-computer-icons-bar-43f6b8fd6c7e0c5b.png" class="logo">
+            </div>
+            <div class="col-5">
+                <h1 class="document-type display-4">
+                    Come
+                    Together
+                </h1>
+                <p class="text-right"><strong>N°90T-17-01-0123</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <p>
+                    <strong>90TECH SAS</strong><br>
+                    Volodymyrska Street, 60, Kyiv, 01033<br>
+                    044 239 3333
+                </p>
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <h6>
+
+            Period of work for which payment is made(@Html.LabelFor(model => model[0].GeneratingDate, new
+{
+htmlAttributes = new
+{
+@class = "form-control"
+},
+disabled = "disabled",
+@readonly = "readonly"
+}))
+        </h6>
+        <br>
+       
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Project Name</th>
+                    <th>Date</th>
+                    <th>Current Budget</th>
+
+                </tr>
+            </thead>  @foreach (var mod in Model)
+            {
+
+                <tbody>
+
+                <td>Info</td>
+                <td>
+                    @Html.TextBoxFor(model => mod.ProjectName, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control"
+                   },
+                   disabled = "disabled",
+                   @readonly = "readonly"
+               })
+
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(model => mod.GeneratingDate, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control"
+                   },
+                   disabled = "disabled",
+                        @readonly = "readonly"
+               })
+
+                </td>
+
+
+                <td class="text-right">
+                    @Html.TextBoxFor(model => mod.CurrentBudget, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control"
+                   },
+                   disabled = "disabled",
+                   @readonly = "readonly"
+               })
+
+                </td>
+
+               
+            </tbody>}
+        </table>
+       
+    </div>
+</div>
+@*<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+    <input type="image" src="http://michaeltruong.ca/images/paypal.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+</form>
+<div id="legalcopy">
+    <p class="legal">
+        <strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
+    </p>
+</div>*@

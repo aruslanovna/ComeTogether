@@ -9,6 +9,7 @@
     <Compile Remove="Areas\Identity\Pages\Account\LoginWith2fa - Copy.cshtml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot\favicon.ico" />
     <Content Remove="wwwroot\js\notification.min.js" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +57,7 @@
     <None Include="wwwroot\css\devextreme\fonts\Roboto-700.woff2" />
     <None Include="wwwroot\css\devextreme\icons\dxicons.woff2" />
     <None Include="wwwroot\css\devextreme\icons\dxiconsmaterial.woff2" />
+    <None Include="wwwroot\css\favicon.ico" />
     <None Include="wwwroot\js\devextreme\aspnet\dx.aspnet.data.js" />
     <None Include="wwwroot\js\devextreme\aspnet\dx.aspnet.mvc.js" />
     <None Include="wwwroot\js\devextreme\bootstrap.js" />
@@ -149,6 +151,8 @@
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNet.Web.Optimization" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />

@@ -2,56 +2,93 @@
 @model LoginModel
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+
+
+@inject SignInManager<ComeTogether.Domain.Entities.ApplicationUser> SignInManager
 <link rel="stylesheet" href="~/css/Login.css" />
 <div class="containerLog" id="container">
 
-
+    
 
     <div class="form-container sign-in-container">
-        <form id="account" method="post">
-            <h1>
-                @Localizer["Sign in"]
-            </h1>
-            @*<div class="social-container">
-            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-    <span>@Localizer["oruseyouraccount"]</span>*@
-    <input type="email" placeholder="Email" asp-for="Input.Email" class="form-control" />
-    <span asp-validation-for="Input.Email" class="text-danger"></span>
-    <input type="password" placeholder="Password" asp-for="Input.Password" class="form-control" />
-    <span asp-validation-for="Input.Password" class="text-danger"></span>
-    <div class="form-group">
-        <div class="checkbox">
-            <label asp-for="Input.RememberMe">
-                <input asp-for="Input.RememberMe" />
-                @Localizer["Remember Me"]
-            </label>
-        </div>
-    </div>
-    <a id="forgot-password" asp-page="./ForgotPassword">@Localizer[""]Forgot your password?</a>
-    <button>@Localizer["Sign In"]</button>
-    </form>
-</div>
-<div class="overlay-container">
-    <div class="overlay">
+
       
-        <div class="overlay-panel overlay-right">
-            <h1>@Localizer["Hello, Friend!"]</h1>
-            <p>@Localizer["Enter your personal details and start journey with us"]</p>
-            <a href="/Identity/Account/Register" class="ghost" id="signUp">@Localizer["Sign Up"]</a>
+
+        <form id="account" method="post">
+
+            <div class="social-container">
+                <button asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" type="submit" class="social" name="provider" value="Facebook" title="Log in using your  account"><img src="https://img.icons8.com/plasticine/50/000000/facebook-new.png" /></button>
+                <button asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" type="submit" class="social" name="provider" value="Google" title="Log in using your  account"><img src="https://img.icons8.com/offices/40/000000/google-logo.png" /></button>
+               
+            </div>
+            <span>@Localizer["or use your account"]</span>
+            <input type="email" placeholder="Email" asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+            <input type="password" placeholder="Password" asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="Input.RememberMe">
+                        <input asp-for="Input.RememberMe" />
+                        @Localizer["Remember Me"]
+                    </label>
+                </div>
+            </div>
+            <a id="forgot-password" asp-page="./ForgotPassword">@Localizer[""]Forgot your password?</a>
+            <button>@Localizer["Sign In"]</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+
+            <div class="overlay-panel overlay-right">
+                <h1>@Localizer["Hello, Friend!"]</h1>
+                <p>@Localizer["Enter your personal details and start journey with us"]</p>
+                <a href="/Identity/Account/Register" class="ghost" id="signUp">@Localizer["Sign Up"]</a>
+            </div>
         </div>
     </div>
-</div>
 
 </div>
 
 
 @section Scripts {
-    <partial name = "_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }
 
 
 
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+</script>
 
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '{your-app-id}',
+            cookie: true,
+            xfbml: true,
+            version: '{api-version}'
+        });
+
+        FB.AppEvents.logPageView();
+
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

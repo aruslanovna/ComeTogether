@@ -1,5 +1,7 @@
 ﻿using ComeTogether.Domain.Entities;
 using ComeTogether.Infrastructure;
+using ComeTogether.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,18 +15,25 @@ namespace WebMVC.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        private readonly UnitOfWork _unitOfWork;
-        public CategoriesController(ApplicationDbContext context, UnitOfWork unitOfWork)
+       
+        public CategoriesController(ApplicationDbContext context)
         {
-            _unitOfWork = unitOfWork;
+           
 
             _context = context;
         }
 
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            ViewData["CurrentFilter"] = searchString;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var categor = _context.Categories.Where(x => x.CategoryName.Contains(searchString)).ToList();
+                return View(categor);
+            }
+           
             List<Category> categories = _context.Categories.ToList();
             return View(categories);
         }
@@ -37,7 +46,7 @@ namespace WebMVC.Controllers
                 return NotFound();
             }
 
-           Category category = _unitOfWork.CategoriesRepository.GetById(id);
+           Category category = _context.Categories.Where(x=> x.CategoryId==id).FirstOrDefault();
             //.FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
@@ -56,12 +65,17 @@ namespace WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,Description,Picture")] Category category)
+        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,Description,Picture")] Category category, IFormFile image)
         {
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.CategoriesRepository.Create(category);
+                if (image != null && image.Length > 0)
+
+                {
+                    category.Picture= ImageConvertor.ConvertImageToBytes(image);
+                }
+                _context.Categories.Add(category);
                 _context.SaveChanges();
 
 
@@ -80,7 +94,7 @@ namespace WebMVC.Controllers
             {
                 return NotFound();
             }
-            Category category =  _unitOfWork.CategoriesRepository.GetById(id);
+            Category category = _context.Categories.Where(x => x.CategoryId == id).FirstOrDefault();
             if (category == null)
             {
                 return NotFound();
@@ -130,7 +144,7 @@ namespace WebMVC.Controllers
                 return NotFound();
             }
 
-            Category category = _unitOfWork.CategoriesRepository.GetById(id);
+            Category category = _context.Categories.Where(x => x.CategoryId == id).FirstOrDefault();
             if (category == null)
             {
                 return NotFound();
@@ -145,9 +159,9 @@ namespace WebMVC.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 
+            Category category = _context.Categories.Where(x => x.CategoryId == id).FirstOrDefault();
 
-
-             _unitOfWork.CategoriesRepository.Delete(id);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

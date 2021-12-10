@@ -25,10 +25,16 @@
 
                                         </a>
                                     </div>
-                                  
+
                                 </div>
 
-                            </div>
+                            </div> <a href="/Projects/GetAllProjects" class="iconBtn" id="createProjectBtn">
+                                <div class="iconBtn__content">
+
+                                    @Localizer["DetailedSearch"]
+                                </div>
+
+                            </a>
                         </div>
 
                     </div>
@@ -119,13 +125,9 @@
 
 
                                 <span class="card-maker">@Html.DisplayFor(modelItem => item.ProjectName)</span>
-                                <span class="card-maker">@Html.DisplayFor(modelItem => item.ShortDescription)</span>
+                               
                             </div>
-                            <div class="card-vote">
-
-
-                                <span class="card-maker">Partners</span>
-                            </div>
+                          
                         </div>
                     </div>
 

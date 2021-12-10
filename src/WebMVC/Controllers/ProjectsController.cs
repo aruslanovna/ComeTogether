@@ -67,20 +67,63 @@ namespace WebMVC.Controllers
             return View();            
         }
 
+        public IActionResult MyProjects()
+        {
+            return View();
+        }
+
         [HttpGet]
         public object Get(DataSourceLoadOptions loadOptions)
         {
-            var events = _context.Projects.ToList();
-           
+            var events = from x in _context.Projects
+                        
+                         select new ProjectDetailsModel
+                         {
+                             ProjectId = x.ProjectId,
+                             Photo = x.Photo,
+                             ProjectName = x.ProjectName,
+                             FullDescription = x.FullDescription,
+                             ShortDescription = x.ShortDescription,
+                             StartBudget = x.StartBudget,
+                             StartDate = x.StartDate,
+                             RisksAndChallenges = x.RisksAndChallenges,
+                             Background = x.Background,
+                             Category = x.Category.CategoryName,
+                             Founder = x.Founder,
+                            Country=x.Country
+
+                         };
+
             return DataSourceLoader.Load(events, loadOptions);
         }
 
         [Authorize]
-        public async Task<IActionResult> MyProjects()
+        [HttpGet]
+        public object MyProjectsRequest(DataSourceLoadOptions loadOptions)
         {
             var current = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString();
             var applicationDbContext = _unitOfWork.GetOrganized(current);
-            return View(nameof(Index),  applicationDbContext);
+            var events = from x in _context.Projects
+                         where x.FounderId== current
+                         select new ProjectDetailsModel
+                         {
+                             ProjectId = x.ProjectId,
+                             Photo = x.Photo,
+                             ProjectName = x.ProjectName,
+                             FullDescription = x.FullDescription,
+                             ShortDescription = x.ShortDescription,
+                             StartBudget = x.StartBudget,
+                             StartDate = x.StartDate,
+                             RisksAndChallenges = x.RisksAndChallenges,
+                             Background = x.Background,
+                             Category = x.Category.CategoryName,
+                             Founder = x.Founder,
+                             Country = x.Country
+
+                         };
+            return DataSourceLoader.Load(events, loadOptions);
+
+
         }
 
         
@@ -156,14 +199,14 @@ namespace WebMVC.Controllers
        Category = x.Category.CategoryName,
        FounderId = x.FounderId,
        Founder = x.Founder,
-       CPO = x.CPO,
-       CAC = x.CAC,
-       ROMI = x.ROMI,
-       ROI = x.ROI,
-       ROAS = x.ROAS,
-       ARPU = x.ARPU,
-       AOV = x.AOV,
-       LTV = x.LTV,
+       //CPO = x.CPO,
+       //CAC = x.CAC,
+       //ROMI = x.ROMI,
+       //ROI = x.ROI,
+       //ROAS = x.ROAS,
+       //ARPU = x.ARPU,
+       //AOV = x.AOV,
+       //LTV = x.LTV,
        Country=x.Country,
        Partners = _context.Projects
                 .Where(user => user.ProjectId == x.ProjectId)
@@ -321,7 +364,23 @@ namespace WebMVC.Controllers
         {
             return _context.Projects.Any(e => e.ProjectId == id);
         }
+
+
+        public async Task<IActionResult> Manager()
+        {
+           
+            return View();
+        }
+
+        public async Task<IActionResult> InvoiceStep3()
+        {
+
+            return View();
+        }
     }
+
+
+
     public class InstructorIndexData
     {
         public bool isFounder { get; set; }
